@@ -17,8 +17,6 @@
 
   <ItemGroup>
     <Folder Include="ModelVM\" />
-    <Folder Include="Service\Abstraction\" />
-    <Folder Include="Service\Implementation\" />
     <Folder Include="Upload\" />
   </ItemGroup>
 
