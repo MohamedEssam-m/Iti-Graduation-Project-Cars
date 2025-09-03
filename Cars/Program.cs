@@ -1,3 +1,9 @@
+using Cars.DAL.Database;
+using Cars.DAL.Entities.Users;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 namespace Cars
 {
     public class Program
@@ -8,6 +14,33 @@ namespace Cars
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            builder.Services.AddDbContext<CarsDbContext>(options =>
+            options.UseSqlServer(connectionString));
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+                            options =>
+                            {
+                                  options.LoginPath = new PathString("/Account/Login");
+                                  options.AccessDeniedPath = new PathString("/Account/Login");
+                            });
+            builder.Services.AddIdentityCore<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<CarsDbContext>()
+                .AddTokenProvider<DataProtectorTokenProvider<CarsDbContext>>(TokenOptions.DefaultProvider);
+
+
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+            }).AddEntityFrameworkStores<CarsDbContext>();
 
             var app = builder.Build();
 
@@ -23,7 +56,7 @@ namespace Cars
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

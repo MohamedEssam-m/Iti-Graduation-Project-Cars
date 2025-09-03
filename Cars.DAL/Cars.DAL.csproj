@@ -17,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\" />
-    <Folder Include="Entities\" />
     <Folder Include="Repo\Abstraction\" />
     <Folder Include="Repo\Implementation\" />
   </ItemGroup>
