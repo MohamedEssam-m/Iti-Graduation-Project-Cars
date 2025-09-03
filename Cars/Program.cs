@@ -1,6 +1,12 @@
+using Cars.BLL.Mapper;
+using Cars.BLL.Service.Abstraction;
+using Cars.BLL.Service.Implementation;
 using Cars.DAL.Database;
 using Cars.DAL.Entities.Users;
+using Cars.DAL.Repo.Abstraction;
+using Cars.DAL.Repo.Implementation;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,6 +47,14 @@ namespace Cars
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 0;
             }).AddEntityFrameworkStores<CarsDbContext>();
+
+            builder.Services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
+            builder.Services.AddScoped<IAppUserRepo, AppUserRepo>();
+            builder.Services.AddScoped<ICarRepo, CarRepo>();
+
+            builder.Services.AddScoped<IAppUserService, AppUserService>();
+            builder.Services.AddScoped<ICarService, CarService>();
+
 
             var app = builder.Build();
 
