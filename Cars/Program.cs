@@ -31,7 +31,7 @@ namespace Cars
                 .AddTokenProvider<DataProtectorTokenProvider<CarsDbContext>>(TokenOptions.DefaultProvider);
 
 
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
             {
                 // Default Password settings.
                 options.Password.RequireDigit = true;

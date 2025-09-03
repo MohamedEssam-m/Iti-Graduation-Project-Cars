@@ -14,5 +14,7 @@ namespace Cars.DAL.Database
         public CarsDbContext(DbContextOptions<CarsDbContext> options) : base(options)
         {
         }
+        public virtual DbSet<AppUser> AppUsers { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
     }
 }
