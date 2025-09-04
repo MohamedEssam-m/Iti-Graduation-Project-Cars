@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ModelVM\" />
     <Folder Include="Upload\" />
   </ItemGroup>
 

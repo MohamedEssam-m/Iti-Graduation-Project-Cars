@@ -22,6 +22,8 @@ namespace Cars
             builder.Services.AddControllersWithViews();
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+            builder.Services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
+
             builder.Services.AddDbContext<CarsDbContext>(options =>
             options.UseSqlServer(connectionString));
 
@@ -32,9 +34,13 @@ namespace Cars
                                   options.LoginPath = new PathString("/Account/Login");
                                   options.AccessDeniedPath = new PathString("/Account/Login");
                             });
-            builder.Services.AddIdentityCore<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<CarsDbContext>()
-                .AddTokenProvider<DataProtectorTokenProvider<CarsDbContext>>(TokenOptions.DefaultProvider);
+            builder.Services.AddIdentityCore<AppUser>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+            })
+.AddEntityFrameworkStores<CarsDbContext>()
+.AddDefaultTokenProviders();
+
 
 
             builder.Services.AddIdentity<AppUser, IdentityRole>(options =>

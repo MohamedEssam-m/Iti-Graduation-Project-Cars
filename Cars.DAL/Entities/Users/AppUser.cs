@@ -1,4 +1,6 @@
 ﻿
+using Cars.BLL.Helper.Renting;
+using Cars.BLL.Helper.Repairing;
 using Cars.DAL.Entities.Renting;
 using Cars.DAL.Entities.Repairing;
 using Cars.DAL.Entities.Users;
@@ -7,17 +9,19 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 public class AppUser : IdentityUser
 {
-    [Required(ErrorMessage ="Name is required, you must add a name.")]
-    [Column(TypeName ="nvarchar(30)")]
+    [Required(ErrorMessage = "Name is required, you must add a name.")]
+    [Column(TypeName = "nvarchar(30)")]
     public string FullName { get; private set; }
-    [Required(ErrorMessage = "Name is required, you must add an address.")]
+
+    [Required(ErrorMessage = "Address is required, you must add an address.")]
     [Column(TypeName = "nvarchar(50)")]
     public string Address { get; private set; }
+
     public List<Car> Cars { get; private set; }
-    public MechanicDetails MechanicDetails { get; private set; }
-    public List<Repair> RepairsAsCustomer { get; private set; }
-    public List<Repair> RepairsAsMechanic { get; private set; }
+    public List<Repair> RepairsAsUser { get; private set; }
     public List<Rent> Rents { get; private set; }
+    public List<RentPayment> RentPayments { get; private set; }
+    public List<RepairPayment> RepairPayments { get;  set; }
 
     public string? ProfilePicture { get; private set; }
     public bool IsDeleted { get; private set; }
@@ -29,11 +33,16 @@ public class AppUser : IdentityUser
         FullName = fullName;
         Address = address;
         Cars = new List<Car>();
-        RepairsAsCustomer = new List<Repair>();
-        RepairsAsMechanic = new List<Repair>();
+        RepairsAsUser = new List<Repair>();
         Rents = new List<Rent>();
+        RentPayments = new List<RentPayment>();
+        RepairPayments = new List<RepairPayment>();
         CreatedAt = DateTime.UtcNow;
         IsDeleted = false;
+    }
+
+    public AppUser()
+    {
     }
 
     public bool UpdateProfile(string fullName, string address, string? profilePicture)

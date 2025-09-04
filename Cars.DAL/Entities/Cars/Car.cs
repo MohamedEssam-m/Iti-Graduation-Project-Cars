@@ -17,21 +17,23 @@ public class Car
     [Required(ErrorMessage ="Plate Number is required.")]
     public string PlateNumber { get; private set; }
     public string CarImagePath { get; private set; }
-
+    [ForeignKey("User")]
+    public string? userId { get;  set; }
     public AppUser User { get; private set; }
 
     public List<Repair> Repairs { get; private set; }
     public List<Rent> Rents { get; private set; }
+    
 
 
-    protected Car()
+    public Car()
     {
         Repairs = new List<Repair>();
         Rents = new List<Rent>();
     }
 
     
-    public Car(string madeBy, string model, int year, string plateNumber, AppUser user)
+    public Car(string madeBy, string model, int year, string plateNumber, AppUser user , string CarImagePath)
         
     {
         MadeBy = madeBy;
@@ -39,6 +41,9 @@ public class Car
         Year = year;
         PlateNumber = plateNumber;
         User = user;
+        Repairs = new List<Repair>();
+        Rents = new List<Rent>();
+        this.CarImagePath = CarImagePath;
     }
 
     

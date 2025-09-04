@@ -17,8 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repo\Abstraction\" />
-    <Folder Include="Repo\Implementation\" />
+    <Folder Include="Helper\" />
   </ItemGroup>
 
 </Project>

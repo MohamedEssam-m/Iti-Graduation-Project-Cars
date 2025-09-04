@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cars.BLL.ModelVM.AppUserVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,9 @@ namespace Cars.BLL.Mapper
 {
     public class DomainProfile : Profile
     {
+        public DomainProfile()
+        {
+            CreateMap<AppUser, CreateUserVM>().ReverseMap();
+        }
     }
 }
