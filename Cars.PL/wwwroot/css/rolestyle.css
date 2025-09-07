@@ -1,0 +1,38 @@
+﻿/* Dropdown container */
+.custom-dropdown {
+    background-color: #1e1e2f !important;
+    border-radius: 8px;
+    padding: 5px 0;
+    min-width: 200px;
+    margin-top: 0 !important; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* List items */
+.custom-item {
+    color: #dcdcdc !important;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+    /* Icons */
+    .custom-item i {
+        font-size: 16px;
+        color: #9ca3af !important;
+        transition: color 0.3s ease;
+    }
+
+    /* Hover effect */
+    .custom-item:hover {
+        background-color: #111827 !important;
+        color: cyan !important;
+        padding-left: 20px;
+    }
+
+        .custom-item:hover i {
+            color: cyan !important;
+        }

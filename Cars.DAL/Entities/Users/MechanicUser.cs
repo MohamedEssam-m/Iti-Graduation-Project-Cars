@@ -1,0 +1,39 @@
+﻿using Cars.BLL.Helper.Renting;
+using Cars.BLL.Helper.Repairing;
+using Cars.DAL.Entities.Repairing;
+using Cars.DAL.Enums;
+using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Cars.DAL.Entities.Users
+{
+    public class MechanicUser : AppUser
+    {
+        [Required]
+        [StringLength(100)]
+        public MechanicSpecialize Specialization { get; private set; }
+
+        [Range(0, 50)]
+        public int ExperienceYears { get; private set; }
+
+        [StringLength(200)]
+        public string WorkshopAddress { get; private set; }
+
+        public MechanicUser()
+        {
+            
+        }
+        public MechanicUser(string fullName, string address, MechanicSpecialize specialization, int experienceYears, string workshopAddress)
+        {
+            Specialization = specialization;
+            ExperienceYears = experienceYears;
+            WorkshopAddress = workshopAddress;
+        }
+    }
+}

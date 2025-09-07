@@ -1,0 +1,67 @@
+﻿@using Cars.BLL.ModelVM.Account
+@model SignInVM
+
+
+<link rel="stylesheet" href="~/css/SignUp.css" />
+
+<div class="registration-container">
+    <div class="registration-card">
+        <div class="registration-header">
+            
+            <h2>@SharedLocalizer["Login"]</h2>
+            <p>@SharedLocalizer["JoinUsToday"]</p>
+        </div>
+
+        <form asp-action="Login" asp-controller="Account" method="post" class="registration-form">
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+            
+            
+
+            <!-- Email -->
+            <div class="form-group">
+                <label asp-for="UserName" class="form-label">@SharedLocalizer["Username"] *</label>
+                <input asp-for="UserName" class="form-input" placeholder="@SharedLocalizer["EnterYourUsername"]" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+           
+
+            <!-- Password -->
+            <div class="form-group">
+                <label asp-for="Password" class="form-label">@SharedLocalizer["Password"] *</label>
+                <input asp-for="Password" class="form-input" type="password" placeholder="@SharedLocalizer["EnterYourPassword"]" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="btn-register">@SharedLocalizer["Confirm"]</button>
+            </div>
+
+            <!-- Divider -->
+            <div class="divider">
+                <span>@SharedLocalizer["Or"]</span>
+            </div>
+
+           
+
+            <!-- Login Link -->
+            <div class="login-link">
+                <p>@SharedLocalizer["CreateAnAccount"] <a asp-action="determineRole" asp-controller="Account">@SharedLocalizer["SignUp"]</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+@* <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const inputs = document.querySelectorAll("input, textarea, select");
+    inputs.forEach(input => {
+        input.addEventListener("blur", () => {
+            input.classList.add("touched");
+        });
+    });
+});
+</script> *@

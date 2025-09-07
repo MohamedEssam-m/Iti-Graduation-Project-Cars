@@ -1,0 +1,198 @@
+﻿@using Cars.BLL.ModelVM.AppUserVM
+
+@model CreateUserVM
+@{
+    ViewData["Title"] = "Create User";
+}
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs">
+                    <span class="mr-2">
+                        <a href="@Url.Action("Index", "Home")">Home <i class="ion-ios-arrow-forward"></i></a>
+                    </span> 
+                    <span>Users <i class="ion-ios-arrow-forward"></i></span>
+                </p>
+                <h1 class="mb-3 bread">Create User</h1>
+            </div>
+        </div>
+    </div>
+</section>
+@if(ViewBag.Success != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.Success</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if(ViewBag.Error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.Error</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card custom-card">
+                    <div class="card-header text-center">
+                        <h4 class="mb-0">Add New User</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form asp-action="SaveUser" asp-controller="User" method="post">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                            <!-- Full Name -->
+                            <div class="mb-3">
+                                <label asp-for="FullName" class="form-label fw-bold">Full Name *</label>
+                                <input asp-for="FullName" class="form-control" placeholder="Enter your full name" />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+
+                            <!-- Username -->
+                            <div class="mb-3">
+                                <label asp-for="Username" class="form-label fw-bold">Username *</label>
+                                <input asp-for="Username" class="form-control" placeholder="Choose a username" />
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label asp-for="Email" class="form-label fw-bold">Email Address *</label>
+                                <input asp-for="Email" class="form-control" placeholder="Enter your email address" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="mb-3">
+                                <label asp-for="PhoneNumber" class="form-label fw-bold">Phone Number *</label>
+                                <input asp-for="PhoneNumber" class="form-control" placeholder="Enter your phone number" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="mb-3">
+                                <label asp-for="Address" class="form-label fw-bold">Address</label>
+                                <input asp-for="Address" class="form-control" placeholder="Enter your address (optional)" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+
+                            <!-- Age -->
+                            <div class="mb-3">
+                                <label asp-for="Age" class="form-label fw-bold">Age *</label>
+                                <input asp-for="Age" type="number" class="form-control" placeholder="Enter your age" />
+                                <span asp-validation-for="Age" class="text-danger"></span>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <label asp-for="Password" class="form-label fw-bold">Password *</label>
+                                <input asp-for="Password" type="password" class="form-control" placeholder="Create a password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="mb-3">
+                                <label asp-for="ConfirmPassword" class="form-label fw-bold">Confirm Password *</label>
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm password" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-create px-4">
+                                    <i class="fa fa-user-plus"></i> Create
+                                </button>
+                                <a asp-action="Index" asp-controller="Home" class="btn btn-cancel px-4">
+                                    <i class="fa fa-arrow-left"></i> Cancel
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center text-muted">
+                        User Management System
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    .custom-card {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .custom-card .card-header {
+        background: linear-gradient(90deg, #00bcd4, #000);
+        color: #fff;
+        font-weight: bold;
+        padding: 15px;
+        text-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+    }
+
+    .custom-card .card-body {
+        background: #fff;
+        color: #000;
+    }
+
+    .custom-card label {
+        color: #000;
+    }
+
+    .custom-card input.form-control {
+        border: 2px solid #00bcd4;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .custom-card input.form-control:focus {
+        border-color: #000;
+        box-shadow: 0 0 8px #00bcd4;
+    }
+
+    .btn-create {
+        background: #00bcd4;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-create:hover {
+        background: #000;
+        color: #fff;
+        box-shadow: 0 0 10px #00bcd4;
+    }
+
+    .btn-cancel {
+        background: #000;
+        color: #fff;
+        border: 1px solid #00bcd4;
+        font-weight: bold;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+        background: #00bcd4;
+        color: #fff;
+        box-shadow: 0 0 10px #00bcd4;
+    }
+
+    .custom-card .card-footer {
+        background: #f9f9f9;
+        font-size: 0.9rem;
+        color: #555;
+    }
+</style>

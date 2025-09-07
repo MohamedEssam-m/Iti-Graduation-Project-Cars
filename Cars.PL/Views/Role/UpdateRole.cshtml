@@ -1,0 +1,180 @@
+﻿@using Cars.BLL.ModelVM.Role
+@model UpdateRoleVM
+@{
+    ViewData["Title"] = @SharedLocalizer["UpdateRole"];
+}
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs">
+                    <span class="mr-2">
+                        <a href="@Url.Action("Index", "Home")">@SharedLocalizer["Home"] <i class="ion-ios-arrow-forward"></i></a>
+                    </span> 
+                    <span>Roles <i class="ion-ios-arrow-forward"></i></span>
+                </p>
+                <h1 class="mb-3 bread">@SharedLocalizer["UpdateRole"]</h1>
+            </div>
+        </div>
+    </div>
+</section>
+@if(ViewBag.Success != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.Success</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@SharedLocalizer["Close"]"></button>
+    </div>
+}
+@if(ViewBag.Error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.Error</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@SharedLocalizer["Close"]"></button>
+    </div>
+}
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card custom-card">
+                    <div class="card-header text-center">
+                        <h4 class="mb-0">@SharedLocalizer["UpdateRole"]</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form asp-action="SaveUpdateRole" asp-controller="Role" method="post">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                            @* <div class="mb-3">
+                                <label asp-for="Id" class="form-label fw-bold"></label>
+                                <input asp-for="Id" class="form-control" placeholder="The Id Of The Role You Want To Update" />
+                                <span asp-validation-for="Id" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Name" class="form-label fw-bold"></label>
+                                <input asp-for="Name" class="form-control" placeholder="The New Name Of The Role" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div> *@
+                            
+
+                            
+                            <!-- Dropdown list for OldName -->
+                            <div class="mb-3">
+                            <label asp-for="OldName" class="form-label fw-bold">@SharedLocalizer["OldRoleName"]</label>
+                            <select asp-for="OldName" class="form-select">
+                                    <option hidden selected> @SharedLocalizer["OldRoleName"] </option>
+                            @foreach (var role in Model.RolesList)
+                            {
+                            <option value="@role.Name">@role.Name</option>
+                            }
+                            </select>
+                            <span asp-validation-for="OldName" class="text-danger"></span>
+                            </div>
+
+                            <!-- Input for NewName -->
+                            <div class="mb-3">
+                                <label asp-for="NewName" class="form-label fw-bold">@SharedLocalizer["NewRoleName"]</label>
+                            <input asp-for="NewName" class="form-control" placeholder="@SharedLocalizer["EnterNewName"]" />
+                            <span asp-validation-for="NewName" class="text-danger"></span>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-update px-4">
+                                    <i class="fa fa-edit"></i> @SharedLocalizer["Update"]
+                                </button>
+                                <a asp-action="Index" asp-controller="Home" class="btn btn-cancel px-4">
+                                    <i class="fa fa-arrow-left"></i> @SharedLocalizer["Cancel"]
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center text-muted">
+                        @SharedLocalizer["RolesManagementSystem"]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    
+    .custom-card {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .custom-card:hover {
+        transform: scale(1.01);
+        box-shadow: 0 5px 25px rgba(0, 188, 212, 0.3);
+    }
+
+    .custom-card .card-header {
+        background: linear-gradient(90deg, #00bcd4, #000);
+        color: #fff;
+        font-weight: bold;
+        padding: 15px;
+        text-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+    }
+
+    .custom-card .card-body {
+        background: #fff;
+        color: #000;
+    }
+
+    .custom-card label {
+        color: #000;
+    }
+
+    .custom-card input.form-control {
+        border: 2px solid #00bcd4;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .custom-card input.form-control:focus {
+        border-color: #000;
+        box-shadow: 0 0 8px #00bcd4;
+    }
+
+    
+    .btn-update {
+        background: #00bcd4;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-update:hover {
+        background: #000;
+        color: #fff;
+        box-shadow: 0 0 10px #00bcd4;
+    }
+
+    
+    .btn-cancel {
+        background: #000;
+        color: #fff;
+        border: 1px solid #00bcd4;
+        font-weight: bold;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+        background: #00bcd4;
+        color: #fff;
+        box-shadow: 0 0 10px #00bcd4;
+    }
+
+    .custom-card .card-footer {
+        background: #f9f9f9;
+        font-size: 0.9rem;
+        color: #555;
+    }
+</style>

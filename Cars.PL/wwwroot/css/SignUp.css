@@ -1,0 +1,224 @@
+﻿/* -------------------- Reset -------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+/* -------------------- Body -------------------- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+/* -------------------- Main Container -------------------- */
+/* -------------------- Main Container -------------------- */
+.registration-container {
+    flex: 1; /* يخلي المحتوى يمتد وياخد المساحة بين navbar و footer */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px 40px;
+
+
+    /* خلتها 60px فوق علشان يبعد عن الـ navbar */
+}
+
+
+/* -------------------- Card -------------------- */
+.registration-card {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 2px solid #00ffff;
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+    overflow: hidden;
+
+
+}
+
+/* -------------------- Header -------------------- */
+.registration-header {
+    background: linear-gradient(135deg, #00ffff 0%, #00cccc 100%);
+    color: #000;
+    text-align: center;
+    padding: 20px;
+
+}
+
+    .registration-header h2 {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    .registration-header p {
+        font-size: 13px;
+        opacity: 0.8;
+    }
+
+/* -------------------- Form -------------------- */
+/* -------------------- Form -------------------- */
+.registration-form {
+    padding: 25px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px; /* مسافة بين الحقول */
+}
+
+/* Form groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #000;
+}
+
+/* Inputs */
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fff;
+    color: #000;
+    transition: all 0.3s ease;
+
+}
+
+    .form-input:focus,
+    .form-textarea:focus {
+        border-color: #00ffff;
+        box-shadow: 0 0 6px rgba(0, 255, 255, 0.4);
+        outline: none;
+    }
+
+    /* Placeholder */
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+        color: #777;
+    }
+
+/* -------------------- Validation -------------------- */
+.validation-error {
+    font-size: 12px;
+    color: #ff0000;
+    margin-top: 4px;
+    display: none;
+}
+
+input.touched:invalid + .validation-error,
+textarea.touched:invalid + .validation-error {
+    display: block;
+}
+
+/* -------------------- Buttons -------------------- */
+.btn-register {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #000 0%, #333 100%);
+    color: #fff;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+    .btn-register:hover {
+        background: linear-gradient(135deg, #333 0%, #000 100%);
+        box-shadow: 0 4px 12px rgba(0, 255, 255, 0.4);
+        transform: translateY(-2px);
+    }
+
+/* -------------------- Divider -------------------- */
+.divider {
+    text-align: center;
+    margin: 15px 0;
+    position: relative;
+}
+
+    .divider::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: #ddd;
+    }
+
+    .divider span {
+        background: #fff;
+        padding: 0 10px;
+        color: #666;
+        font-size: 13px;
+        position: relative;
+    }
+
+/* -------------------- Google Button -------------------- */
+.btn-google {
+    width: auto; /* ياخد العرض على قد المحتوى */
+    padding: 8px 8px; /* padding أكبر شوية عشان الشكل */
+    background: #fff;
+    border: 2px solid #00ffff;
+    color: #000;
+    font-weight: 600;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 auto; /* يخليه في النص */
+}
+
+
+    .btn-google:hover {
+        background: #00ffff;
+        color: #000;
+        box-shadow: 0 4px 12px rgba(0, 255, 255, 0.4);
+    }
+
+/* -------------------- Login Link -------------------- */
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+}
+
+    .login-link p {
+        color: #444;
+        font-size: 13px;
+    }
+
+    .login-link a {
+        color: #00cccc;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+        .login-link a:hover {
+            color: #00ffff;
+            text-decoration: underline;
+        }

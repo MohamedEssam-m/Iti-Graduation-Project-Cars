@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Sign Up Choice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="signup-choice-container">
+    <div class="signup-choice-card">
+        <h2>@SharedLocalizer["SignUpAs"]</h2>
+        <p>@SharedLocalizer["PleaseChooseYourAccountType"]</p>
+        
+        <div class="signup-buttons">
+            <a asp-controller="Account" asp-action="SignUpView" class="btn btn-user">
+                <i class="fa fa-user"></i> @SharedLocalizer["User"]
+            </a>
+            <a asp-controller="Account" asp-action="SignUpMechanic" class="btn btn-mechanic">
+                <i class="fa fa-car"></i> @SharedLocalizer["Mechanic"]
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+.signup-choice-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    padding: 20px;
+}
+
+.signup-choice-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    max-width: 400px;
+    width: 100%;
+}
+
+.signup-choice-card h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.signup-choice-card p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.signup-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.signup-buttons .btn {
+    flex: 1;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-user {
+    background: #00bcd4;
+}
+
+.btn-user:hover {
+    background: #000;
+    box-shadow: 0 0 10px #00bcd4;
+}
+
+.btn-mechanic {
+    background: #000;
+    border: 2px solid #00bcd4;
+}
+
+.btn-mechanic:hover {
+    background: #00bcd4;
+    box-shadow: 0 0 10px #00bcd4;
+}
+</style>
+

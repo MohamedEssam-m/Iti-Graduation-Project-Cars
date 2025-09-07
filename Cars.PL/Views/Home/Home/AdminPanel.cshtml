@@ -1,0 +1,258 @@
+﻿@* AdminPanel.cshtml - Razor view (cshtml)
+   - Admin Panel (LTR)
+   - Contains three main sections: User Management, Mechanic Management, Roles
+   - Buttons for each CRUD operation
+   - Strong CSS styling with white/black/cyan
+*@
+@{
+    ViewData["Title"] = "Admin Panel";
+}
+@{
+    Layout = "_Layout"; // use your Layout here
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Panel</title>
+    <style>
+        /* === Colors: white, black, cyan === */
+        :root{
+            --bg: #000000;
+            --card: #0ff;
+            --accent: #00d1d1;
+            --text: #ffffff;
+            --muted: rgba(255,255,255,0.85);
+        }
+        *{box-sizing:border-box;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
+        body{
+            margin:0;
+            background: linear-gradient(180deg,var(--bg) 0%, #070707 100%);
+            color:var(--text);
+            min-height:100vh;
+            padding:24px;
+        }
+        .container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns: 260px 1fr;gap:24px;align-items:start}
+        .sidebar{background:linear-gradient(180deg, rgba(0,209,209,0.06), rgba(0,209,209,0.02));border:1px solid rgba(0,209,209,0.12);padding:18px;border-radius:14px;box-shadow: 0 6px 20px rgba(0,0,0,0.6);}
+        .brand{font-weight:700;font-size:18px;color:var(--card);text-align:center;margin-bottom:14px;}
+        .nav-btn{display:block;width:100%;padding:12px 14px;margin:8px 0;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);cursor:pointer;font-size:15px;transition:all 180ms ease;}
+        .nav-btn:hover{transform:translateX(6px); color:var(--text); border-color:var(--accent)}
+        .nav-btn.active{background:linear-gradient(90deg, rgba(0,209,209,0.06), rgba(0,209,209,0.03)); color:var(--text); border-color:var(--accent)}
+        .panel{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:20px;border-radius:14px;min-height:420px;box-shadow: 0 10px 30px rgba(0,0,0,0.6);}
+        .panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+        .panel-title{font-size:20px;font-weight:700;color:var(--card)}
+        .panel-sub{color:var(--muted);font-size:13px}
+        .dash{display:grid;grid-template-columns: repeat(auto-fit,minmax(180px,1fr));gap:14px;}
+        .dash-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:18px;border-radius:12px;min-height:90px;display:flex;flex-direction:column;justify-content:space-between;transition:transform 160ms ease, box-shadow 160ms ease;}
+        .dash-card:hover{transform:translateY(-6px); box-shadow:0 12px 30px rgba(0,0,0,0.7)}
+        .dash-card h3{margin:0;color:var(--text);font-size:15px}
+        .dash-card p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
+        .action-btn{border:1px solid var(--accent);background:transparent;padding:8px 12px;border-radius:8px;cursor:pointer;color:var(--card);font-weight:600;transition:all 140ms ease;text-align:center;}
+        .action-btn:hover{background:var(--card);color:var(--bg);transform:translateY(-3px)}
+        .hidden{display:none}
+        .muted{color:var(--muted); font-size:13px}
+    </style>
+</head>
+<body>
+    <br></br>
+    <br></br>
+    
+    
+
+    <div class="container">
+    <aside class="sidebar">
+        <div class="brand">Admin Panel</div>
+        <button class="nav-btn active" data-target="users">User Management</button>
+        <button class="nav-btn" data-target="mechanics">Mechanic Management</button>
+        <button class="nav-btn" data-target="roles">Roles</button>
+        <button class="nav-btn" data-target="cars">Cars</button>
+    </aside>
+
+        <main class="panel">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title" id="panelTitle">User Management</div>
+                    <div class="panel-sub" id="panelSub">Choose an operation below</div>
+                </div>
+                <div><span class="muted">Logged in as Admin</span></div>
+            </div>
+
+            <!-- === Users Dashboard === -->
+            <section id="dashboard-users" class="dash-section">
+                <div class="dash">
+                    <div class="dash-card">
+                        <h3>Add User</h3>
+                        <p class="muted">Create new user</p>
+                        <form asp-controller="User" asp-action="CreateUser" method="post"> @* Create *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                    <div class="dash-card">
+                        <h3>Update User</h3>
+                        <p class="muted">Edit user data</p>
+                        <form asp-controller="User" asp-action="UpdateUser" method="post"> @* Update *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                    <div class="dash-card">
+                        <h3>Delete User</h3>
+                        <p class="muted">Remove user</p>
+                        <form asp-controller="User" asp-action="DeleteUser" method="post"> @* Delete *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                    <div class="dash-card">
+                        <h3>View All Users</h3>
+                        <p class="muted">List users</p>
+                        <form asp-controller="User" asp-action="Index" method="get"> @* Read/List *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                    <div class="dash-card">
+                        <h3>Update User Role</h3>
+                        <p class="muted">Change role</p>
+                        <form asp-controller="User" asp-action="UpdateUserRole" method="post"> @* Update Role *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- === Mechanics Dashboard === -->
+            <section id="dashboard-mechanics" class="dash-section hidden">
+                <div class="dash">
+                    <div class="dash-card">
+                        <h3>Add Mechanic</h3>
+                        <form asp-controller="Mechanic" asp-action="AddMechanic" method="post"> @* Create *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                    <div class="dash-card">
+                        <h3>Update Mechanic</h3>
+                        <form asp-controller="Mechanic" asp-action="UpdateMechanic" method="post"> @* Update *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                    <div class="dash-card">
+                        <h3>Delete Mechanic</h3>
+                        <form asp-controller="Mechanic" asp-action="DeleteMechanic" method="post"> @* Delete *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                    <div class="dash-card">
+                        <h3>View All Mechanics</h3>
+                        <form asp-controller="Mechanic" asp-action="Index" method="get"> @* Read/List *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                    <div class="dash-card">
+                        <h3>Update Mechanic Role</h3>
+                        <form asp-controller="Mechanic" asp-action="UpdateMechanicRole" method="post"> @* Update Role *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- === Roles Dashboard === -->
+            <section id="dashboard-roles" class="dash-section hidden">
+                <div class="dash">
+                    <div class="dash-card">
+                        <h3>Add Role</h3>
+                        <form asp-controller="Role" asp-action="CreateRole" method="post"> @* Create *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                    <div class="dash-card">
+                        <h3>Update Role</h3>
+                        <form asp-controller="Role" asp-action="UpdateRole" method="post"> @* Update *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                    <div class="dash-card">
+                        <h3>Delete Role</h3>
+                        <form asp-controller="Role" asp-action="DeleteRole" method="post"> @* Delete *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                    <div class="dash-card">
+                        <h3>View All Roles</h3>
+                        <form asp-controller="Role" asp-action="Index" method="get"> @* Read/List *@
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <!-- === Cars Dashboard === -->
+        <section id="dashboard-cars" class="dash-section hidden">
+            <div class="dash">
+                <div class="dash-card">
+                    <h3>Add Car</h3>
+                    <form asp-controller="Car" asp-action="CreateCar" method="post"> @* Create *@
+                        <button type="submit" class="action-btn">Go</button>
+                    </form>
+                </div>
+                <div class="dash-card">
+                    <h3>Update Car</h3>
+                    <form asp-controller="Car" asp-action="UpdateCar" method="post"> @* Update *@
+                        <button type="submit" class="action-btn">Go</button>
+                    </form>
+                </div>
+                <div class="dash-card">
+                    <h3>Delete Car</h3>
+                    <form asp-controller="Car" asp-action="DeleteCar" method="post"> @* Delete *@
+                        <button type="submit" class="action-btn">Go</button>
+                    </form>
+                </div>
+                <div class="dash-card">
+                    <h3>View All Cars</h3>
+                    <form asp-controller="Car" asp-action="Index" method="get"> @* Read/List *@
+                        <button type="submit" class="action-btn">Go</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        </main>
+    </div>
+
+    <script>
+        // === Sidebar navigation ===
+        const navBtns = document.querySelectorAll('.nav-btn');
+        const sections = {
+            users: document.getElementById('dashboard-users'),
+            mechanics: document.getElementById('dashboard-mechanics'),
+            roles: document.getElementById('dashboard-roles')
+            , cars: document.getElementById('dashboard-cars')
+        };
+        const panelTitle = document.getElementById('panelTitle');
+        const panelSub = document.getElementById('panelSub');
+
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', ()=>{
+                navBtns.forEach(b=>b.classList.remove('active'));
+                btn.classList.add('active');
+                const t = btn.getAttribute('data-target');
+                Object.values(sections).forEach(s => s.classList.add('hidden'));
+                sections[t].classList.remove('hidden');
+
+                if(t === 'users'){
+                    panelTitle.innerText = 'User Management';
+                    panelSub.innerText = 'Add, update, delete, list, and update role';
+                } else if(t === 'mechanics'){
+                    panelTitle.innerText = 'Mechanic Management';
+                    panelSub.innerText = 'Add, update, delete, list, and update role';
+                } else if (t === 'roles') {
+                    panelTitle.innerText = 'Roles Management';
+                    panelSub.innerText = 'Add, update, delete, and list roles';
+                }
+                else
+                {
+                    panelTitle.innerText = 'Cars Management';
+                    panelSub.innerText = 'Add, update, delete, and list cars';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
