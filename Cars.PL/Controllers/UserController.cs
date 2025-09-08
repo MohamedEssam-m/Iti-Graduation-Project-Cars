@@ -1,135 +1,45 @@
-﻿using Cars.DAL.Repo.Abstraction;
+﻿using AutoMapper;
+using Cars.BLL.ModelVM.AppUserVM;
+using Cars.BLL.ModelVM.Role;
+using Cars.BLL.Service.Abstraction;
+using Cars.BLL.Service.Implementation;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 
-namespace Cars.API.Controllers
+namespace Cars.PL.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    public class UserController : Controller
     {
-        private readonly IAppUserRepo _userRepo;
-
-        public UsersController(IAppUserRepo userRepo)
+        private readonly IAppUserService appUserService;
+        private readonly IMapper mapper;
+        public UserController(IAppUserService appUserService , IMapper mapper)
         {
-            _userRepo = userRepo;
+            this.appUserService = appUserService;
+            this.mapper = mapper;
         }
-        [HttpGet]
-        public ActionResult<IEnumerable<AppUser>> GetUsers()
+        public IActionResult Index()
         {
-            try
-            {
-                var users = _userRepo.GetAll();
-                return Ok(users);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+            var list = appUserService.GetAllUsers();
+            return View(list);
         }
-        [HttpGet("{id}")]
-        public ActionResult<AppUser> GetUser(string id)
+        public IActionResult CreateUser()
         {
-            try
-            {
-                if (string.IsNullOrEmpty(id))
-                {
-                    return BadRequest("ID cannot be null or empty");
-                }
-
-                var user = _userRepo.GetById(id);
-
-                if (user == null || string.IsNullOrEmpty(user.Id))
-                {
-                    return NotFound($"User with ID {id} not found");
-                }
-
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+            return View();
         }
-        [HttpPost]
-        public ActionResult<AppUser> CreateUser(AppUser user)
+        public async Task<IActionResult> SaveUser(CreateUserVM user)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (user == null)
-                {
-                    return BadRequest("User object is null");
-                }
-
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-                _userRepo.Add(user);
-
-                return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+                await appUserService.Add(user);
+                ViewBag.Success = "User Created Successfully";
+                return View("CreateUser" , user);
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                ViewBag.Error = "SomeThing Is Wrong";
+                return View("CreateUser", user);
             }
+
         }
-        [HttpPut("{id}")]
-        public IActionResult UpdateUser(string id, AppUser user)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(id) || user == null)
-                {
-                    return BadRequest("ID or user object is invalid");
-                }
-
-                if (id != user.Id)
-                {
-                    return BadRequest("ID in route doesn't match user ID");
-                }
-
-                var existingUser = _userRepo.GetById(id);
-                if (existingUser == null || string.IsNullOrEmpty(existingUser.Id))
-                {
-                    return NotFound($"User with ID {id} not found");
-                }
-
-                _userRepo.Update(user);
-
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
-        }
-        [HttpDelete("{id}")]
-        public IActionResult DeleteUser(string id)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(id))
-                {
-                    return BadRequest("ID cannot be null or empty");
-                }
-
-                var user = _userRepo.GetById(id);
-                if (user == null || string.IsNullOrEmpty(user.Id))
-                {
-                    return NotFound($"User with ID {id} not found");
-                }
-
-                _userRepo.Delete(id);
-
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
-        }
+        
     }
 }

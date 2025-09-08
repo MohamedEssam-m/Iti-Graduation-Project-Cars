@@ -1,7 +1,16 @@
 ﻿using AutoMapper;
+using Cars.BLL.ModelVM.Account;
+using Cars.BLL.ModelVM.AppUserVM;
 using Cars.BLL.ModelVM.CarVM;
-using Cars.DAL.Entities.Cars;
-
+using Cars.BLL.ModelVM.MechanicUserVM;
+using Cars.BLL.ModelVM.Role;
+using Cars.DAL.Entities.Users;
+using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Cars.BLL.Mapper
 {
@@ -9,26 +18,15 @@ namespace Cars.BLL.Mapper
     {
         public DomainProfile()
         {
-            // Car mappings
-            CreateMap<Car, CarVM>()
-                .ForMember(dest => dest.MadeBy, opt => opt.MapFrom(src => src.Brand)) // Adjust if property names differ
-                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.OwnerId)); // Adjust if property names differ
-
-            CreateMap<CarVM, Car>()
-                .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.MadeBy))
-                .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.UserId));
-
-            CreateMap<CreateCarVM, Car>()
-                .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.MadeBy))
-                .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.UserId));
-
-            CreateMap<UpdateCarVM, Car>()
-                .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.MadeBy))
-                .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.UserId));
-
-            CreateMap<Car, UpdateCarVM>()
-                .ForMember(dest => dest.MadeBy, opt => opt.MapFrom(src => src.Brand))
-                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.OwnerId));
+            CreateMap<AppUser, CreateUserVM>().ReverseMap();
+            CreateMap<AppUser, UpdateUserVM>().ReverseMap();
+            CreateMap<Car, CreateCarVM>().ReverseMap();
+            CreateMap<Car, UpdateUserVM>().ReverseMap();
+            CreateMap<MechanicUser, CreateMechanicVM>().ReverseMap();
+            CreateMap<MechanicUser, UpdateMechanicVM>().ReverseMap();
+            CreateMap<IdentityRole, CreateRoleVM>().ReverseMap();
+            CreateMap<IdentityRole, UpdateRoleVM>().ReverseMap();
+            CreateMap<AppUser, SignUpVM>().ReverseMap();
         }
     }
 }
