@@ -27,6 +27,7 @@ namespace Cars.BLL.Mapper
             CreateMap<IdentityRole, CreateRoleVM>().ReverseMap();
             CreateMap<IdentityRole, UpdateRoleVM>().ReverseMap();
             CreateMap<AppUser, SignUpVM>().ReverseMap();
+
         }
     }
 }

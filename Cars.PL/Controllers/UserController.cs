@@ -1,45 +1,113 @@
-﻿using AutoMapper;
-using Cars.BLL.ModelVM.AppUserVM;
-using Cars.BLL.ModelVM.Role;
+﻿using Cars.BLL.ModelVM.AppUserVM;
 using Cars.BLL.Service.Abstraction;
-using Cars.BLL.Service.Implementation;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Cars.PL.Controllers
+[Route("api/[controller]")]
+[ApiController]
+public class UsersController : ControllerBase
 {
-    public class UserController : Controller
-    {
-        private readonly IAppUserService appUserService;
-        private readonly IMapper mapper;
-        public UserController(IAppUserService appUserService , IMapper mapper)
-        {
-            this.appUserService = appUserService;
-            this.mapper = mapper;
-        }
-        public IActionResult Index()
-        {
-            var list = appUserService.GetAllUsers();
-            return View(list);
-        }
-        public IActionResult CreateUser()
-        {
-            return View();
-        }
-        public async Task<IActionResult> SaveUser(CreateUserVM user)
-        {
-            if (ModelState.IsValid)
-            {
-                await appUserService.Add(user);
-                ViewBag.Success = "User Created Successfully";
-                return View("CreateUser" , user);
-            }
-            else
-            {
-                ViewBag.Error = "SomeThing Is Wrong";
-                return View("CreateUser", user);
-            }
+    private readonly IAppUserService _userService;
 
+    public UsersController(IAppUserService userService)
+    {
+        _userService = userService;
+    }
+
+    [HttpGet]
+    public ActionResult<IEnumerable<AppUser>> GetUsers()
+    {
+        try
+        {
+            var users = _userService.GetAllUsers();
+            return Ok(users);
         }
-        
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
+    [HttpGet("{id}")]
+    public ActionResult<AppUser> GetUser(string id)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(id))
+                return BadRequest("ID cannot be null or empty");
+
+            var user = _userService.GetById(id);
+
+            if (user == null)
+                return NotFound($"User with ID {id} not found");
+
+            return Ok(user);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
+    [HttpPost]
+    public ActionResult<AppUser> CreateUser(CreateUserVM model)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            _userService.Add(model);
+
+            return Ok("User created successfully");
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult UpdateUser(string id, UpdateUserVM model)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(id) || model == null)
+                return BadRequest("ID or user object is invalid");
+
+            var existingUser = _userService.GetById(id);
+            if (existingUser == null)
+                return NotFound($"User with ID {id} not found");
+
+            _userService.UpdateUser(id, model);
+
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteUser(string id)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(id))
+                return BadRequest("ID cannot be null or empty");
+
+            var user = _userService.GetById(id);
+            if (user == null)
+                return NotFound($"User with ID {id} not found");
+
+            _userService.DeleteUser(id);
+
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
     }
 }

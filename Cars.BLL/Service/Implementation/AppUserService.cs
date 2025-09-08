@@ -104,27 +104,50 @@ namespace Cars.BLL.Service.Implementation
             return new AppUser();
         }
 
-        public async Task<bool> UpdateUser(UpdateUserVM user)
+        //public async Task<bool> UpdateUser(UpdateUserVM user)
+        //{
+        //    try
+        //    {
+        //        if (user != null)
+        //        {
+        //            var appUser = mapper.Map<AppUser>(user);
+        //            repo.Update(appUser);
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            throw new Exception("user");
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e.Message);
+        //        return false;
+        //    }
+
+
+        //}
+        public async Task<bool> UpdateUser(string id, UpdateUserVM user)
         {
             try
             {
-                if (user != null)
-                {
-                    var appUser = mapper.Map<AppUser>(user);
-                    repo.Update(appUser);
-                    return true;
-                }
-                else
-                {
-                    throw new Exception("user");
-                }
+                if (string.IsNullOrEmpty(id) || user == null)
+                    throw new ArgumentException("Invalid ID or user data");
+
+                var existingUser =  repo.GetById(id);
+                if (existingUser == null)
+                    throw new Exception($"User with ID {id} not found");
+                mapper.Map(user, existingUser);
+
+                repo.Update(existingUser);
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return false;
             }
-
         }
+
     }
 }
