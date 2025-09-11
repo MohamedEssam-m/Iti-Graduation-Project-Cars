@@ -4,6 +4,7 @@ using Cars.BLL.ModelVM.MechanicUserVM;
 using Cars.BLL.Service.Abstraction;
 using Cars.DAL.Entities.Users;
 using Cars.DAL.Repo.Abstraction;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,19 @@ namespace Cars.BLL.Service.Implementation
     {
         private readonly IMechanicRepo repo;
         private readonly IMapper mapper;
-        public MechanicService(IMechanicRepo repo, IMapper mapper)
+        private readonly UserManager<AppUser> userManager;
+
+        public RoleManager<IdentityRole> RoleManager;
+        public MechanicService(IMechanicRepo repo, IMapper mapper, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.repo = repo;
             this.mapper = mapper;
+            this.userManager = userManager;
+            this.RoleManager = roleManager;
         }
         //CreateMechanicVM
         //UpdateMechanicVM
-        public void Add(CreateMechanicVM mechanicVM)
+        public async Task Add(CreateMechanicVM mechanicVM)
         {
             try
             {
@@ -33,6 +39,10 @@ namespace Cars.BLL.Service.Implementation
                 {
                     var mechanic = mapper.Map<MechanicUser>(mechanicVM);
                     repo.CreateMechanic(mechanic);
+                    if (await RoleManager.RoleExistsAsync("Mechanic"))
+                    {
+                        userManager.AddToRoleAsync(mechanic, "Mechanic").Wait();
+                    }
                 }
             }
             catch (Exception e)

@@ -291,4 +291,34 @@
   <data name="AddNewRole" xml:space="preserve">
     <value>Add New Role</value>
   </data>
+  <data name="ConfirmLogOut" xml:space="preserve">
+    <value>Do You Want To Log Out?</value>
+  </data>
+  <data name="SaveEdit" xml:space="preserve">
+    <value>Save Edit</value>
+  </data>
+  <data name="EditYourAccount" xml:space="preserve">
+    <value>Edit Your Account</value>
+  </data>
+  <data name="ConfirmChangingPassword" xml:space="preserve">
+    <value>Confirm Changing Password</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="Some Thing Is Wrong!" xml:space="preserve">
+    <value>Some Thing Is Wrong!</value>
+  </data>
+  <data name="NoRolesAvailable" xml:space="preserve">
+    <value>No Roles Available</value>
+  </data>
+  <data name="PleaseSelectRole" xml:space="preserve">
+    <value>Please Select Role</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="EnterYourCurrentEmailAddress" xml:space="preserve">
+    <value>Enter Your Current EmailAddress</value>
+  </data>
 </root>

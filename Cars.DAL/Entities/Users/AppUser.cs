@@ -11,14 +11,14 @@ public class AppUser : IdentityUser
 {
     [Required(ErrorMessage = "Name is required, you must add a name.")]
     [Column(TypeName = "nvarchar(30)")]
-    public string FullName { get; private set; }
+    public string FullName { get;  set; }
 
     [Required(ErrorMessage = "Address is required, you must add an address.")]
     [Column(TypeName = "nvarchar(50)")]
-    public string Address { get; private set; }
+    public string Address { get;  set; }
     [Required]
     [Range(18 , 60)]
-    public int Age { get; private set; }
+    public int Age { get;  set; }
     
     
     public List<Car>? Cars { get; private set; }
@@ -27,10 +27,13 @@ public class AppUser : IdentityUser
     public List<RentPayment>? RentPayments { get; private set; }
     public List<RepairPayment>? RepairPayments { get;  set; }
 
-    public string? ProfilePicture { get; private set; }
+    public string? ProfilePicture { get;  set; }
     public bool? IsDeleted { get; private set; }
     public DateTime? DeletedAt { get; private set; }
     public DateTime? CreatedAt { get; private set; } = DateTime.UtcNow;
+   
+    public string? Role { get; private set; }
+    
 
     //public AppUser(string fullName, string address)
     //{

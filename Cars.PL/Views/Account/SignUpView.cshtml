@@ -3,21 +3,24 @@
 
 
 <link rel="stylesheet" href="~/css/SignUp.css" />
+<link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
+@if (ViewBag.Success != null)
+{
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
 
-@if(ViewBag.Success != null)
+@if (ViewBag.Error != null)
 {
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>@ViewBag.Success</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@SharedLocalizer["Close"]"></button>
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
     </div>
 }
-@if(ViewBag.Error != null)
-{
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>@ViewBag.Error</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@SharedLocalizer["Close"]"></button>
-    </div>
-}
+
 
 <div class="registration-container">
     <div class="registration-card">
@@ -27,10 +30,7 @@
         </div>
 
         <form asp-action="SignUp" asp-controller="Account" method="post" class="registration-form">
-
-            <!-- Validation Summary -->
-            @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
-
+            <input type="hidden" name = "Role" value = "@Model.Role"></input>
             <!-- Full Name -->
             <div class="form-group">
                 <label asp-for="Fullname" class="form-label">@SharedLocalizer["FullName"]</label>
@@ -88,6 +88,33 @@
                 <input asp-for="ConfirmPassword" class="form-input" type="password" placeholder="@SharedLocalizer["ConfirmYourPassword"]" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
+            @if(Model.Role == "Mechanic")
+            {
+                <!-- Specialization -->
+                <div class="form-group">
+                    <label asp-for="Specialization" class="form-label">@SharedLocalizer["Specialization"]</label>
+    
+                    <select asp-for="Specialization" class="form-input">
+                        <option value="">@SharedLocalizer["SelectSpecialization"]</option>
+                        <option value="Electricity">@SharedLocalizer["Electricity"]</option>
+                        <option value="Fuel">@SharedLocalizer["Fuel"]</option>
+                    </select>
+
+                    <span asp-validation-for="Specialization" class="text-danger"></span>
+                </div>
+                <!-- ExperienceYears -->
+                <div class="form-group">
+                    <label asp-for="ExperienceYears" class="form-label">@SharedLocalizer["ExperienceYears"]</label>
+                    <input asp-for="ExperienceYears" class="form-input"  placeholder="@SharedLocalizer["EnterYourExperienceYears"]"  />
+                    <span asp-validation-for="ExperienceYears" class="text-danger"></span>
+                </div>
+                <!-- WorkshopAddress -->
+                <div class="form-group">
+                    <label asp-for="WorkshopAddress" class="form-label">@SharedLocalizer["WorkshopAddress"]</label>
+                    <input asp-for="WorkshopAddress" class="form-input"  placeholder="@SharedLocalizer["EnterYourWorkshopAddress"]"  />
+                    <span asp-validation-for="WorkshopAddress" class="text-danger"></span>
+                </div>
+            }
 
             <!-- Submit Button -->
             <div class="form-group">
@@ -122,13 +149,3 @@
 
 
 
-@* <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const inputs = document.querySelectorAll("input, textarea, select");
-    inputs.forEach(input => {
-        input.addEventListener("blur", () => {
-            input.classList.add("touched");
-        });
-    });
-});
-</script> *@

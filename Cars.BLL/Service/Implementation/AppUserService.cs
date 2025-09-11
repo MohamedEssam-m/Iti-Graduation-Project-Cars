@@ -2,6 +2,7 @@
 using Cars.BLL.ModelVM.AppUserVM;
 using Cars.BLL.Service.Abstraction;
 using Cars.DAL.Repo.Abstraction;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,15 @@ namespace Cars.BLL.Service.Implementation
     {
         private readonly IAppUserRepo repo;
         private readonly IMapper mapper;
-        public AppUserService(IAppUserRepo repo, IMapper mapper)
+        private readonly UserManager<AppUser> userManager;
+
+        public RoleManager<IdentityRole> RoleManager;
+        public AppUserService(IAppUserRepo repo, IMapper mapper, UserManager<AppUser> userManager, RoleManager<IdentityRole> RoleManager)
         {
             this.repo = repo;
             this.mapper = mapper;
+            this.userManager = userManager;
+            this.RoleManager = RoleManager;
         }
         public async Task<bool> Add(CreateUserVM userVM)
         {
@@ -29,6 +35,8 @@ namespace Cars.BLL.Service.Implementation
                 {
                     var user = mapper.Map<AppUser>(userVM);
                     repo.Add(user);
+                    
+                    
                     return true;
                 }
             }
@@ -104,50 +112,27 @@ namespace Cars.BLL.Service.Implementation
             return new AppUser();
         }
 
-        //public async Task<bool> UpdateUser(UpdateUserVM user)
-        //{
-        //    try
-        //    {
-        //        if (user != null)
-        //        {
-        //            var appUser = mapper.Map<AppUser>(user);
-        //            repo.Update(appUser);
-        //            return true;
-        //        }
-        //        else
-        //        {
-        //            throw new Exception("user");
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e.Message);
-        //        return false;
-        //    }
-
-
-        //}
-        public async Task<bool> UpdateUser(string id, UpdateUserVM user)
+        public async Task<bool> UpdateUser(UpdateUserVM user)
         {
             try
             {
-                if (string.IsNullOrEmpty(id) || user == null)
-                    throw new ArgumentException("Invalid ID or user data");
-
-                var existingUser =  repo.GetById(id);
-                if (existingUser == null)
-                    throw new Exception($"User with ID {id} not found");
-                mapper.Map(user, existingUser);
-
-                repo.Update(existingUser);
-                return true;
+                if (user != null)
+                {
+                    var appUser = mapper.Map<AppUser>(user);
+                    repo.Update(appUser);
+                    return true;
+                }
+                else
+                {
+                    throw new Exception("user");
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return false;
             }
-        }
 
+        }
     }
 }

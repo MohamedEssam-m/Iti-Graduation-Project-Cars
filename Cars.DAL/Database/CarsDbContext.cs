@@ -3,6 +3,7 @@ using Cars.BLL.Helper.Repairing;
 using Cars.DAL.Entities.Renting;
 using Cars.DAL.Entities.Repairing;
 using Cars.DAL.Entities.Users;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Cars.DAL.Database
 {
-    public class CarsDbContext :IdentityDbContext<AppUser>
+    public class CarsDbContext :IdentityDbContext<AppUser, IdentityRole, string>
     {
         public CarsDbContext(DbContextOptions<CarsDbContext> options) : base(options)
         {
@@ -26,6 +27,9 @@ namespace Cars.DAL.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<AppUser>()
+            .HasIndex(u => u.Email)
+            .IsUnique();
 
             // -------------------
             // Car ↔ User

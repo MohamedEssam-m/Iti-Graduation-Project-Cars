@@ -104,5 +104,12 @@ namespace Cars.BLL.Service.Implementation
                 return new IdentityResult();
             }
         }
+        public async Task<(bool , AppUser)> ForgetPassword(ForgetPasswordVM forgetPassword)
+        {
+            var user = await userManager.FindByEmailAsync(forgetPassword.Email);
+            if (user == null || user.Email == null)
+                return (false , new AppUser());
+            return (true , user);
+        }
     }
 }

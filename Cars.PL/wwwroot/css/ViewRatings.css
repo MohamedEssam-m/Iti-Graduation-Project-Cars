@@ -1,0 +1,32 @@
+﻿.ratings-container {
+    margin: 40px auto;
+    max-width: 900px;
+}
+
+.ratings-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+    .table th, .table td {
+        padding: 12px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table th {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    .table tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }

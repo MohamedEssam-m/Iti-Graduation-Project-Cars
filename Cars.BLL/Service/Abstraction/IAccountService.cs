@@ -17,5 +17,6 @@ namespace Cars.BLL.Service.Abstraction
         Task LogOut();
 
         //Task LogOutMechanic();
+        Task<(bool , AppUser)> ForgetPassword(ForgetPasswordVM forgetPassword);
     }
 }

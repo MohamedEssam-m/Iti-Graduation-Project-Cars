@@ -2,7 +2,9 @@
 using Cars.BLL.ModelVM.AppUserVM;
 using Cars.BLL.ModelVM.CarVM;
 using Cars.BLL.Service.Abstraction;
+using Cars.DAL.Entities.Cars;
 using Cars.DAL.Repo.Abstraction;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,30 +17,36 @@ namespace Cars.BLL.Service.Implementation
     {
         private readonly ICarRepo repo;
         private readonly IMapper mapper;
-        public CarService(ICarRepo repo, IMapper mapper)
+        private readonly UserManager<AppUser> userManager;
+        public CarService(ICarRepo repo, IMapper mapper , UserManager<AppUser> userManager)
         {
             this.repo = repo;
             this.mapper = mapper;
+            this.userManager = userManager;
         }
         // Add Car
-        public void Add(CreateCarVM carVM)
+        public async Task<bool> Add(CreateCarVM CarVM)
         {
             try
             {
-                if (carVM == null)
-                    throw new ArgumentNullException(nameof(carVM));
-
-                var car = mapper.Map<Car>(carVM);
-                repo.Add(car);
+                if (CarVM == null)
+                    return false;
+                else
+                {
+                    var car = mapper.Map<Car>(CarVM);
+                    repo.Add(car);
+                    return true;
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
         }
 
         // Delete Car
-        public void Delete(int carId)
+        public async Task<bool> Delete(int carId)
         {
             try
             {
@@ -46,21 +54,23 @@ namespace Cars.BLL.Service.Implementation
                 if (car != null && car.CarId > 0)
                 {
                     repo.Delete(carId);
+                    return true;
                 }
                 else
                 {
                     throw new Exception("Car not found");
+                    
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                Console.WriteLine("Car ID Not Found!!");
+                return false;
             }
         }
 
         // Get All Cars
-        public List<Car> GetAll()
+        public async Task<List<Car>> GetAll()
         {
             try
             {
@@ -78,7 +88,7 @@ namespace Cars.BLL.Service.Implementation
         }
 
         // Get Car by Id
-        public Car GetById(int carId)
+        public async Task<Car> GetById(int carId)
         {
             try
             {
@@ -100,7 +110,7 @@ namespace Cars.BLL.Service.Implementation
         }
 
         // Update Car
-        public void Update(UpdateCarVM carVM)
+        public async Task<bool> Update(UpdateCarVM carVM)
         {
             try
             {
@@ -111,6 +121,7 @@ namespace Cars.BLL.Service.Implementation
                     {
                         mapper.Map(carVM, car); 
                         repo.Update(car);
+                        return true;
                     }
                     else
                     {
@@ -125,7 +136,61 @@ namespace Cars.BLL.Service.Implementation
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
         }
+        public async Task<bool> RateCar(RateCarVM rateCarVM, string UserId)
+        {
+            try
+            {
+                if (rateCarVM == null || UserId == null)
+                    return false;
+
+                var car = repo.GetById(rateCarVM.CarId);
+                var user = await userManager.FindByIdAsync(UserId);
+
+                if (car != null && car.CarId > 0 && user != null)
+                {
+                    
+                    var existingRate = car.CarRates
+                        .FirstOrDefault(r => r.UserId == UserId && r.CarId == rateCarVM.CarId);
+
+                    if (existingRate != null)
+                    {
+                        
+                        existingRate.Rating = rateCarVM.Rating;
+                        existingRate.Comment = rateCarVM.Comment;
+                        existingRate.UserFullName = user.FullName; 
+                    }
+                    else
+                    {
+                        
+                        car.CarRates.Add(new CarRate
+                        {
+                            UserId = UserId,
+                            CarId = rateCarVM.CarId,
+                            Rating = rateCarVM.Rating,
+                            Comment = rateCarVM.Comment,
+                            UserFullName = user.FullName
+                        });
+                    }
+
+                  
+                    var ratingSum = car.CarRates.Sum(r => r.Rating);
+                    car.AverageRating = (double)ratingSum / car.CarRates.Count;
+
+                    repo.Update(car);
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
     }
 }

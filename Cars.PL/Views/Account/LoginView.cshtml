@@ -11,7 +11,24 @@
             <h2>@SharedLocalizer["Login"]</h2>
             <p>@SharedLocalizer["JoinUsToday"]</p>
         </div>
+        <link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
 
+@if (ViewBag.Success != null)
+{
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
         <form asp-action="Login" asp-controller="Account" method="post" class="registration-form">
             <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
             

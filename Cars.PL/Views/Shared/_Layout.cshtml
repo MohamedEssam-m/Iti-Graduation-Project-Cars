@@ -59,40 +59,123 @@
                 <li class="nav-item @(ViewData["ActivePage"] as string == "AdminPanel" ? "active" : "")">
                     <a class="nav-link" asp-controller="Home" asp-action="AdminPanel">AdminPanel</a>
                 </li>
+                <li class="nav-item dropdown @(ViewData["ActivePage"] as string == "ManageProfile" ? "active" : "")">
+    <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa fa-user-circle me-1"></i> Profile
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+        <li>
+            <a class="dropdown-item" asp-controller="EditUserProfile" asp-action="EditUserProfileView">
+                <i class="fa fa-user-edit me-2"></i> Edit Personal Info
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="EditUserProfile" asp-action="ChangePassword">
+                <i class="fa fa-key me-2"></i> Change Password
+            </a>
+        </li>
+    </ul>
+</li>
+
                 <li class="nav-item @(ViewData["ActivePage"] as string == "Contact" ? "active" : "")">
                     <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
                 </li>
 
-                <!-- Language Switch -->
-                <li class="nav-item d-flex">
-                    <a class="nav-link px-2"
-                       href="@Url.Action("SetLanguage", "Language", new { culture = "en-US", returnUrl = Context.Request.Path + Context.Request.QueryString })">
-                        <img src="~/lib/famfamfam-flags/dist/png/us.png" width="22" height="14" class="mt-1" />
-                        English
-                    </a>
-                    <a class="nav-link px-2"
-                       href="@Url.Action("SetLanguage", "Language", new { culture = "ar-EG", returnUrl = Context.Request.Path + Context.Request.QueryString })">
-                        <img src="~/lib/famfamfam-flags/dist/png/eg.png" width="22" height="14" class="mt-1" />
-                        العربية
-                    </a>
-                </li>
+               
 
-                <!-- Auth Buttons -->
-                <li class="nav-item ms-3">
-                    <a class="btn btn-outline-light btn-sm me-2" asp-controller="Account" asp-action="determineRole">
-                        <i class="fa fa-user-plus me-1"></i> Sign Up
-                    </a>
-                    <a class="btn btn-light btn-sm text-dark" asp-controller="Account" asp-action="LoginView">
-                        <i class="fa fa-sign-in me-1"></i> Sign In
-                    </a>
-                </li>
+
+<!-- Auth Buttons -->
+<li class="nav-item ms-auto d-flex align-items-center auth-buttons">
+    <a class="btn btn-outline-light btn-sm auth-btn" asp-controller="Account" asp-action="determineRole">
+        <i class="fa fa-user-plus me-1"></i> Sign Up
+    </a>
+
+    <a class="btn btn-outline-light btn-sm auth-btn" asp-controller="Account" asp-action="LoginView">
+        <i class="fa fa-sign-in me-1"></i> Sign In
+    </a>
+
+    <a class="btn btn-outline-light btn-sm auth-btn" asp-controller="Account" asp-action="LogOutView">
+        <i class="fa fa-sign-out me-1"></i> Log Out
+    </a>
+</li>
+
+<style>
+    .auth-buttons {
+        gap: 12px; 
+        margin-left: auto; 
+    }
+
+    .auth-buttons .auth-btn {
+        border-color: #fff;
+        color: #fff;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+    }
+
+    
+    .auth-buttons .auth-btn:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: -8px;
+        top: 25%;
+        height: 50%;
+        width: 1px;
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .auth-buttons .auth-btn:hover {
+        background-color: #06b6d4; 
+        border-color: #06b6d4;
+        color: #fff;
+        transform: scale(1.05);
+    }
+</style>
+
+
+                 <!-- Language Toggle -->
+<li class="nav-item d-flex align-items-center">
+    @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "ar-EG")
+    {
+        <a class="btn btn-sm lang-toggle"
+           href="@Url.Action("SetLanguage", "Language", new { culture = "en-US", returnUrl = Context.Request.Path + Context.Request.QueryString })">
+            <img src="~/lib/famfamfam-flags/dist/png/us.png" width="22" height="14" class="me-1" />
+            English
+        </a>
+    }
+    else
+    {
+        <a class="btn btn-sm lang-toggle"
+           href="@Url.Action("SetLanguage", "Language", new { culture = "ar-EG", returnUrl = Context.Request.Path + Context.Request.QueryString })">
+            <img src="~/lib/famfamfam-flags/dist/png/eg.png" width="22" height="14" class="me-1" />
+            العربية
+        </a>
+    }
+</li>
+
+<style>
+    .lang-toggle {
+        background: white;
+        color: #06b6d4; /* cyan */
+        border: 2px solid #06b6d4;
+        font-weight: 600;
+        border-radius: 20px;
+        padding: 4px 12px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .lang-toggle:hover {
+        background: #06b6d4;
+        color: white;
+        text-decoration: none;
+        transform: scale(1.05);
+    }
+
+    .lang-toggle img {
+        border-radius: 2px;
+    }
+</style>
                 
-                    <li class="nav-item ms-3"
-                        
-                        
-                            <a class="btn btn-light btn-sm text-dark" asp-controller="Accont" asp-action="LogOut"><i class="fa fa-sign-in me-1"></i>LogOut</a>    
-                        
-                </li>
+                    
             </ul>
         </div>
     </div>
@@ -520,6 +603,8 @@
     	</div>
     </section>	
  *@
+ 
+
  @RenderBody()
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">

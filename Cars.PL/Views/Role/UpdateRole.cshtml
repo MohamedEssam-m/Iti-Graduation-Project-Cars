@@ -20,31 +20,25 @@
         </div>
     </div>
 </section>
-@if(ViewBag.Success != null)
+<link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
+
+@if (ViewBag.Success != null)
 {
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>@ViewBag.Success</strong> 
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@SharedLocalizer["Close"]"></button>
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
     </div>
 }
-@if(ViewBag.Error != null)
+
+@if (ViewBag.Error != null)
 {
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>@ViewBag.Error</strong> 
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@SharedLocalizer["Close"]"></button>
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
     </div>
 }
-<section class="ftco-section bg-light">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="card custom-card">
-                    <div class="card-header text-center">
-                        <h4 class="mb-0">@SharedLocalizer["UpdateRole"]</h4>
-                    </div>
-                    <div class="card-body p-4">
-                        <form asp-action="SaveUpdateRole" asp-controller="Role" method="post">
-                            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
 
                             @* <div class="mb-3">
                                 <label asp-for="Id" class="form-label fw-bold"></label>
@@ -59,16 +53,31 @@
                             
 
                             
-                            <!-- Dropdown list for OldName -->
+                            @if (Model.RolesList != null && Model.RolesList.Count != 0)
+                            {
+                                <section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card custom-card">
+                    <div class="card-header text-center">
+                        <h4 class="mb-0">@SharedLocalizer["UpdateRole"]</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form asp-action="SaveUpdateRole" asp-controller="Role" method="post">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                                <!-- Dropdown list for OldName -->
                             <div class="mb-3">
                             <label asp-for="OldName" class="form-label fw-bold">@SharedLocalizer["OldRoleName"]</label>
                             <select asp-for="OldName" class="form-select">
                                     <option hidden selected> @SharedLocalizer["OldRoleName"] </option>
-                            @foreach (var role in Model.RolesList)
-                            {
-                            <option value="@role.Name">@role.Name</option>
-                            }
-                            </select>
+                            
+                                    @foreach (var role in Model.RolesList)
+                                    {
+                                    <option value="@role.Name">@role.Name</option>
+                                    }            
+                            
+                                </select>
                             <span asp-validation-for="OldName" class="text-danger"></span>
                             </div>
 
@@ -78,6 +87,7 @@
                             <input asp-for="NewName" class="form-control" placeholder="@SharedLocalizer["EnterNewName"]" />
                             <span asp-validation-for="NewName" class="text-danger"></span>
                             </div>
+                            
 
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-update px-4">
@@ -89,6 +99,7 @@
                             </div>
                         </form>
                     </div>
+                    
                     <div class="card-footer text-center text-muted">
                         @SharedLocalizer["RolesManagementSystem"]
                     </div>
@@ -98,7 +109,19 @@
     </div>
 </section>
 
-<style>
+                            }
+                            else
+                            {
+                                <div class="alert alert-warning text-center" role="alert">
+                                    @SharedLocalizer["PleaseSelectRole"]
+                                    <script>
+    setTimeout(function() {
+        window.location.href = '@Url.Action("UpdateRole", "Role")';
+    }, 3000); 
+</script>
+                                </div>
+                            }
+                            <style>
     
     .custom-card {
         background: #fff;

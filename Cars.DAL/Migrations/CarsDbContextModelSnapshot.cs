@@ -92,6 +92,9 @@ namespace Cars.DAL.Migrations
                     b.Property<string>("ProfilePicture")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -103,6 +106,10 @@ namespace Cars.DAL.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -127,19 +134,81 @@ namespace Cars.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarId"));
 
-                    b.Property<string>("CarImagePath")
+                    b.Property<double>("AverageRating")
+                        .HasColumnType("float");
+
+                    b.Property<string>("BodyType")
                         .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CarImagePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MadeBy")
+                    b.Property<int>("Doors")
+                        .HasColumnType("int");
+
+                    b.Property<double>("EngineCapacity")
+                        .HasColumnType("float");
+
+                    b.Property<double>("FuelConsumption")
+                        .HasColumnType("float");
+
+                    b.Property<string>("FuelType")
                         .IsRequired()
+                        .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("HasABS")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasAirCondition")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasAirbags")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasESP")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasMultimedia")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasParkingSensors")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasRearCamera")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("HorsePower")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("InsuranceIncluded")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LuggageCapacity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxKmPerDay")
+                        .HasColumnType("int");
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("PlateNumber")
+                    b.Property<decimal>("PricePerDay")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Seats")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Transmission")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -246,6 +315,41 @@ namespace Cars.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("RepairPayment");
+                });
+
+            modelBuilder.Entity("Cars.DAL.Entities.Cars.CarRate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserFullName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("CarRate");
                 });
 
             modelBuilder.Entity("Cars.DAL.Entities.Renting.Rent", b =>
@@ -547,6 +651,17 @@ namespace Cars.DAL.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Cars.DAL.Entities.Cars.CarRate", b =>
+                {
+                    b.HasOne("Car", "Car")
+                        .WithMany("CarRates")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+                });
+
             modelBuilder.Entity("Cars.DAL.Entities.Renting.Rent", b =>
                 {
                     b.HasOne("Car", "Car")
@@ -656,6 +771,8 @@ namespace Cars.DAL.Migrations
 
             modelBuilder.Entity("Car", b =>
                 {
+                    b.Navigation("CarRates");
+
                     b.Navigation("Rents");
 
                     b.Navigation("Repairs");

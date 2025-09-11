@@ -14,5 +14,6 @@ namespace Cars.BLL.Service.Abstraction
         Task<List<IdentityRole>> GetAllRoles();
         Task<bool> DeleteRole(string roleId);
         Task<bool> UpdateRole(UpdateRoleVM roleVM);
+        Task<bool> AssignRoleToUser(AppUser user, string roleName);
     }
 }

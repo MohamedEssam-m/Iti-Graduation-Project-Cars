@@ -1,0 +1,569 @@
+﻿/* Enhanced Car Form CSS - White, Black, and Cyan Color Scheme */
+/* MODIFICATION: Complete CSS rewrite to address all requirements */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* MODIFICATION: Changed main background from default to black */
+body {
+    background-color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white; /* White text for contrast against black background */
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* MODIFICATION: Toast alerts styling to work with black background */
+.toast-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.success-toast {
+    background-color: cyan;
+    color: black;
+    border: 2px solid black;
+}
+
+.error-toast {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 15px;
+    color: inherit;
+}
+
+/* Main heading - White text for contrast against black background */
+h2 {
+    color: white; /* MODIFICATION: Changed from default to white for contrast */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 3px solid cyan;
+    padding-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+}
+
+/* MODIFICATION: Form container with white background as requested */
+.car-form {
+    max-width: 1000px; /* Increased width to accommodate wrapping */
+    margin: 0 auto;
+    background-color: white; /* Form background remains white */
+    border: 2px solid cyan; /* Cyan border for visual appeal */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2); /* Cyan glow effect */
+}
+
+/* MODIFICATION: Grid layout to make input fields wrap */
+.form-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Input fields will wrap */
+    gap: 20px;
+    padding: 40px;
+    background-color: white; /* Form wrap background remains white */
+}
+
+/* Form groups */
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: black; /* Black text on white form background */
+        font-weight: 600;
+        font-size: 1.1rem;
+        text-transform: capitalize;
+        letter-spacing: 0.5px;
+    }
+
+/* Input fields and select dropdowns */
+.form-control {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+    .form-control:focus {
+        border-color: cyan;
+        box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .form-control:hover {
+        border-color: cyan;
+    }
+
+/* Select dropdown specific styling */
+select.form-control {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+    padding-right: 45px;
+}
+
+/* Validation messages */
+.text-danger {
+    color: black;
+    background-color: cyan;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: inline-block;
+    font-weight: 500;
+}
+
+/* MODIFICATION: Checkbox group spans full width and ensures content appears */
+.checkbox-group {
+    grid-column: 1 / -1; /* Span across all columns for full width */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 30px 0;
+    padding: 25px;
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: white;
+}
+
+/* MODIFICATION: Custom checkbox styling to ensure content appears */
+.checkbox-btn {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    position: relative;
+    color: black; /* Ensure text is visible */
+    min-height: 50px; /* Minimum height to ensure content appears */
+}
+
+    .checkbox-btn:hover {
+        background-color: cyan;
+        color: black;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* MODIFICATION: Checkbox input positioning to ensure it doesn't interfere with content */
+    .checkbox-btn input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        width: 0;
+        height: 0;
+    }
+
+/* MODIFICATION: Checkmark styling to ensure visibility */
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 3px;
+    margin-right: 12px;
+    position: relative;
+    background-color: white;
+    transition: all 0.3s ease;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.checkbox-btn input[type="checkbox"]:checked + .checkmark {
+    background-color: cyan;
+    border-color: black;
+}
+
+    .checkbox-btn input[type="checkbox"]:checked + .checkmark::after {
+        content: "✓";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: black;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+/* MODIFICATION: Submit button spans full width but doesn't affect other buttons */
+.car-form .btn {
+    grid-column: 1 / -1; /* Span across all columns for full width */
+    padding: 15px 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 30px auto 0;
+    min-width: 200px;
+}
+
+.car-form .btn-primary {
+    background-color: cyan;
+    color: black;
+    border: 2px solid black;
+}
+
+    .car-form .btn-primary:hover {
+        background-color: black;
+        color: cyan;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .car-form .btn-primary:active {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+
+/* MODIFICATION: Ensure other buttons (signup/signin/logout) are NOT affected */
+/* This targets only buttons outside the car-form */
+body > .btn,
+.navbar .btn,
+.header .btn,
+nav .btn,
+.auth-buttons .btn {
+    /* These buttons will keep their original styling */
+    all: revert;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .form-wrap {
+        padding: 20px;
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .checkbox-group {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+
+    .form-control {
+        padding: 12px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .checkbox-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .car-form .btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+/* Additional visual enhancements */
+.form-group::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 3px;
+    height: 100%;
+    background-color: cyan;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.form-group:focus-within::before {
+    opacity: 1;
+}
+
+/* Smooth animations */
+.car-form {
+    animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Input field animations */
+.form-control::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus::placeholder {
+    color: rgba(0, 255, 255, 0.7);
+}
+
+/* MODIFICATION: Ensure toast alerts work properly with black background */
+.toast-alert.success-toast .close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+}
+
+.toast-alert.error-toast .close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+}
+
+
+
+/* MODIFICATION: Specific rules to ensure signup/signin/logout buttons are NOT affected by form styling */
+/* These selectors target common button locations outside the car form */
+
+/* MODIFICATION: Navigation and header buttons made smaller with cyan hover */
+.navbar-nav .btn,
+.nav .btn,
+.header .btn,
+.top-nav .btn,
+.main-nav .btn {
+    all: unset !important;
+    /* Reset all properties and allow original styling */
+    display: inline-block !important;
+    padding: 6px 12px !important; /* MODIFICATION: Reduced padding for smaller buttons */
+    margin: 0 3px !important; /* MODIFICATION: Reduced margin */
+    text-decoration: none !important;
+    border-radius: 4px !important; /* MODIFICATION: Smaller border radius */
+    cursor: pointer !important;
+    font-weight: 500 !important; /* MODIFICATION: Reduced font weight */
+    font-size: 14px !important; /* MODIFICATION: Smaller font size */
+    text-transform: capitalize !important; /* MODIFICATION: Capitalize instead of none */
+    letter-spacing: 0.5px !important; /* MODIFICATION: Slight letter spacing */
+    transition: all 0.3s ease !important;
+    background-color: white !important; /* MODIFICATION: White background by default */
+    color: black !important;
+    border: 1px solid black !important; /* MODIFICATION: Added border */
+}
+
+    /* MODIFICATION: Cyan hover effect for navigation buttons */
+    .navbar-nav .btn:hover,
+    .nav .btn:hover,
+    .header .btn:hover,
+    .top-nav .btn:hover,
+    .main-nav .btn:hover {
+        background-color: cyan !important; /* MODIFICATION: Cyan hover background */
+        color: black !important;
+        transform: translateY(-1px) !important; /* MODIFICATION: Subtle lift effect */
+        box-shadow: 0 2px 4px rgba(0, 255, 255, 0.3) !important; /* MODIFICATION: Cyan shadow */
+    }
+
+/* MODIFICATION: Authentication buttons made smaller with cyan hover */
+.auth-nav .btn,
+.user-nav .btn,
+.login-nav .btn,
+.account-nav .btn {
+    all: unset !important;
+    display: inline-block !important;
+    padding: 6px 12px !important; /* MODIFICATION: Reduced padding for smaller buttons */
+    margin: 0 4px !important; /* MODIFICATION: Reduced margin */
+    background-color: white !important; /* MODIFICATION: White background by default */
+    color: black !important;
+    border: 1px solid black !important; /* MODIFICATION: Thinner border */
+    border-radius: 4px !important; /* MODIFICATION: Smaller border radius */
+    text-decoration: none !important;
+    font-weight: 500 !important; /* MODIFICATION: Reduced font weight */
+    font-size: 14px !important; /* MODIFICATION: Smaller font size */
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+    /* MODIFICATION: Cyan hover effect for authentication buttons */
+    .auth-nav .btn:hover,
+    .user-nav .btn:hover,
+    .login-nav .btn:hover,
+    .account-nav .btn:hover {
+        background-color: cyan !important; /* MODIFICATION: Cyan hover background */
+        color: black !important;
+        transform: translateY(-1px) !important; /* MODIFICATION: Subtle lift effect */
+        box-shadow: 0 2px 4px rgba(0, 255, 255, 0.3) !important; /* MODIFICATION: Cyan shadow */
+    }
+
+/* Layout container buttons */
+.container .btn:not(.car-form .btn),
+.main-content .btn:not(.car-form .btn),
+.page-content .btn:not(.car-form .btn) {
+    all: unset !important;
+    display: inline-block !important;
+    padding: 12px 24px !important;
+    background-color: cyan !important;
+    color: black !important;
+    border: 2px solid black !important;
+    border-radius: 5px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin: 5px !important;
+}
+
+/* Sidebar and menu buttons */
+.sidebar .btn,
+.menu .btn,
+.dropdown .btn {
+    all: unset !important;
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 16px !important;
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+    border-radius: 3px !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin-bottom: 5px !important;
+}
+
+    .sidebar .btn:hover,
+    .menu .btn:hover,
+    .dropdown .btn:hover {
+        background-color: cyan !important;
+        color: black !important;
+    }
+
+/* Action buttons in other parts of the page */
+.actions .btn,
+.button-group .btn,
+.toolbar .btn {
+    all: unset !important;
+    display: inline-block !important;
+    padding: 8px 16px !important;
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+    border-radius: 4px !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin: 0 3px !important;
+}
+
+/* Primary action buttons outside form */
+.btn-primary:not(.car-form .btn-primary) {
+    background-color: cyan !important;
+    color: black !important;
+    border: 2px solid black !important;
+    padding: 12px 24px !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+}
+
+    .btn-primary:not(.car-form .btn-primary):hover {
+        background-color: black !important;
+        color: cyan !important;
+    }
+
+/* Secondary action buttons outside form */
+.btn-secondary:not(.car-form .btn-secondary) {
+    background-color: white !important;
+    color: black !important;
+    border: 2px solid black !important;
+    padding: 12px 24px !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+}
+
+    .btn-secondary:not(.car-form .btn-secondary):hover {
+        background-color: cyan !important;
+        color: black !important;
+    }
+
+/* MODIFICATION: Specific auth button classes made smaller with cyan hover */
+.btn-login,
+.btn-signup,
+.btn-signin,
+.btn-logout,
+.btn-register {
+    all: unset !important;
+    display: inline-block !important;
+    padding: 6px 12px !important; /* MODIFICATION: Reduced padding for smaller buttons */
+    background-color: white !important; /* MODIFICATION: White background by default */
+    color: black !important;
+    border: 1px solid black !important; /* MODIFICATION: Thinner border */
+    border-radius: 4px !important; /* MODIFICATION: Smaller border radius */
+    text-decoration: none !important;
+    font-weight: 500 !important; /* MODIFICATION: Reduced font weight */
+    font-size: 14px !important; /* MODIFICATION: Smaller font size */
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin: 0 4px !important; /* MODIFICATION: Reduced margin */
+    text-transform: capitalize !important; /* MODIFICATION: Changed from uppercase */
+    letter-spacing: 0.5px !important; /* MODIFICATION: Reduced letter spacing */
+}
+
+    /* MODIFICATION: Cyan hover effect for specific auth buttons */
+    .btn-login:hover,
+    .btn-signup:hover,
+    .btn-signin:hover,
+    .btn-logout:hover,
+    .btn-register:hover {
+        background-color: cyan !important; /* MODIFICATION: Cyan hover background */
+        color: black !important;
+        transform: translateY(-1px) !important; /* MODIFICATION: Subtle lift effect */
+        box-shadow: 0 2px 4px rgba(0, 255, 255, 0.3) !important; /* MODIFICATION: Cyan shadow */
+    }

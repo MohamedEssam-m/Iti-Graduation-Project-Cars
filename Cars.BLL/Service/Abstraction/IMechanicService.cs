@@ -11,7 +11,7 @@ namespace Cars.BLL.Service.Abstraction
 {
     public interface IMechanicService
     {
-        public void Add(CreateMechanicVM user);
+        public Task Add(CreateMechanicVM user);
         public List<MechanicUser> GetAll();
         public void Update(UpdateMechanicVM user);
         public void Delete(string id);

@@ -67,18 +67,18 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult UpdateUser(string id, UpdateUserVM model)
+    public IActionResult UpdateUser(UpdateUserVM model)
     {
         try
         {
-            if (string.IsNullOrEmpty(id) || model == null)
-                return BadRequest("ID or user object is invalid");
+            if (model == null || string.IsNullOrEmpty(model.Id))
+                return BadRequest("User object or ID is invalid");
 
-            var existingUser = _userService.GetById(id);
+            var existingUser = _userService.GetById(model.Id);
             if (existingUser == null)
-                return NotFound($"User with ID {id} not found");
+                return NotFound($"User with ID {model.Id} not found");
 
-            _userService.UpdateUser(id, model);
+            _userService.UpdateUser(model);
 
             return NoContent();
         }

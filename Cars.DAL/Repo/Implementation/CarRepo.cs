@@ -1,8 +1,10 @@
 ﻿using Cars.DAL.Database;
 using Cars.DAL.Repo.Abstraction;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,7 +37,7 @@ namespace Cars.DAL.Repo.Implementation
         {
             try
             {
-                var result = db.Cars.FirstOrDefault(c => c.CarId == id);
+                var result = db.Cars.Include(c => c.CarRates).FirstOrDefault(c => c.CarId == id);
                 if (result != null)
                 {
                     return result;
@@ -57,7 +59,7 @@ namespace Cars.DAL.Repo.Implementation
         {
             try
             {
-                return db.Cars.ToList();
+                return db.Cars.Include(c => c.CarRates).ToList();
             }
             catch (Exception ex)
             {
@@ -73,10 +75,26 @@ namespace Cars.DAL.Repo.Implementation
             {
                 if (car == null) throw new ArgumentNullException(nameof(car));
 
-                var existingcar = db.Cars.FirstOrDefault(u => u.CarId == car.CarId);
-                if (existingcar != null)
+                var existingcar =  db.Cars
+                .Include(c => c.CarRates)
+                .FirstOrDefault(c => c.CarId == car.CarId);
+                if (existingcar != null && existingcar.CarRates != null)
                 {
-                    db.Cars.Update(existingcar);
+                    existingcar.AverageRating = car.AverageRating;
+                    foreach (var rate in car.CarRates)
+                    {
+                        if (existingcar.CarRates.Any(r => r.UserId == rate.UserId && r.CarId == rate.CarId))
+                        {
+                            var rateToUpdate = existingcar.CarRates.First(r => r.UserId == rate.UserId && r.CarId == rate.CarId);
+                            rateToUpdate.Rating = rate.Rating;
+                            rateToUpdate.Comment = rate.Comment;
+                            rateToUpdate.UserFullName = rate.UserFullName;
+
+                        }
+                        else
+                            existingcar.CarRates.Add(rate);
+
+                    }
                     db.SaveChanges();
                 }
                 else

@@ -4,6 +4,7 @@ using Cars.BLL.ModelVM.AppUserVM;
 using Cars.BLL.ModelVM.CarVM;
 using Cars.BLL.ModelVM.MechanicUserVM;
 using Cars.BLL.ModelVM.Role;
+using Cars.DAL.Entities.Cars;
 using Cars.DAL.Entities.Users;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -27,6 +28,11 @@ namespace Cars.BLL.Mapper
             CreateMap<IdentityRole, CreateRoleVM>().ReverseMap();
             CreateMap<IdentityRole, UpdateRoleVM>().ReverseMap();
             CreateMap<AppUser, SignUpVM>().ReverseMap();
+            CreateMap<AppUser, UserWithRoleVM>().ReverseMap();
+            CreateMap<Car , CreateCarVM>().ReverseMap();
+            CreateMap<Car, UpdateCarVM>().ReverseMap();
+            CreateMap<Car, CarRate>().ReverseMap();
+            CreateMap<AppUser, AppUser>().ReverseMap();
 
         }
     }

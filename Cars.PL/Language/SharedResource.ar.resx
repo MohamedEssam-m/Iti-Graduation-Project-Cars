@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddNewRole" xml:space="preserve">
-    <value>اضافة دور جديد</value>
-  </data>
   <data name="Cancel" xml:space="preserve">
     <value>إلغاء </value>
   </data>
@@ -290,5 +287,38 @@
   </data>
   <data name="Mechanic" xml:space="preserve">
     <value>ميكانيكي</value>
+  </data>
+  <data name="AddNewRole" xml:space="preserve">
+    <value>اضافة دور جديد</value>
+  </data>
+  <data name="ConfirmLogOut" xml:space="preserve">
+    <value>هل تريد تسجيل الخروج بالفعل؟</value>
+  </data>
+  <data name="SaveEdit" xml:space="preserve">
+    <value>حفظ جميع التعديلات</value>
+  </data>
+  <data name="EditYourAccount" xml:space="preserve">
+    <value>تعديل بيانات الحساب</value>
+  </data>
+  <data name="ConfirmChangingPassword" xml:space="preserve">
+    <value>تاكيد تغيير كلمة السر</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>تغيير كلمة السر</value>
+  </data>
+  <data name="Some Thing Is Wrong!" xml:space="preserve">
+    <value>هناك خطا ما</value>
+  </data>
+  <data name="NoRolesAvailable" xml:space="preserve">
+    <value>لا يوجد ادوار</value>
+  </data>
+  <data name="PleaseSelectRole" xml:space="preserve">
+    <value>يجب اختيار دور</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>الصلاحية</value>
+  </data>
+  <data name="EnterYourCurrentEmailAddress" xml:space="preserve">
+    <value>البريد الالكتروني الحالي</value>
   </data>
 </root>

@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "LogOut Choice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Car
+<link rel="stylesheet" href="~/css/ViewBag.css" />
+<link rel="stylesheet" href="~/css/DeleteCar.css" />
+<script src="~/js/ViewBag.js"></script>
+@if (ViewBag.Success != null)
+{
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+<section class="signup-choice-container">
+    <div class="signup-choice-card">
+        <p>Are You Sure Do You Want To Delete @Model.Brand - @Model.Model? Car</p>
+        
+        <div class="signup-buttons">
+            <form asp-action="DeleteCar" asp-controller="Cars" method="post" class="car-form">
+                <div class="form-wrap">
+                <input type="hidden" asp-for="CarId" />
+                <button>@SharedLocalizer["Confirm"] </button>
+            </form>
+            
+            <a asp-controller="Cars" asp-action="GetAllCars" class="btn btn-mechanic">
+                <i class="fa fa-car"></i> @SharedLocalizer["Cancel"]
+            </a>
+        </div>
+    </div>
+</section>
+

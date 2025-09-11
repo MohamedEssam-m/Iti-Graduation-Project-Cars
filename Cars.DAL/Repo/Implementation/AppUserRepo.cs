@@ -1,20 +1,24 @@
 ﻿using Cars.DAL.Database;
 using Cars.DAL.Repo.Abstraction;
+using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using AutoMapper;
 namespace Cars.DAL.Repo.Implementation
 {
     
     public class AppUserRepo : IAppUserRepo
     {
         private readonly CarsDbContext db;
-        public AppUserRepo(CarsDbContext db)
+        private readonly IMapper mapper;
+        public AppUserRepo(CarsDbContext db , IMapper mapper)
         {
             this.db= db;
+            this.mapper= mapper;
         }
         public void Add(AppUser user)
         {
@@ -77,17 +81,23 @@ namespace Cars.DAL.Repo.Implementation
         {
             try
             {
-                if (user == null) throw new ArgumentNullException(nameof(user));
+                if (user == null) 
+                    throw new Exception();
 
-                var existingUser = db.Users.FirstOrDefault(u => u.Id == user.Id);
+                var existingUser = db.AppUsers.FirstOrDefault(u => u.Email == user.Email);
                 if (existingUser != null)
                 {
+                    existingUser.FullName = user.FullName;
+                    existingUser.UserName = user.UserName;
+                    existingUser.PhoneNumber = user.PhoneNumber;
+                    existingUser.Address = user.Address;
+                    existingUser.Age = user.Age;
                     db.AppUsers.Update(existingUser);
-                    db.SaveChanges();
+                    db.SaveChanges(); 
                 }
                 else
                 {
-                    throw new ArgumentNullException();
+                    throw new Exception("User not found");
                 }
             }
             catch (Exception ex)

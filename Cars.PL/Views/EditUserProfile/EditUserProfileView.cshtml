@@ -1,0 +1,172 @@
+﻿@using Cars.BLL.ModelVM.AppUserVM
+@model UpdateUserVM
+
+
+<link rel="stylesheet" href="~/css/SignUp.css" />
+<link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
+
+@if (ViewBag.Success != null)
+{
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+
+<div class="registration-container">
+    <div class="registration-card">
+        <div class="registration-header">
+            <h2>@SharedLocalizer["EditYourAccount"]</h2>
+        </div>
+
+        <form asp-action="SaveEditProfile" asp-controller="EditUserProfile" method="post" class="registration-form">
+            <!-- Email -->
+            <div class="form-group">
+                <label asp-for="Email" class="form-label">@SharedLocalizer["Email"]</label>
+                <input asp-for="Email" class="form-input" placeholder="@SharedLocalizer["EnterYourCurrentEmailAddress"]" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <!-- Full Name -->
+            <div class="form-group">
+                <label asp-for="FullName" class="form-label">@SharedLocalizer["FullName"]</label>
+                <input asp-for="FullName" class="form-input" placeholder="@SharedLocalizer["EnterYourFullName"]" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+
+            <!-- Username -->
+            <div class="form-group">
+                <label asp-for="Username" class="form-label">@SharedLocalizer["Username"]</label>
+                <input asp-for="Username" class="form-input" placeholder="@SharedLocalizer["ChooseAUsername"]" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+
+            
+
+            <!-- Phone Number -->
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="form-label">@SharedLocalizer["PhoneNumber"]</label>
+                <input asp-for="PhoneNumber" class="form-input" placeholder="@SharedLocalizer["EnterYourPhoneNumber"]" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+                <label asp-for="Address" class="form-label">@SharedLocalizer["Address"]</label>
+                <textarea asp-for="Address" class="form-textarea" placeholder="@SharedLocalizer["EnterYourAddress"]" rows="3"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <!-- Age -->
+            <div class="form-group">
+                <label asp-for="Age" class="form-label">@SharedLocalizer["Age"]</label>
+                <input asp-for="Age" class="form-input" type="number" placeholder="@SharedLocalizer["EnterYourAge"]" min="18" max="100" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+
+            
+
+            @* <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="btn-register">@SharedLocalizer["SaveEdit"]</button>
+            </div>
+            <div class="form-group">
+                <a asp-controller="Home" asp-action="Index" class="btn-register">@SharedLocalizer["Cancel"]</a>
+            </div> *@
+            <div class="signup-buttons">
+                <button type="submit" class="btn btn-user">@SharedLocalizer["SaveEdit"]</button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-mechanic">
+                    <i class="fa fa-car"></i> @SharedLocalizer["Cancel"]
+                </a>
+            </div>
+            
+        </form>
+    </div>
+</div>
+<style>
+.signup-choice-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    padding: 20px;
+}
+
+.signup-choice-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    max-width: 400px;
+    width: 100%;
+}
+
+.signup-choice-card h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.signup-choice-card p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.signup-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.signup-buttons .btn {
+    flex: 1;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-user {
+    background: #00bcd4;
+}
+
+.btn-user:hover {
+    background: #000;
+    box-shadow: 0 0 10px #00bcd4;
+}
+
+.btn-mechanic {
+    background: #000;
+    border: 2px solid #00bcd4;
+}
+
+.btn-mechanic:hover {
+    background: #00bcd4;
+    box-shadow: 0 0 10px #00bcd4;
+}
+</style>
+
+
+
+
+

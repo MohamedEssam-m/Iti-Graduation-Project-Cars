@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Cars.BLL.ModelVM.Account;
 using Cars.BLL.Service.Abstraction;
+using Cars.BLL.Service.Implementation;
+using Cars.PL.Language;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace Cars.PL.Controllers
 {
@@ -12,48 +15,71 @@ namespace Cars.PL.Controllers
         private readonly IAccountService accountService;
         private readonly IMapper mapper;
 
-        public AccountController(IAccountService accountService, IMapper mapper)
+        private readonly IStringLocalizer<SharedResource> SharedLocalizer;
+
+        private readonly IRoleService RoleService;
+
+        private readonly UserManager<AppUser> UserManager;
+
+        public AccountController(IAccountService accountService, IMapper mapper , IStringLocalizer<SharedResource> SharedLocalizer , IRoleService roleService , UserManager<AppUser> userManager)
         {
             this.accountService = accountService;
             this.mapper = mapper;
+            this.SharedLocalizer = SharedLocalizer;
+            RoleService = roleService;
+            UserManager = userManager;
         }
         public IActionResult determineRole()
         {
             return View();
         }
-        public IActionResult SignUpView()
+        public IActionResult SignUpView(string role)
         {
-            return View();
+            SignUpVM signUp = new SignUpVM();
+            signUp.Role = role;
+            return View(signUp);
         }
-        [HttpGet]
-        public IActionResult SignUpMechanic()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> SignUpMechanicVM(SignUpMechanicVM signUp)
-        {
-            var result = await accountService.SignUpMechanic(signUp);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Login");
-            }
-            else
-            {
-                foreach (var item in result.Errors)
-                {
-                    ModelState.AddModelError("Password", item.Description);
-                }
-            }
-            ViewBag.error = "Some Thing Is Wrong!";
-            return View("SignUpView", signUp);
-        }
+        //[HttpGet]
+        //public IActionResult SignUpMechanic()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> SignUpMechanic(SignUpMechanicVM signUp)
+        //{
+        //    var result = await accountService.SignUpMechanic(signUp);
+        //    if (result.Succeeded)
+        //    {
+        //        var user = await UserManager.FindByEmailAsync(signUp.Email);
+        //        if (user != null && user.Email != null)
+        //        {
+        //            var role = await RoleService.AssignRoleToUser(user, "Mechanic");
+        //        }
+        //        return RedirectToAction("Login");
+        //    }
+        //    else
+        //    {
+        //        foreach (var item in result.Errors)
+        //        {
+        //            ModelState.AddModelError("Password", item.Description);
+        //        }
+        //    }
+        //    ViewBag.error = "Some Thing Is Wrong!";
+        //    return View("SignUpView", signUp);
+        //}
         public async Task<IActionResult> SignUp(SignUpVM signUp)
         {
             var result = await accountService.SignUp(signUp);
+
             if (result.Succeeded)
             {
-                return RedirectToAction("LoginView");
+                var user = await UserManager.FindByEmailAsync(signUp.Email);
+                if (user != null && user.Email != null)
+                {
+                    var role = await RoleService.AssignRoleToUser(user, signUp.Role);
+                }
+                ViewBag.success = "SignUp Is Done Successfully , You Can Login Now";
+                return View("LoginView");
             }
             else
             {
@@ -80,9 +106,14 @@ namespace Cars.PL.Controllers
             {
                 
                 ModelState.AddModelError("", "Invalid UserName Or Password");
+                ViewBag.error = SharedLocalizer["Some Thing Is Wrong!"];
                 return View("LoginView", signin);
             }
             
+        }
+        public IActionResult LogOutView()
+        {
+            return View();
         }
         public async Task<IActionResult> LogOut()
         {

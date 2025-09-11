@@ -1,0 +1,162 @@
+﻿@using Cars.BLL.ModelVM.AppUserVM
+@model List<UserWithRoleVM>
+@{
+    ViewData["Title"] = @SharedLocalizer["UsersManagement"];
+}
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs">
+                    <span class="mr-2">
+                        <a href="@Url.Action("Index", "Home")">@SharedLocalizer["Home"] <i class="ion-ios-arrow-forward"></i></a>
+                    </span>
+                    <span>@SharedLocalizer["Users"] <i class="ion-ios-arrow-forward"></i></span>
+                </p>
+                <h1 class="mb-3 bread">@SharedLocalizer["ViewUsers"]</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="table-container">
+    <h1 class="table-title">@SharedLocalizer["UsersDataRecords"]</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>@SharedLocalizer["FullName"]</th>
+                <th>@SharedLocalizer["Username"]</th>
+                <th>@SharedLocalizer["Email"]</th>
+                <th>@SharedLocalizer["PhoneNumber"]</th>
+                <th>@SharedLocalizer["Address"]</th>
+                <th>@SharedLocalizer["Age"]</th>
+                <th>@SharedLocalizer["Role"]</th>
+                <th colspan="2">@SharedLocalizer["Actions"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.FullName</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.PhoneNumber</td>
+                    <td>@user.Address</td>
+                    <td>@user.Age</td>
+                    <td>@foreach(var role in user.Roleslist)
+                        {
+                            @role<br />
+                        }
+                    </td>
+                    
+                    <td>
+                        <form asp-action="DeleteUser" asp-controller="User" method="post" style="display:inline;">
+                            <input type="hidden" name="Username" value="@user.UserName" />
+                            <button type="submit" class="btn btn-delete">@SharedLocalizer["Delete"]</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    body {
+        background: #fff;
+        font-family: 'Segoe UI', sans-serif;
+        color: #000;
+    }
+
+    .table-container {
+        margin: 40px auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        max-width: 95%;
+        overflow-x: auto;
+    }
+
+    .table-title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #00bcd4;
+        text-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .data-table thead {
+        background: linear-gradient(90deg, #00bcd4, #000);
+        color: #fff;
+    }
+
+    .data-table th {
+        padding: 15px;
+        text-align: left;
+        font-size: 1rem;
+        text-transform: uppercase;
+        border-bottom: 2px solid #00bcd4;
+    }
+
+    .data-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        color: #000;
+    }
+
+    .data-table tbody tr {
+        transition: all 0.3s ease;
+    }
+
+    .data-table tbody tr:hover {
+        background: rgba(0, 188, 212, 0.1);
+        transform: scale(1.01);
+        box-shadow: inset 0 0 10px rgba(0, 188, 212, 0.3);
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-update {
+        background: #00bcd4; /* Cyan */
+        color: #fff;
+    }
+
+    .btn-update:hover {
+        background: #000;
+        color: #fff;
+        box-shadow: 0 0 10px #00bcd4;
+    }
+
+    .btn-delete {
+        background: #000;
+        color: #fff;
+        border: 1px solid #00bcd4;
+    }
+
+    .btn-delete:hover {
+        background: #00bcd4;
+        color: #fff;
+        box-shadow: 0 0 10px #00bcd4;
+    }
+</style>

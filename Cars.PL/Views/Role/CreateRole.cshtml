@@ -20,18 +20,22 @@
         </div>
     </div>
 </section>
-@if(ViewBag.Success != null)
+<link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
+
+@if (ViewBag.Success != null)
 {
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>@ViewBag.Success</strong> 
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
     </div>
 }
-@if(ViewBag.Error != null)
+
+@if (ViewBag.Error != null)
 {
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>@ViewBag.Error</strong> 
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
     </div>
 }
 <section class="ftco-section bg-light">

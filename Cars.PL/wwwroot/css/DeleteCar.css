@@ -1,0 +1,89 @@
+﻿
+/* Container */
+.signup-choice-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    background: #f7f7f7;
+    padding: 20px;
+}
+
+/* Card */
+.signup-choice-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    max-width: 450px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+    /* Title text */
+    .signup-choice-card p {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 25px;
+        color: #333;
+    }
+
+/* Buttons wrapper */
+.signup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Confirm button */
+.car-form button {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+    .car-form button:hover {
+        background-color: #c0392b;
+        transform: scale(1.05);
+    }
+
+/* Cancel button */
+.btn-mechanic {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: cyan;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+    .btn-mechanic:hover {
+        background-color: #00bcd4; /* darker cyan */
+        color: white;
+        transform: scale(1.05);
+        text-decoration: none;
+    }
+
+/* Small fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cars.BLL.ModelVM.Account
 {
+    using Cars.DAL.Enums;
     using System.ComponentModel.DataAnnotations;
 
     public class SignUpVM
@@ -55,6 +56,17 @@ namespace Cars.BLL.ModelVM.Account
         [Required(ErrorMessage = "Age is required")]
         [Range(18, 100, ErrorMessage = "Age must be between 18 and 100")]
         public int Age { get; set; }
+        [Required]
+        public string Role { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string Specialization { get; private set; }
+
+        [Range(0, 50)]
+        public int ExperienceYears { get; private set; }
+
+        [StringLength(200)]
+        public string? WorkshopAddress { get; private set; }
     }
 
 }

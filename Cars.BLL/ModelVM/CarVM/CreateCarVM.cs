@@ -9,25 +9,122 @@ namespace Cars.BLL.ModelVM.CarVM
 {
     public class CreateCarVM
     {
-        [Required(ErrorMessage = "Brand name is required.")]
-        [StringLength(20, ErrorMessage = "Brand name cannot exceed 20 characters.")]
-        public string MadeBy { get; set; }
+        //[Required(ErrorMessage = "Plate Number is required")]
+        //[MaxLength(20, ErrorMessage = "Plate Number cannot exceed 20 characters")]
+        //public string PlateNumber { get; private set; }
 
-        [Required(ErrorMessage = "Model of the car is required.")]
+        // Brand of the car (e.g., Toyota, BMW, Subaru)
+        [Required(ErrorMessage = "Brand is required.")]
+        [MaxLength(50, ErrorMessage = "Brand cannot exceed 50 characters")]
+        public string Brand { get; set; }
+
+        // Model name of the car (e.g., Elantra, X5)
+        [Required(ErrorMessage = "Model is required.")]
+        [MaxLength(50, ErrorMessage = "Model cannot exceed 50 character")]
         public string Model { get; set; }
 
-        [Required(ErrorMessage = "Year of the car is required.")]
-        [Range(1900, 2100, ErrorMessage = "Year must be between 1900 and 2100.")]
+        // Manufacturing year of the car
+        [Range(1990, 2100, ErrorMessage = "Year must be between 1990 and 2100")]
         public int Year { get; set; }
 
-        [Required(ErrorMessage = "Plate Number is required.")]
-        public string PlateNumber { get; set; }
+        // Type of the car body (Sedan, SUV, Hatchback, etc.)
+        [MaxLength(20, ErrorMessage = "Body type cannot exceed 20 characters")]
+        public string BodyType { get; set; }
 
-        [Required(ErrorMessage = "Owner (User) is required.")]
-        public int UserId { get; set; }
+        // Number of doors
+        [Range(2, 7, ErrorMessage = "Doors must be between 2 and 7")]
+        public int Doors { get; set; }
+
+        // Type of fuel used (Petrol, Diesel, Electric, Hybrid)
+        [MaxLength(20, ErrorMessage = "Fuel type cannot exceed 20 characters")]
+        public string FuelType { get; set; }
+
+        // Engine displacement in CC (e.g., 1600, 2000)
+        [Range(500, 8000, ErrorMessage = "Engine capacity must be between 500 and 8000 CC")]
+        public double EngineCapacity { get; set; }
+
+        // Engine power in HorsePower (HP)
+        [Range(30, 2000, ErrorMessage = "Horse power must be between 30 and 2000 HP")]
+        public int HorsePower { get; set; }
+
+        // Fuel consumption in Km/L
+        [Range(1, 50, ErrorMessage = "Fuel consumption must be between 1 and 50 Km/L")]
+        public double FuelConsumption { get; set; }
+
+        // Number of passenger seats
+        [Range(2, 9, ErrorMessage = "Seats must be between 2 and 9")]
+        public int Seats { get; set; }
+
+        // Transmission type (Automatic / Manual)
+        [Required(ErrorMessage = "Transmission type is required")]
+        public string Transmission { get; set; }
+
+        // Luggage capacity in liters
+        [Range(50, 2000, ErrorMessage = "Luggage capacity must be between 50 and 2000 liters")]
+        public int LuggageCapacity { get; set; }
+
+        // Rental price per day
+        [Required(ErrorMessage = "Price per day is required.")]
+        [Range(100, 10000, ErrorMessage = "Price per day must be between 100 and 10000")]
+        public decimal PricePerDay { get; set; }
+
+        // Maximum allowed kilometers per day
+        [Range(0, 10000, ErrorMessage = "Max kilometers per day must be between 0 and 10000")]
+        public int MaxKmPerDay { get; set; }
+
+        // Does the rental include insurance?
+        public bool InsuranceIncluded { get; set; }
+
+        // Does the car have air conditioning?
+        public bool HasAirCondition { get; set; }
+
+        // Does the car have multimedia system (Bluetooth/Screen)?
+        public bool HasMultimedia { get; set; }
+
+        // Safety: Airbags available or not
+        public bool HasAirbags { get; set; }
+
+        // Safety: Anti-lock Braking System
+        public bool HasABS { get; set; }
+
+        // Safety: Electronic Stability Program
+        public bool HasESP { get; set; }
+
+        // Safety: Rear view camera
+        public bool HasRearCamera { get; set; }
+
+        // Safety: Parking sensors
+        public bool HasParkingSensors { get; set; }
         public CreateCarVM()
         {
             
+        }
+
+        public CreateCarVM(string brand, string model, int year, string bodyType, int doors, string fuelType, double engineCapacity, int horsePower, double fuelConsumption, int seats, string transmission, int luggageCapacity, decimal pricePerDay, int maxKmPerDay, bool insuranceIncluded, bool hasAirCondition, bool hasMultimedia, bool hasAirbags, bool hasABS, bool hasESP, bool hasRearCamera, bool hasParkingSensors)
+        {
+            //PlateNumber = plateNumber;
+            Brand = brand;
+            Model = model;
+            Year = year;
+            BodyType = bodyType;
+            Doors = doors;
+            FuelType = fuelType;
+            EngineCapacity = engineCapacity;
+            HorsePower = horsePower;
+            FuelConsumption = fuelConsumption;
+            Seats = seats;
+            Transmission = transmission;
+            LuggageCapacity = luggageCapacity;
+            PricePerDay = pricePerDay;
+            MaxKmPerDay = maxKmPerDay;
+            InsuranceIncluded = insuranceIncluded;
+            HasAirCondition = hasAirCondition;
+            HasMultimedia = hasMultimedia;
+            HasAirbags = hasAirbags;
+            HasABS = hasABS;
+            HasESP = hasESP;
+            HasRearCamera = hasRearCamera;
+            HasParkingSensors = hasParkingSensors;
         }
     }
 }

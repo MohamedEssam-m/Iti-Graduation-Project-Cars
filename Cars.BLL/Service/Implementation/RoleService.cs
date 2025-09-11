@@ -14,10 +14,14 @@ namespace Cars.BLL.Service.Implementation
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IMapper mapper;
-        public RoleService(RoleManager<IdentityRole> roleManager, IMapper mapper)
+
+        private readonly UserManager<AppUser> UserManager;
+
+        public RoleService(RoleManager<IdentityRole> roleManager, IMapper mapper , UserManager<AppUser> userManager)
         {
             this.roleManager = roleManager;
             this.mapper = mapper;
+            UserManager = userManager;
         }
         public async Task<bool> CreateRole(CreateRoleVM roleVM)
         {
@@ -30,13 +34,14 @@ namespace Cars.BLL.Service.Implementation
                     var result = await roleManager.CreateAsync(role);
                     return true;
                 }
+                return false;
             }
             catch (Exception)
             {
 
                 return false;
             }
-            return false;
+            
         }
 
         public async Task<bool> DeleteRole(string roleId)
@@ -86,6 +91,29 @@ namespace Cars.BLL.Service.Implementation
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        public async Task<bool> AssignRoleToUser(AppUser user, string roleName)
+        {
+            try
+            {
+                var role = await roleManager.FindByNameAsync(roleName);
+                if (role == null)
+                    return false;
+
+                
+                if (await UserManager.IsInRoleAsync(user, roleName))
+                    return false;
+
+                var result = await UserManager.AddToRoleAsync(user, roleName);
+                if(result.Succeeded) 
+                    return true;
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
                 return false;
             }
         }

@@ -1,0 +1,192 @@
+﻿@using Cars.BLL.ModelVM.AppUserVM
+@model CreateUserVM
+@{
+    ViewData["Title"] = @SharedLocalizer["CreateUser"];
+}
+
+<link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
+@if (ViewBag.Success != null)
+{
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+<br />
+<br />
+<br />
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs">
+                    <span class="mr-2">
+                        <a href="@Url.Action("Index", "Home")">@SharedLocalizer["Home"] <i class="ion-ios-arrow-forward"></i></a>
+                    </span>
+                    <span>@SharedLocalizer["Users"] <i class="ion-ios-arrow-forward"></i></span>
+                </p>
+                <h1 class="mb-3 bread">@SharedLocalizer["CreateUser"]</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="form-container">
+    <h1 class="form-title">@SharedLocalizer["AddNewUser"]</h1>
+
+    <form asp-action="CreateUser" asp-controller="Users" method="post">
+        <div class="form-group">
+            <label asp-for="FullName"></label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Username"></label>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Age"></label>
+            <input asp-for="Age" class="form-control" type="number"/>
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" type="password"/>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword" class="form-control" type="password"/>
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-update">@SharedLocalizer["Create"]</button>
+            <a href="@Url.Action("AdminPanel", "Home")" class="btn btn-delete">@SharedLocalizer["Cancel"]</a>
+        </div>
+    </form>
+</div>
+
+
+<style>
+    .form-container {
+        margin: 40px auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+    }
+
+    .form-title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #00bcd4;
+        text-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        color: #000;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #00bcd4;
+        box-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+        outline: none;
+    }
+
+    .text-danger {
+        font-size: 0.85rem;
+        color: red;
+    }
+
+    .form-buttons {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 0 5px;
+    }
+
+    .btn-update {
+        background: #00bcd4;
+        color: #fff;
+    }
+
+    .btn-update:hover {
+        background: #000;
+        color: #fff;
+        box-shadow: 0 0 10px #00bcd4;
+    }
+
+    .btn-delete {
+        background: #000;
+        color: #fff;
+        border: 1px solid #00bcd4;
+    }
+
+    .btn-delete:hover {
+        background: #00bcd4;
+        color: #fff;
+        box-shadow: 0 0 10px #00bcd4;
+    }
+</style>

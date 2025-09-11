@@ -10,10 +10,11 @@ namespace Cars.BLL.Service.Abstraction
 {
     public interface ICarService
     {
-        public void Add(CreateCarVM user);
-        public List<Car> GetAll();
-        public void Update(UpdateCarVM user);
-        public void Delete(int id);
-        public Car GetById(int id);
+        public Task<bool> Add(CreateCarVM user);
+        public Task<List<Car>> GetAll();
+        public Task<bool> Update(UpdateCarVM user);
+        public Task<bool> Delete(int id);
+        public Task<Car> GetById(int id);
+        public Task<bool> RateCar(RateCarVM rateCarVM , string UserId);
     }
 }
