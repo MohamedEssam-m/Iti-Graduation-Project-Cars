@@ -33,19 +33,21 @@
         {
             <div class="col-md-4 mb-4">
                 <div class="car-card">
-                    <!-- صورة العربية -->
+                    
                     <div class="car-image" style="background-image: url('@car.CarImagePath');">
                     </div>
 
-                    <!-- محتوى الكارت -->
+                    
                     <div class="car-content">
                         <h2 class="car-brand">@car.Brand</h2>
                         <div class="car-info">
                             <p class="car-model">@car.Model</p>
                             <p class="car-price">$@car.PricePerDay /day</p>
+                            <p class="car-model">@car.quantity</p>
+                            <p class="car-model">@car.Status</p>
                         </div>
 
-                        <!-- الأزرار -->
+                        
                         <div class="car-buttons">
                             <form asp-controller="Cars" asp-action="UpdateCarView" method="post">
                                 <button type="submit" name="CarId" value="@car.CarId" class="book-button">

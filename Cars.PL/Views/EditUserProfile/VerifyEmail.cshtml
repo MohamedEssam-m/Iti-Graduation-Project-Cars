@@ -1,0 +1,180 @@
+﻿@* @using Cars.BLL.ModelVM.Account
+@model ForgetPasswordVM
+
+@{
+        ViewData["Title"] = "Change Password";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/ChangePassword.css" />
+
+@if(ViewBag.Success != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.Success</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@SharedLocalizer["Close"]"></button>
+    </div>
+}
+@if(ViewBag.Error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.Error</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@SharedLocalizer["Close"]"></button>
+    </div>
+}
+<br />
+<br />
+<div class="change-password-container">
+    <div class="change-password-card">
+        <h2 class = "registration-header">@SharedLocalizer["ChangePassword"]</h2>
+
+        <form asp-action="SaveChangePassword" asp-controller="EditUserProfile" method="post">
+            <!-- Password -->
+            <div class="form-group">
+                <label asp-for="Password" class="form-label">@SharedLocalizer["Password"]</label>
+                <input asp-for="Password" class="form-input" type="password" placeholder="@SharedLocalizer["CreateAPassword"]" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="form-group mt-3">
+                <label asp-for="ConfirmPassword" class="form-label">@SharedLocalizer["ConfirmPassword"]</label>
+                <input asp-for="ConfirmPassword" class="form-input" type="password" placeholder="@SharedLocalizer["ConfirmYourPassword"]" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-group d-flex justify-content-between mt-4">
+                <button type="submit" class="btn-register">@SharedLocalizer["Confirm"]</button>
+                <a asp-controller="Home" asp-action="Index" class="btn-mechanic">
+                    <i class="fa fa-car me-1"></i> @SharedLocalizer["Cancel"]
+                </a>
+            </div>
+        </form>
+    </div>
+</div> *@
+@using Cars.BLL.ModelVM.Account
+@model VerifyEmail
+
+<link rel="stylesheet" href="~/css/SignUp.css" />
+<link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
+
+@if (ViewBag.Success != null)
+{
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+<div class="registration-container">
+    <div class="registration-card">
+        <div class="registration-header">
+            <h2>@SharedLocalizer["ChangePassword"]</h2>
+        </div>
+
+        <form asp-action="EmailSend" asp-controller="EditUserProfile" method="get" class="registration-form">
+            <!-- Email -->
+            <div class="form-group">
+                <label asp-for="Email" class="form-label">@SharedLocalizer["Email"]</label>
+                <input asp-for="Email" class="form-input" type="Email" placeholder="@SharedLocalizer["Email"]" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            
+
+            <div class="signup-buttons">
+                <button type="submit" class="btn btn-user">@SharedLocalizer["Confirm"]</button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-mechanic">
+                    <i class="fa fa-car"></i> @SharedLocalizer["Cancel"]
+                </a>
+            </div>
+            
+        </form>
+    </div>
+</div>
+<style>
+.signup-choice-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    padding: 20px;
+}
+
+.signup-choice-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    max-width: 400px;
+    width: 100%;
+}
+
+.signup-choice-card h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.signup-choice-card p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.signup-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.signup-buttons .btn {
+    flex: 1;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-user {
+    background: #00bcd4;
+}
+
+.btn-user:hover {
+    background: #000;
+    box-shadow: 0 0 10px #00bcd4;
+}
+
+.btn-mechanic {
+    background: #000;
+    border: 2px solid #00bcd4;
+}
+
+.btn-mechanic:hover {
+    background: #00bcd4;
+    box-shadow: 0 0 10px #00bcd4;
+}
+</style>
+
+
+
+
+
+

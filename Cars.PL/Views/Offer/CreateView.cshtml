@@ -1,0 +1,98 @@
+﻿@using Cars.BLL.ModelVM.Offers
+@using Cars.BLL.Service.Implementation
+@using Microsoft.AspNetCore.Identity
+@model CreateOfferVM
+
+@inject UserManager<AppUser> userManager
+@* @inject CarService carService
+@inject AccidentService accidentService *@
+<link rel="stylesheet" href="~/css/SignUp.css" />
+
+<div class="registration-container">
+    <div class="registration-card">
+        <div class="registration-header">
+            
+            <h2>Create An Offer</h2>
+            
+        </div>
+<link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
+
+@if (ViewBag.Success != null)
+{
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+        <form asp-action="Create" asp-controller="Offer" method="post" class="registration-form">
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+            <input type="hidden" asp-for="CarName"></input>
+            <input type="hidden" asp-for="AccidentId"></input>
+            <input type="hidden" asp-for="MechanicId" value="@userManager.GetUserId(User)"></input>
+            
+            
+
+            <!-- Price -->
+            <div class="form-group">
+                <label asp-for="Price" class="form-label">Price *</label>
+                <input asp-for="Price" class="form-input" placeholder="Enter Offer Price" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+           
+
+            <!-- Details -->
+            <div class="form-group">
+                <label asp-for="Details" class="form-label">Details *</label>
+                <input asp-for="Details" class="form-input" type="text" placeholder="Enter Offer Details" />
+                <span asp-validation-for="Details" class="text-danger"></span>
+            </div>
+
+            <!-- OfferStartDate -->
+            <div class="form-group">
+                <label asp-for="OfferStartDate" class="form-label">Start Date Of Repairing *</label>
+                <input asp-for="OfferStartDate" class="form-input" type="Date" min="@DateTime.Today.ToString("yyyy-MM-dd")" placeholder="Enter The Start Date Of Repairing" />
+                <span asp-validation-for="OfferStartDate" class="text-danger"></span>
+            </div>
+
+            <!-- OfferStartDate -->
+            <div class="form-group">
+                <label asp-for="OfferEndDate" class="form-label">The Date Of Receiving Car *</label>
+                <input asp-for="OfferEndDate" class="form-input" type="Date" min="@DateTime.Today.ToString("yyyy-MM-dd")" placeholder="Enter The Date Of Receiving Car" />
+                <span asp-validation-for="OfferEndDate" class="text-danger"></span>
+            </div>
+
+            
+
+            
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="btn-register">@SharedLocalizer["Confirm"]</button>
+            </div>
+
+            
+        </form>
+    </div>
+</div>
+
+@* <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const inputs = document.querySelectorAll("input, textarea, select");
+    inputs.forEach(input => {
+        input.addEventListener("blur", () => {
+            input.classList.add("touched");
+        });
+    });
+});
+</script> *@
+

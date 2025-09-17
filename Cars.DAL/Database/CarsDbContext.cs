@@ -1,7 +1,8 @@
 ﻿using Cars.BLL.Helper.Renting;
 using Cars.BLL.Helper.Repairing;
+using Cars.DAL.Entities.Accidents;
+using Cars.DAL.Entities.Offers;
 using Cars.DAL.Entities.Renting;
-using Cars.DAL.Entities.Repairing;
 using Cars.DAL.Entities.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -23,7 +24,9 @@ namespace Cars.DAL.Database
         public virtual DbSet<MechanicUser> MechanicUsers { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Rent> Rents { get; set; }
-        public virtual DbSet<Repair> Repairs { get; set; }
+        //public virtual DbSet<Repair> Repairs { get; set; }
+        public virtual DbSet<Accident> Accidents { get; set; }
+        public virtual DbSet<Offer> Offers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -32,7 +35,7 @@ namespace Cars.DAL.Database
             .IsUnique();
 
             // -------------------
-            // Car ↔ User
+            // Car - User
             modelBuilder.Entity<Car>()
                 .HasOne(c => c.User)
                 .WithMany(u => u.Cars)
@@ -40,7 +43,7 @@ namespace Cars.DAL.Database
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             // -------------------
-            // Rent ↔ User
+            // Rent  User
             modelBuilder.Entity<Rent>()
                 .HasOne(r => r.User)
                 .WithMany(u => u.Rents)
@@ -48,7 +51,7 @@ namespace Cars.DAL.Database
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             // -------------------
-            // Rent ↔ Car
+            // Rent - Car
             modelBuilder.Entity<Rent>()
                 .HasOne(r => r.Car)
                 .WithMany(c => c.Rents)
@@ -56,18 +59,18 @@ namespace Cars.DAL.Database
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             // -------------------
-            // Repair ↔ User
-            modelBuilder.Entity<Repair>()
-                .HasOne(r => r.User)
-                .WithMany(u => u.Repairs)
-                .HasForeignKey(r => r.UserId)
+            // Repair - User // comment
+            //modelBuilder.Entity<Repair>()
+            //    .HasOne(r => r.User)
+            //    .WithMany(u => u.Repairs)
+            //    .HasForeignKey(r => r.UserId)
                 
-                .OnDelete(DeleteBehavior.ClientSetNull);
+            //    .OnDelete(DeleteBehavior.ClientSetNull);
 
             
 
 
-            // Repair ↔ Mechanic
+            // Repair _ Mechanic
             //modelBuilder.Entity<Repair>()
             //    .HasOne(r => r.Mechanic)
             //    .WithMany(u => u.Repairs)
@@ -75,7 +78,7 @@ namespace Cars.DAL.Database
             //    .OnDelete(DeleteBehavior.ClientSetNull);
 
             // -------------------
-            // RepairPayment ↔ User
+            // RepairPayment - User
             modelBuilder.Entity<RepairPayment>()
                 .HasOne(rp => rp.User)
                 .WithMany(u => u.RepairPayments)
@@ -83,12 +86,13 @@ namespace Cars.DAL.Database
                 
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            modelBuilder.Entity<RepairPayment>()
-    .HasOne(rp => rp.Repair)
-    .WithMany(r => r.Payments)
-    .HasForeignKey(rp => rp.RepairId)
+            modelBuilder.Entity<Accident>()
+    .HasOne(a => a.repairPayment)
+    .WithOne(rp => rp.accident)
+    .HasForeignKey<RepairPayment>(rp => rp.accidentId)
     .OnDelete(DeleteBehavior.ClientSetNull);
-            //RepairPayment ↔ Mechanic
+
+            //RepairPayment - Mechanic
             //modelBuilder.Entity<RepairPayment>()
             //    .HasOne(rp => rp.Mechanic)
             //    .WithMany(u => u.RepairPayments)
@@ -96,18 +100,47 @@ namespace Cars.DAL.Database
             //    .OnDelete(DeleteBehavior.ClientSetNull);
 
             // -------------------
-            // RentPayment ↔ User
-            modelBuilder.Entity<RentPayment>()
-                .HasOne(rp => rp.User)
-                .WithMany(u => u.RentPayments)
-                .HasForeignKey(rp => rp.UserId)
+            // RentPayment - User
+            //modelBuilder.Entity<RentPayment>()
+            //    .HasOne(rp => rp.User)
+            //    .WithMany(u => u.RentPayments)
+            //    .HasForeignKey(rp => rp.UserId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull);
+
+            // RentPayment - Rent
+            //    modelBuilder.Entity<RentPayment>()
+            //        .HasOne(rp => rp.Rent)
+            //        .HasOne(r => r.Payments)
+            //        .HasForeignKey(rp => rp.RentId)
+            //        .OnDelete(DeleteBehavior.ClientSetNull);
+
+            //new
+            // Accident - AppUser (User)
+            modelBuilder.Entity<Accident>()
+                .HasOne(a => a.User)
+                .WithMany(u => u.Accidents) 
+                .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            // RentPayment ↔ Rent
-            modelBuilder.Entity<RentPayment>()
-                .HasOne(rp => rp.Rent)
-                .WithMany(r => r.Payments)
-                .HasForeignKey(rp => rp.RentId)
+            // Accident - Car
+            modelBuilder.Entity<Accident>()
+                .HasOne(a => a.Car)
+                .WithMany(c => c.Accidents) 
+                .HasForeignKey(a => a.carId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            // Accident - Offer
+            modelBuilder.Entity<Offer>()
+                .HasOne(o => o.Accident)
+                .WithMany(a => a.Offers)
+                .HasForeignKey(o => o.AccidentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Offer - Mechanic (AppUser)
+            modelBuilder.Entity<Offer>()
+                .HasOne(o => o.Mechanic)
+                .WithMany(m=>m.Offers) 
+                .HasForeignKey(o => o.MechanicId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
         }
 

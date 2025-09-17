@@ -20,14 +20,18 @@ namespace Cars.PL.Controllers
         private readonly IRoleService RoleService;
 
         private readonly UserManager<AppUser> UserManager;
+        private readonly IEmailService EmailService;
+        
 
-        public AccountController(IAccountService accountService, IMapper mapper , IStringLocalizer<SharedResource> SharedLocalizer , IRoleService roleService , UserManager<AppUser> userManager)
+        public AccountController(IAccountService accountService, IMapper mapper , IStringLocalizer<SharedResource> SharedLocalizer , IRoleService roleService , UserManager<AppUser> userManager, IEmailService EmailService)
         {
             this.accountService = accountService;
             this.mapper = mapper;
             this.SharedLocalizer = SharedLocalizer;
             RoleService = roleService;
             UserManager = userManager;
+            this.EmailService = EmailService;
+            
         }
         public IActionResult determineRole()
         {
@@ -78,8 +82,9 @@ namespace Cars.PL.Controllers
                 {
                     var role = await RoleService.AssignRoleToUser(user, signUp.Role);
                 }
-                ViewBag.success = "SignUp Is Done Successfully , You Can Login Now";
-                return View("LoginView");
+                ViewBag.success = "SignUp Is Done Successfully , You Can Verify Your Account Now";
+                return RedirectToAction("SendEmailConfirm", "Account" , new {email = signUp.Email});
+                //return View("LoginView");
             }
             else
             {
@@ -119,6 +124,54 @@ namespace Cars.PL.Controllers
         {
             await accountService.LogOut();
             return RedirectToAction("Index", "Home");
+        }
+        public async Task<ActionResult> SendEmailConfirm(string email)
+        {
+            var user = await UserManager.FindByEmailAsync(email);
+            if (ModelState.IsValid && user != null)
+            {
+                var resetToken = await UserManager.GenerateEmailConfirmationTokenAsync(user);
+                //**add new object after "EditUserProfile"**
+                var resetLink = Url.Action("ConfirmEmail", "Account", new { email = email, token = resetToken }, protocol: HttpContext.Request.Scheme);
+
+                var subject = "Vrify Your Email";
+                var body = $"Please, Vrify Your Email By Clicking Here : <a href=\"{resetLink}\">Vrify Email</a>";
+
+                await EmailService.SendEmail(email, subject, body);
+                ViewBag.Send = "Verification Email Sent";
+                return View();
+            }
+            else
+            {
+                ViewBag.Error = "Email Not Found!";
+                return View();
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string email, string token)
+        {
+            if (email == null || token == null)
+            {
+                ViewBag.Error = "Email Not Found!";
+                return View("SendEmailConfirm");
+            }
+
+            var user = await UserManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                ViewBag.Error = "Email Not Found!";
+                return View("SendEmailConfirm");
+            }
+
+            var result = await UserManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                ViewBag.Success = "Your Email Verified Successfully";
+                return View("LoginView"); 
+            }
+
+            ViewBag.Error = "Some Thing Was Wrong";
+            return View("SendEmailConfirm");
         }
 
 

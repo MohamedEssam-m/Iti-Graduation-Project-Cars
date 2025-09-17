@@ -1,6 +1,9 @@
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Cars.BLL.Service.Abstraction;
+using Cars.DAL.Entities.Accidents;
 using Cars.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cars.Controllers
@@ -10,11 +13,13 @@ namespace Cars.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private readonly ICarService CarService;
+        private readonly IAccidentService accidentService;
 
-        public HomeController(ILogger<HomeController> logger , ICarService carService)
+        public HomeController(ILogger<HomeController> logger , ICarService carService, IAccidentService accidentService)
         {
             _logger = logger;
             CarService = carService;
+            this.accidentService = accidentService;
         }
 
         public IActionResult Index()
@@ -33,21 +38,23 @@ namespace Cars.Controllers
             var cars =  await CarService.GetAll();
             return View(cars);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminPanel()
         {
             ViewData["ActivePage"] = "Admin Panel";
             return View();
         }
-        //public IActionResult ManageProfile()
-        //{
-        //    ViewData["ActivePage"] = "ManageProfile";
-        //    return View();
-        //}
+        public IActionResult ManageProfile()
+        {
+            ViewData["ActivePage"] = "ManageProfile";
+            return View();
+        }
         public IActionResult Contact()
         {
             ViewData["ActivePage"] = "Contact";
             return View();
         }
+        
         public IActionResult Services()
         {
             ViewData["ActivePage"] = "Services";

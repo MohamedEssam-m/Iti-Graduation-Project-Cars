@@ -1,6 +1,6 @@
-﻿using Cars.DAL.Entities.Cars;
+﻿using Cars.DAL.Entities.Accidents;
+using Cars.DAL.Entities.Cars;
 using Cars.DAL.Entities.Renting;
-using Cars.DAL.Entities.Repairing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,7 +14,9 @@ public class Car
     public string? userId { get;  set; }
     public AppUser? User { get; private set; }
 
-    public List<Repair>? Repairs { get; private set; }
+    //public List<Repair>? Repairs { get; private set; }
+    //new
+    public List<Accident>? Accidents { get; private set; } = new List<Accident>();
     public List<Rent>? Rents { get; private set; }
     
     // Brand of the car (e.g., Toyota, BMW, Subaru)
@@ -102,9 +104,14 @@ public class Car
 
     public double AverageRating { get; set; }
     public List<CarRate>? CarRates { get; set; } = new List<CarRate>();
+    [Required(ErrorMessage = "Quantity is Required")]
+    [Range(0, 100, ErrorMessage = "Quantity must be between 0 and 100 ")]
+    public int quantity { get; set; }
+    [Required(ErrorMessage = "Status is Required")]
+    public string Status { get; set; }
     public Car()
     {
-        Repairs = new List<Repair>();
+        Accidents = new List<Accident>();
         Rents = new List<Rent>();
     }
 

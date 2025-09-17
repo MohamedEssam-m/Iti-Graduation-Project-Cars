@@ -321,4 +321,100 @@
   <data name="EnterYourCurrentEmailAddress" xml:space="preserve">
     <value>البريد الالكتروني الحالي</value>
   </data>
+  <data name="Brand" xml:space="preserve">
+    <value>الماركة</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>الموديل</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>السنة</value>
+  </data>
+  <data name="BodyType" xml:space="preserve">
+    <value>نوع السيارة</value>
+  </data>
+  <data name="Doors" xml:space="preserve">
+    <value>عدد الأبواب</value>
+  </data>
+  <data name="EngineCapacity" xml:space="preserve">
+    <value>سعة المحرك</value>
+  </data>
+  <data name="HorsePower" xml:space="preserve">
+    <value>قوة الحصان</value>
+  </data>
+  <data name="FuelConsumption" xml:space="preserve">
+    <value>استهلاك الوقود</value>
+  </data>
+  <data name="Seats" xml:space="preserve">
+    <value>عدد المقاعد</value>
+  </data>
+  <data name="SelectFuelType" xml:space="preserve">
+    <value>اختر نوع الوقود</value>
+  </data>
+  <data name="Transmission" xml:space="preserve">
+    <value>نوع ناقل الحركة (جير)</value>
+  </data>
+  <data name="SelectTransmission" xml:space="preserve">
+    <value>اختر ناقل الحركة</value>
+  </data>
+  <data name="LuggageCapacity" xml:space="preserve">
+    <value>سعة التخزين (الشنطة)</value>
+  </data>
+  <data name="PricePerDay" xml:space="preserve">
+    <value>السعر لليوم الواحد</value>
+  </data>
+  <data name="MaxKmPerDay" xml:space="preserve">
+    <value>المسافة المسموح بها يوميًا</value>
+  </data>
+  <data name="InsuranceIncluded" xml:space="preserve">
+    <value>يشمل التأمين</value>
+  </data>
+  <data name="AirConditioning" xml:space="preserve">
+    <value>تكييف</value>
+  </data>
+  <data name="MultimediaSystem" xml:space="preserve">
+    <value>نظام وسائط متعددة</value>
+  </data>
+  <data name="AirBags" xml:space="preserve">
+    <value>وسائد هوائية (إيرباج)</value>
+  </data>
+  <data name="ABS" xml:space="preserve">
+    <value>فرامل مانعة للانغلاق (ABS)</value>
+  </data>
+  <data name="ESP" xml:space="preserve">
+    <value>ظام الثبات الإلكتروني (ESP)</value>
+  </data>
+  <data name="RearCamera" xml:space="preserve">
+    <value>كاميرا خلفية</value>
+  </data>
+  <data name="ParkingSensors" xml:space="preserve">
+    <value>حساسات ركن</value>
+  </data>
+  <data name="FuelType" xml:space="preserve">
+    <value>نوع البنزين</value>
+  </data>
+  <data name="MaxPerDay" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>أوتوماتيك</value>
+  </data>
+  <data name="Manual" xml:space="preserve">
+    <value>مانيوال</value>
+  </data>
+  <data name="CreateCar" xml:space="preserve">
+    <value>أنشىْ سيارة</value>
+  </data>
+  <data name="Petrol" xml:space="preserve">
+    <value>بنزين</value>
+  </data>
+  <data name="Electric" xml:space="preserve">
+    <value>كهربائية</value>
+  </data>
+  <data name="Diesel" xml:space="preserve">
+    <value>ديزل</value>
+  </data>
+  <data name="Hybrid" xml:space="preserve">
+    <value>هجين</value>
+  </data>
 </root>

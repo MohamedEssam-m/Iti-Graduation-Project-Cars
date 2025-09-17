@@ -1,0 +1,138 @@
+﻿@using Cars.DAL.Entities.Accidents
+@{
+    ViewData["Title"] = "Accident Page";
+}
+@{
+    Layout = "_Layout";
+}
+@model List<Accident>
+<link rel="stylesheet" href="~/css/GetAllCars.css" />
+<link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
+@if (ViewBag.Success != null)
+{
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+          <div class="col-md-9 ftco-animate pb-5">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Repairing <i class="ion-ios-arrow-forward"></i></span></p>
+            <h1 class="mb-3 bread">Repairing</h1>
+          </div>
+        </div>
+      </div>
+</section>
+@if(Model == null ||Model.Count == 0)
+{
+    <h2 class="alert alert-info text-center mt-5">
+        No Accidents available Right Now
+    </h2>
+})
+@if(User.IsInRole("User") || User.IsInRole("Admin"))
+{
+    <form asp-controller="Accident" asp-action="Create" method="get" 
+      style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
+    <button type="submit" 
+            class="book-button" 
+            style="background-color: green; 
+                   color: white; 
+                   padding: 12px 20px; 
+                   border: none; 
+                   border-radius: 8px; 
+                   cursor: pointer; 
+                   font-size: 16px;">
+        <i class="fa fa-user"></i> Add An Accident
+    </button>
+</form>
+
+
+}
+@if(Model != null && Model.Count != 0)
+{
+    @foreach(var accident in Model)
+{
+<div class="car-column">
+    <div class="car-card">
+        <!-- Car Image -->
+        <div class="car-image" style="background-image: url('@accident.AccidentImagePath');">
+        </div>
+
+        <!-- Car Content -->
+        <div class="car-content">
+            <h2 class="car-brand">@accident.Location</h2>
+            
+            <div class="car-info" style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+    <h4 class="car-price" style="margin:0;">@accident.AccidentDate.ToString("yyyy/mm/dd")</h4>
+    <p class="car-model" style="margin:0; font-weight:bold;">@accident.Description</p>
+
+
+</div>
+
+            
+                @if(User.IsInRole("Mechanic") && User.Identity.IsAuthenticated)
+                {
+                    <div class="car-buttons">
+                    <form asp-controller="Offer" asp-action="CreateView" method="get">
+                        <button type="submit" name="AccidentId" value="@accident.AccidentId" class="book-button">
+                            <i class="fa fa-user"></i> Send Offer
+                        </button>
+                    </form>
+                           </div> 
+                }
+                @if(User.IsInRole("User") && User.Identity.IsAuthenticated)
+                {
+                    <div class="car-buttons">
+                    <form asp-controller="Accident" asp-action="EditView" method="post">
+                        <input type="hidden" value = "@accident.AccidentId"></input>
+                        <button type="submit" class="book-button">
+                            <i class="fa fa-user"></i> Edit
+                        </button>
+                    </form>
+                    <form asp-controller="#" asp-action="#" method="post">
+                        <button type="submit" name="CarId" value="" class="book-button">
+                            <i class="fa fa-user"></i> Delete
+                        </button>
+                    </form>
+                    </div>
+                            
+                }
+                @if(!User.Identity.IsAuthenticated)
+                {
+                    <div class="car-buttons">
+                    <form asp-controller="Account" asp-action="LoginView" method="post">
+                        <button type="submit" class="book-button">
+                            <i class="fa fa-user"></i> LogIn To Send Offer
+                        </button>
+                    </form>
+                    </div>        
+                }
+
+                <form asp-controller="Accident" asp-action="Offers" method="post">
+                    <input type="hidden" name = "CarId" value="@accident.carId"></input>
+                    <button type="submit" name="accidentId" value="@accident.AccidentId" class="details-button">
+                        <i class="fa fa-car"></i> Offers
+                    </button>
+                </form>
+            
+        </div>
+    </div>
+</div>
+
+                            
+                            
+                                
+}  
+}

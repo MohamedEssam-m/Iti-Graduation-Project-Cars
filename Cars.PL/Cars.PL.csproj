@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Cars.BLL\Cars.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Rent\" />
+  </ItemGroup>
+
 </Project>

@@ -63,8 +63,11 @@
             </div>
 
            
-
-            <!-- Login Link -->
+            <!-- forget password Link -->
+            <div class="login-link">
+                <p>Forget Password? <a asp-action="VerifyEmail" asp-controller="EditUserProfile">Reset Password</a></p>
+            </div>
+            <!-- SignUp Link -->
             <div class="login-link">
                 <p>@SharedLocalizer["CreateAnAccount"] <a asp-action="determineRole" asp-controller="Account">@SharedLocalizer["SignUp"]</a></p>
             </div>

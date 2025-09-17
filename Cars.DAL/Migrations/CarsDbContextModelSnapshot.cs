@@ -208,11 +208,18 @@ namespace Cars.DAL.Migrations
                     b.Property<int>("Seats")
                         .HasColumnType("int");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Transmission")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quantity")
                         .HasColumnType("int");
 
                     b.Property<string>("userId")
@@ -227,14 +234,17 @@ namespace Cars.DAL.Migrations
 
             modelBuilder.Entity("Cars.BLL.Helper.Renting.RentPayment", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("RentId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
@@ -244,23 +254,9 @@ namespace Cars.DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("RentId")
-                        .HasColumnType("int");
+                    b.HasKey("RentId");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RentId");
-
-                    b.HasIndex("UserId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("RentPayment");
                 });
@@ -294,9 +290,6 @@ namespace Cars.DAL.Migrations
                     b.Property<decimal?>("PenaltyAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("RepairId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -306,15 +299,61 @@ namespace Cars.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("accidentId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MechanicId");
 
-                    b.HasIndex("RepairId");
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("accidentId")
+                        .IsUnique();
+
+                    b.ToTable("RepairPayment");
+                });
+
+            modelBuilder.Entity("Cars.DAL.Entities.Accidents.Accident", b =>
+                {
+                    b.Property<int>("AccidentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccidentId"));
+
+                    b.Property<DateTime>("AccidentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("AccidentImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReportDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("carId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AccidentId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RepairPayment");
+                    b.HasIndex("carId");
+
+                    b.ToTable("Accidents");
                 });
 
             modelBuilder.Entity("Cars.DAL.Entities.Cars.CarRate", b =>
@@ -352,6 +391,56 @@ namespace Cars.DAL.Migrations
                     b.ToTable("CarRate");
                 });
 
+            modelBuilder.Entity("Cars.DAL.Entities.Offers.Offer", b =>
+                {
+                    b.Property<int>("OfferId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OfferId"));
+
+                    b.Property<int>("AccidentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CarName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("MechanicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("OfferDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OfferEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OfferStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("OfferId");
+
+                    b.HasIndex("AccidentId");
+
+                    b.HasIndex("MechanicId");
+
+                    b.ToTable("Offers");
+                });
+
             modelBuilder.Entity("Cars.DAL.Entities.Renting.Rent", b =>
                 {
                     b.Property<int>("RentId")
@@ -363,8 +452,18 @@ namespace Cars.DAL.Migrations
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Drop_Off_location")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Pick_up_location")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -373,9 +472,6 @@ namespace Cars.DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -388,64 +484,6 @@ namespace Cars.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Rents");
-                });
-
-            modelBuilder.Entity("Cars.DAL.Entities.Repairing.Repair", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CompleteDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("Deadline")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("MechanicId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("MechanicResponseDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal?>("PenaltyAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("ProposedPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("RequestedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId");
-
-                    b.HasIndex("MechanicId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Repairs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -611,19 +649,17 @@ namespace Cars.DAL.Migrations
 
             modelBuilder.Entity("Cars.BLL.Helper.Renting.RentPayment", b =>
                 {
-                    b.HasOne("Cars.DAL.Entities.Renting.Rent", "Rent")
-                        .WithMany("Payments")
-                        .HasForeignKey("RentId")
-                        .IsRequired();
-
-                    b.HasOne("AppUser", "User")
+                    b.HasOne("AppUser", null)
                         .WithMany("RentPayments")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("Cars.DAL.Entities.Renting.Rent", "Rent")
+                        .WithOne("Payment")
+                        .HasForeignKey("Cars.BLL.Helper.Renting.RentPayment", "RentId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Rent");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Cars.BLL.Helper.Repairing.RepairPayment", b =>
@@ -634,19 +670,36 @@ namespace Cars.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Cars.DAL.Entities.Repairing.Repair", "Repair")
-                        .WithMany("Payments")
-                        .HasForeignKey("RepairId")
-                        .IsRequired();
-
                     b.HasOne("AppUser", "User")
                         .WithMany("RepairPayments")
                         .HasForeignKey("UserId")
                         .IsRequired();
 
+                    b.HasOne("Cars.DAL.Entities.Accidents.Accident", "accident")
+                        .WithOne("repairPayment")
+                        .HasForeignKey("Cars.BLL.Helper.Repairing.RepairPayment", "accidentId")
+                        .IsRequired();
+
                     b.Navigation("Mechanic");
 
-                    b.Navigation("Repair");
+                    b.Navigation("User");
+
+                    b.Navigation("accident");
+                });
+
+            modelBuilder.Entity("Cars.DAL.Entities.Accidents.Accident", b =>
+                {
+                    b.HasOne("AppUser", "User")
+                        .WithMany("Accidents")
+                        .HasForeignKey("UserId")
+                        .IsRequired();
+
+                    b.HasOne("Car", "Car")
+                        .WithMany("Accidents")
+                        .HasForeignKey("carId")
+                        .IsRequired();
+
+                    b.Navigation("Car");
 
                     b.Navigation("User");
                 });
@@ -662,6 +715,24 @@ namespace Cars.DAL.Migrations
                     b.Navigation("Car");
                 });
 
+            modelBuilder.Entity("Cars.DAL.Entities.Offers.Offer", b =>
+                {
+                    b.HasOne("Cars.DAL.Entities.Accidents.Accident", "Accident")
+                        .WithMany("Offers")
+                        .HasForeignKey("AccidentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AppUser", "Mechanic")
+                        .WithMany("Offers")
+                        .HasForeignKey("MechanicId")
+                        .IsRequired();
+
+                    b.Navigation("Accident");
+
+                    b.Navigation("Mechanic");
+                });
+
             modelBuilder.Entity("Cars.DAL.Entities.Renting.Rent", b =>
                 {
                     b.HasOne("Car", "Car")
@@ -675,32 +746,6 @@ namespace Cars.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Car");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Cars.DAL.Entities.Repairing.Repair", b =>
-                {
-                    b.HasOne("Car", "Car")
-                        .WithMany("Repairs")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cars.DAL.Entities.Users.MechanicUser", "Mechanic")
-                        .WithMany()
-                        .HasForeignKey("MechanicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AppUser", "User")
-                        .WithMany("Repairs")
-                        .HasForeignKey("UserId")
-                        .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("Mechanic");
 
                     b.Navigation("User");
                 });
@@ -758,34 +803,38 @@ namespace Cars.DAL.Migrations
 
             modelBuilder.Entity("AppUser", b =>
                 {
+                    b.Navigation("Accidents");
+
                     b.Navigation("Cars");
+
+                    b.Navigation("Offers");
 
                     b.Navigation("RentPayments");
 
                     b.Navigation("Rents");
 
                     b.Navigation("RepairPayments");
-
-                    b.Navigation("Repairs");
                 });
 
             modelBuilder.Entity("Car", b =>
                 {
+                    b.Navigation("Accidents");
+
                     b.Navigation("CarRates");
 
                     b.Navigation("Rents");
+                });
 
-                    b.Navigation("Repairs");
+            modelBuilder.Entity("Cars.DAL.Entities.Accidents.Accident", b =>
+                {
+                    b.Navigation("Offers");
+
+                    b.Navigation("repairPayment");
                 });
 
             modelBuilder.Entity("Cars.DAL.Entities.Renting.Rent", b =>
                 {
-                    b.Navigation("Payments");
-                });
-
-            modelBuilder.Entity("Cars.DAL.Entities.Repairing.Repair", b =>
-                {
-                    b.Navigation("Payments");
+                    b.Navigation("Payment");
                 });
 #pragma warning restore 612, 618
         }

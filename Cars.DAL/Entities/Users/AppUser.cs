@@ -1,8 +1,9 @@
 ﻿
 using Cars.BLL.Helper.Renting;
 using Cars.BLL.Helper.Repairing;
+using Cars.DAL.Entities.Accidents;
+using Cars.DAL.Entities.Offers;
 using Cars.DAL.Entities.Renting;
-using Cars.DAL.Entities.Repairing;
 using Cars.DAL.Entities.Users;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
@@ -21,11 +22,14 @@ public class AppUser : IdentityUser
     public int Age { get;  set; }
     
     
-    public List<Car>? Cars { get; private set; }
-    public List<Repair>? Repairs { get; private set; }
-    public List<Rent>? Rents { get; private set; }
-    public List<RentPayment>? RentPayments { get; private set; }
-    public List<RepairPayment>? RepairPayments { get;  set; }
+    public List<Car>? Cars { get; private set; } = new List<Car>();
+    //public List<Repair>? Repairs { get; private set; }
+    public List<Accident>? Accidents { get; private set; } = new List<Accident>();
+    // new for mechanics
+    public List<Offer>? Offers = new List<Offer>();
+    public List<Rent>? Rents { get; private set; } = new List<Rent>();
+    public List<RentPayment>? RentPayments { get; private set; } = new List<RentPayment>();
+    public List<RepairPayment>? RepairPayments { get; set; } = new List<RepairPayment>();
 
     public string? ProfilePicture { get;  set; }
     public bool? IsDeleted { get; private set; }

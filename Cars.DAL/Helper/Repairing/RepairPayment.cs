@@ -1,4 +1,4 @@
-﻿using Cars.DAL.Entities.Repairing;
+﻿using Cars.DAL.Entities.Accidents;
 using Cars.DAL.Entities.Users;
 using System;
 using System.Collections.Generic;
@@ -16,10 +16,10 @@ namespace Cars.BLL.Helper.Repairing
         public int Id { get; set; }
 
         [Required]
-        public int RepairId { get; set; }
+        public int accidentId { get; set; }
 
-        [ForeignKey(nameof(RepairId))]
-        public Repair? Repair { get; set; }
+        [ForeignKey(nameof(accidentId))]
+        public Accident? accident { get; set; }
 
         [Required]
         public string? UserId { get; set; }

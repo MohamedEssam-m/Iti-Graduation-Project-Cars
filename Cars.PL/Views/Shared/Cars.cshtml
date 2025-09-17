@@ -6,6 +6,23 @@
 }
 @model List<Car>
 <link rel="stylesheet" href="~/css/GetAllCars.css" />
+<link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
+@if (ViewBag.Success != null)
+{
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
@@ -85,17 +102,48 @@
         <div class="car-content">
             <h2 class="car-brand">@car.Brand</h2>
             
-            <div class="car-info">
-                <p class="car-model">@car.Model</p>
-                <p class="car-price">$@car.PricePerDay /day</p>
-                <p class="car-price">$@car.AverageRating</p>
-            </div>
+            <div class="car-info" style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+    <h4 class="car-model" style="margin:0;">@car.Brand @car.Model</h4>
+    <p class="car-price" style="margin:0; font-weight:bold;">$@car.PricePerDay /day</p>
+    <p class="car-price" style="margin:0; color:#f1c40f;">@car.AverageRating ⭐</p>
+    <p class="car-price" style="margin:0; grid-column:span 3;">Quantity : @car.quantity</p>
+    @if (car.quantity < 1)
+    {
+        <p class="car-price" style="margin:0; grid-column:span 3;">
+            <span class="car-price">Status :</span> 
+            <span style="color:red;">@car.Status</span>
+        </p>
+    }
+    else
+    {
+        <p class="car-price" style="margin:0; grid-column:span 3;">
+            <span class="car-price">Status :</span> 
+            <span style="color:green;">@car.Status</span>
+        </p>
+    }
+
+
+</div>
+
             <div class="car-buttons">
-                <form asp-controller="Cars" asp-action="#" method="post">
-                    <button type="submit" name="CarId" value="@car.CarId" class="book-button">
-                        <i class="fa fa-user"></i> Book now
-                    </button>
-                </form>
+                @if(User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Rent" asp-action="RentingDetails" method="post">
+                        <button type="submit" name="CarId" value="@car.CarId" class="book-button">
+                            <i class="fa fa-user"></i> Book now
+                        </button>
+                    </form>
+                            
+                }
+                @if(!User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Account" asp-action="LoginView" method="post">
+                        <button type="submit" class="book-button">
+                            <i class="fa fa-user"></i> LogIn To Book
+                        </button>
+                    </form>
+                            
+                }
 
                 <form asp-controller="Cars" asp-action="CarDetails" method="post">
                     <button type="submit" name="CarId" value="@car.CarId" class="details-button">
@@ -116,7 +164,7 @@
 
 
 
-                <div class="col-md-4">
+       @*          <div class="col-md-4">
     				<div class="car-wrap rounded ftco-animate">
     					<div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-2.jpg);">
     					</div>
@@ -129,7 +177,7 @@
     						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
     					</div>
     				</div>
-    			</div>
+    			</div> *@
     	@* 		<div class="col-md-4">
     				<div class="car-wrap rounded ftco-animate">
     					<div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-3.jpg);">
@@ -308,3 +356,4 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="~/js/google-map.js"></script>
 <script src="~/js/main.js"></script> *@
+

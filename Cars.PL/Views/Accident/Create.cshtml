@@ -1,0 +1,85 @@
+﻿@using Cars.BLL.ModelVM.Accident
+@using Microsoft.AspNetCore.Identity
+@model CreateAccidentVM
+
+@* @inject UserManager<AppUser> userManager
+@{
+        var UserId = userManager.GetUserId(User);
+        var user = await userManager.FindByIdAsync(UserId);
+} *@
+<link rel="stylesheet" href="~/css/SignUp.css" />
+<link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
+@if (ViewBag.Success != null)
+{
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+
+<div class="registration-container">
+    <div class="registration-card">
+        <div class="registration-header">
+            <h2>@SharedLocalizer["CreateYourAccount"]</h2>
+            <p>@SharedLocalizer["JoinUsToday"]</p>
+        </div>
+
+        <form asp-action="Create" asp-controller="Accident" method="post" class="registration-form">
+            <!-- Description -->
+            <div class="form-group">
+                <label asp-for="Description" class="form-label">Description</label>
+                <input asp-for="Description" class="form-input" placeholder="Enter The Description of The Accident" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+
+            <!-- Location -->
+            <div class="form-group">
+                <label asp-for="Location" class="form-label">Location</label>
+                <input asp-for="Location" class="form-input" placeholder="Enter The Location of The Accident" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+
+            <!-- AccidentDate -->
+            <div class="form-group">
+                <label asp-for="AccidentDate" class="form-label">Accident Date</label>
+                <input asp-for="AccidentDate" class="form-input" placeholder="Enter The Date of The Accident" />
+                <span asp-validation-for="AccidentDate" class="text-danger"></span>
+            </div>
+
+            <!-- Car Id Dropdown -->
+            <div class="form-group">
+                <label asp-for="carId" class="form-label">Select Car</label>
+                <select asp-for="carId" class="form-input">
+                    <option value="">-- Select Your Car --</option>
+                    @if(ViewBag.Cars != null && ViewBag.Cars.Count > 0)
+                    {
+                        @foreach (var car in ViewBag.Cars)
+                        {
+                            <option value="@car.CarId">@car.Brand</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="carId" class="text-danger"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="btn-register">@SharedLocalizer["Confirm"]</button>
+            </div>
+
+            
+        </form>
+    </div>
+</div>

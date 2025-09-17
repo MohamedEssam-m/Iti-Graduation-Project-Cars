@@ -5,6 +5,7 @@ using Cars.DAL.Database;
 using Cars.DAL.Entities.Users;
 using Cars.DAL.Repo.Abstraction;
 using Cars.DAL.Repo.Implementation;
+using Cars.DAL.Repo.Implementation.Cars.DAL.Repository;
 using Cars.PL.Language;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -62,12 +63,22 @@ namespace Cars
             // Repositories
             builder.Services.AddScoped<IAppUserRepo, AppUserRepo>();
             builder.Services.AddScoped<ICarRepo, CarRepo>();
+            builder.Services.AddScoped<IRentRepo, RentRepo>();
+            builder.Services.AddScoped<IMechanicRepo, MechanicRepo>();
+            builder.Services.AddScoped<IAccidentRepo, AccidentRepo>();
+            builder.Services.AddScoped<IOfferRepo, OfferRepo>();
 
             // Services
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IAppUserService, AppUserService>();
             builder.Services.AddScoped<ICarService, CarService>();
+            builder.Services.AddScoped<IPayPalService, PayPalService>();
+            builder.Services.AddScoped<IRentService, RentService>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddScoped<IAccidentService, AccidentService>();
+            builder.Services.AddScoped<IOfferService, OfferService>();
+            builder.Services.Configure<EmailService>(builder.Configuration.GetSection("EmailSettings"));
 
             var app = builder.Build();
 

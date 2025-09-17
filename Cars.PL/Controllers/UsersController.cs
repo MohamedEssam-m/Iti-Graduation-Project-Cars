@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Cars.BLL.ModelVM.AppUserVM;
-
+using Cars.BLL.ModelVM.RentVM;
 using Cars.BLL.Service.Abstraction;
+using Cars.BLL.Service.Implementation;
+using Cars.DAL.Entities.Renting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -15,26 +17,29 @@ namespace Cars.PL.Controllers
 
         private readonly UserManager<AppUser> UserManager;
 
-        private  RoleManager<IdentityRole> RoleManager;
+        private readonly RoleManager<IdentityRole> RoleManager;
+        private readonly IRentService rentService;
 
-        public UsersController(IAppUserService userService, IMapper mapper, UserManager<AppUser> userManager ,RoleManager <IdentityRole> roleManager)
+
+        public UsersController(IRentService RentService,IAppUserService userService, IMapper mapper, UserManager<AppUser> userManager ,RoleManager <IdentityRole> roleManager)
         {
             this.userService = userService;
             this.mapper = mapper;
             UserManager = userManager;
             RoleManager = roleManager;
+            this.rentService = RentService;
         }
-        private async Task<List<UserWithRoleVM>> GetAllUsersWithRoles()
+        private async Task<List<UserWithRentCarsVM>> GetAllUsersWithRoles()
         {
             var users = await userService.GetAllUsers();
-            var usersWithRoles = new List<UserWithRoleVM>();
+            var usersWithRoles = new List<UserWithRentCarsVM>();
 
             foreach (var user in users)
             {
                 var roles = await UserManager.GetRolesAsync(user);
                 if (user != null && user.Email != null && user.UserName != null && user.PhoneNumber != null)
                 {
-                    usersWithRoles.Add(new UserWithRoleVM
+                    usersWithRoles.Add(new UserWithRentCarsVM
                     {
                         FullName = user.FullName,
                         UserName = user.UserName,
@@ -43,7 +48,8 @@ namespace Cars.PL.Controllers
                         Address = user.Address,
                         Age = user.Age,
                         id = user.Id,
-                        Roleslist = (List<string>)roles
+                        Roleslist = roles?.ToList() ?? new List<string>(),
+                        Carslist = user.Rents?.ToList() ?? new List<Rent>()
                     });
                 }
             }
@@ -97,6 +103,42 @@ namespace Cars.PL.Controllers
             }
             ViewBag.Error = "Some Thing Was Wrong";
             return View("DeleteUserView", await GetAllUsersWithRoles());
+        }
+        public async Task<IActionResult> UpdateUserCarStatus()
+        {
+            return View(await GetAllUsersWithRoles() ?? new List<UserWithRentCarsVM>());
+        }
+        public async Task<IActionResult> AssignUserCarStatus(int RentId, string NewStatus)
+        {
+
+            //var user = await AppUserService.GetById(Id);
+            //if(ModelState.IsValid)
+            //{
+            //    if (user != null && !string.IsNullOrEmpty(RoleName))
+            //    {
+            //        await roleService.AssignRoleToUser(user, RoleName);
+            //        ViewBag.Success = $"The Role {RoleName} Addes Successfilly";
+            //        return View("AssignRoleToUserView" , users);
+            //    }
+            //}
+            //ViewBag.Error = "Some Thing Was Wrong";
+            //return View("AssignRoleToUserView", users);
+            var rent = await rentService.GetRentById(RentId);
+            if (rent != null)
+            {
+                rent.Status = NewStatus;
+                var rentVM = mapper.Map<UpdateRentVM>(rent);
+                await rentService.UpdateRent(rentVM);
+                var allUsers = await GetAllUsersWithRoles();
+                ViewBag.Success = "Car status updated successfully!";
+                return View("UpdateUserCarStatus", allUsers);
+            }
+            else
+            {
+                var allUsers = await GetAllUsersWithRoles();
+                ViewBag.Error = "Rent Operation not found!";
+                return View("UpdateUserCarStatus", allUsers);
+            }
         }
     }
 }

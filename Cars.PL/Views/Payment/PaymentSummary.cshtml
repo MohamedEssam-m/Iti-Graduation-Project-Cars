@@ -1,0 +1,113 @@
+﻿@using Cars.BLL.ModelVM.Payment
+@model PaymentSummaryVM
+<script src="https://www.paypal.com/sdk/js?client-id=@(ViewBag.PayPalClientId)&currency=USD"></script>
+
+<div class="card shadow p-4 mx-auto" style="max-width: 500px;">
+    <h3 class="text-center mb-4">Payment Summary</h3>
+
+    <img src="@Model.CarImage" class="img-fluid mb-3 rounded" alt="@Model.CarName" />
+
+    <ul class="list-group mb-4">
+        <li class="list-group-item"><strong>User Name:</strong> @Model.UserName</li>
+        <li class="list-group-item"><strong>Car:</strong> @Model.CarName</li>
+        <li class="list-group-item"><strong>Start Date:</strong> @Model.StartDate.ToShortDateString()</li>
+        <li class="list-group-item"><strong>End Date:</strong> @Model.EndDate.ToShortDateString()</li>
+        <li class="list-group-item"><strong>Duration:</strong> @Model.Duration days</li>
+        <li class="list-group-item"><strong>Pick up location:</strong> @Model.Pick_up_location</li>
+        <li class="list-group-item"><strong>Drop Off location:</strong> @Model.Drop_Off_location</li>
+        <li class="list-group-item"><strong>Price/Day:</strong> $@Model.PricePerDay</li>
+        <li class="list-group-item"><strong>Total:</strong> <span class="text-success fw-bold">$@Model.TotalAmount</span></li>
+    </ul>
+
+    <div id="notification-container"></div>
+    <div id="paypal-button-container"></div>
+</div>
+
+<script>
+            paypal.Buttons({
+                async createOrder() {
+                    const response = await fetch("/Payment/createOrder", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            total: @Model.TotalAmount
+                        })
+                    });
+
+                    const order = await response.json();
+
+                    return order.id;
+                },
+        async onApprove(data) {
+        // Capture the funds from the transaction.
+        const response = await fetch("/Payment/CompleteOrder", {
+          method: "POST",
+          headers: {
+                  "Content-Type": "application/json",
+            },
+
+          body: JSON.stringify({
+            orderID: data.orderID
+          })
+        })
+
+        const details = await response.json();
+
+        // Show success message to buyer
+        if(details == "success")
+        {
+            document.getElementById("notification-container").innerHTML = `
+                <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                    <strong>Payment Completed Successfully!</strong>
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>
+            `;
+            setTimeout(function () {
+        window.location.href = "/Home/Cars";
+    }, 4000);
+        }
+        else
+        {
+            document.getElementById("notification-container").innerHTML = `
+                <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                    <strong>Payment Failed! Please retry later.</strong>
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>
+            `;
+            setTimeout(function () {
+        window.location.href = "/Home/Cars";
+    }, 3000);
+        }
+        
+    },
+
+                onCancel(data) {
+    document.getElementById("notification-container").innerHTML = `
+        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+            <strong>Payment Canceled! Redirecting...</strong>
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        </div>
+    `;
+    setTimeout(function () {
+        window.location.href = "/Home/Cars";
+    }, 3000);
+},
+
+
+onError(err) {
+    document.getElementById("notification-container").innerHTML = `
+        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            <strong>An error occured! Please retry later.</strong>
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        </div>
+    `;
+    setTimeout(function () {
+        window.location.href = "/Home/Cars";
+    }, 3000);
+}
+
+            }).render('#paypal-button-container');
+        </script>
+

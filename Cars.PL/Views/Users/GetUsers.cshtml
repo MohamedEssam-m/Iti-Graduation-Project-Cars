@@ -1,5 +1,6 @@
 ﻿@using Cars.BLL.ModelVM.AppUserVM
-@model List<UserWithRoleVM>
+@using Cars.BLL.Service.Abstraction
+@model List<UserWithRentCarsVM>
 @{
     ViewData["Title"] = @SharedLocalizer["UsersManagement"];
 }
@@ -33,7 +34,9 @@
                 <th>@SharedLocalizer["Address"]</th>
                 <th>@SharedLocalizer["Age"]</th>
                 <th>@SharedLocalizer["Role"]</th>
+                <th>Car Details</th>
                 <th colspan="2">@SharedLocalizer["Actions"]</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -51,8 +54,22 @@
                             @role<br />
                         }
                     </td>
-                    
+                    @if (user.Carslist != null && user.Carslist.Count>0)
+                    {
+                        <td>
+                            @foreach (var car in user.Carslist)
+                            {
+                                <p>@car.Car.Brand - @car.Car.Model - @car.Car.Year - @car.Status <br /></p>
+                            }
+                        </td>
+                    }
+                    else
+                    {
+                        <td>___</td>
+                    }
+
                     <td>
+
                         <form asp-action="DeleteUser" asp-controller="User" method="post" style="display:inline;">
                             <input type="hidden" name="Username" value="@user.UserName" />
                             <button type="submit" class="btn btn-delete">@SharedLocalizer["Delete"]</button>

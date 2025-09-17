@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 namespace Cars.DAL.Repo.Implementation
 {
     
@@ -42,7 +43,7 @@ namespace Cars.DAL.Repo.Implementation
             {
                 if(id != null)
                 {
-                    var result =  db.Users.FirstOrDefault(u => u.Id == id);
+                    var result =  db.Users.Include(user => user.Rents).ThenInclude(r => r.Car).FirstOrDefault(u => u.Id == id);
                     if(result != null)
                     { 
                         return result; 
@@ -67,7 +68,7 @@ namespace Cars.DAL.Repo.Implementation
         {
             try
             {
-                return db.Users.ToList();
+                return db.Users.Include(user => user.Rents).ThenInclude(user => user.Car).ToList();
             }
             catch (Exception ex)
             {

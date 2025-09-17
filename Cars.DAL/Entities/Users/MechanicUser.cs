@@ -1,6 +1,6 @@
 ﻿using Cars.BLL.Helper.Renting;
 using Cars.BLL.Helper.Repairing;
-using Cars.DAL.Entities.Repairing;
+using Cars.DAL.Entities.Offers;
 using Cars.DAL.Enums;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -24,6 +24,7 @@ namespace Cars.DAL.Entities.Users
 
         [StringLength(200)]
         public string WorkshopAddress { get; private set; }
+        
 
         public MechanicUser()
         {

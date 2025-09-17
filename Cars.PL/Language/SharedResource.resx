@@ -321,4 +321,100 @@
   <data name="EnterYourCurrentEmailAddress" xml:space="preserve">
     <value>Enter Your Current EmailAddress</value>
   </data>
+  <data name="Brand" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="BodyType" xml:space="preserve">
+    <value>Body Type</value>
+  </data>
+  <data name="Doors" xml:space="preserve">
+    <value>Doors</value>
+  </data>
+  <data name="EngineCapacity" xml:space="preserve">
+    <value>Engine Capacity</value>
+  </data>
+  <data name="HorsePower" xml:space="preserve">
+    <value>Horse Power</value>
+  </data>
+  <data name="FuelConsumption" xml:space="preserve">
+    <value>Fuel Consumption</value>
+  </data>
+  <data name="Seats" xml:space="preserve">
+    <value>Seats</value>
+  </data>
+  <data name="SelectFuelType" xml:space="preserve">
+    <value>Select Fuel Type</value>
+  </data>
+  <data name="Transmission" xml:space="preserve">
+    <value>Transmission</value>
+  </data>
+  <data name="SelectTransmission" xml:space="preserve">
+    <value>Select Transmission</value>
+  </data>
+  <data name="LuggageCapacity" xml:space="preserve">
+    <value>Luggage Capacity</value>
+  </data>
+  <data name="PricePerDay" xml:space="preserve">
+    <value>Price Per Day</value>
+  </data>
+  <data name="MaxKmPerDay" xml:space="preserve">
+    <value>Max Km Per Day</value>
+  </data>
+  <data name="InsuranceIncluded" xml:space="preserve">
+    <value>Insurance Included</value>
+  </data>
+  <data name="AirConditioning" xml:space="preserve">
+    <value>Air Conditioning</value>
+  </data>
+  <data name="MultimediaSystem" xml:space="preserve">
+    <value>Multimedia System</value>
+  </data>
+  <data name="AirBags" xml:space="preserve">
+    <value>Air Bags</value>
+  </data>
+  <data name="ABS" xml:space="preserve">
+    <value>ABS</value>
+  </data>
+  <data name="ESP" xml:space="preserve">
+    <value>ESP</value>
+  </data>
+  <data name="RearCamera" xml:space="preserve">
+    <value>Rear Camera</value>
+  </data>
+  <data name="ParkingSensors" xml:space="preserve">
+    <value>Parking Sensors</value>
+  </data>
+  <data name="FuelType" xml:space="preserve">
+    <value>Fuel Type</value>
+  </data>
+  <data name="MaxPerDay" xml:space="preserve">
+    <value>MaxPerDay</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="Manual" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="CreateCar" xml:space="preserve">
+    <value>Create Car</value>
+  </data>
+  <data name="Petrol" xml:space="preserve">
+    <value>Petrol</value>
+  </data>
+  <data name="Electric" xml:space="preserve">
+    <value>Electric</value>
+  </data>
+  <data name="Diesel" xml:space="preserve">
+    <value>Diesel</value>
+  </data>
+  <data name="Hybrid" xml:space="preserve">
+    <value />
+  </data>
 </root>

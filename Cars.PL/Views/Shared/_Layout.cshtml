@@ -56,10 +56,15 @@
                 <li class="nav-item @(ViewData["ActivePage"] as string == "Cars" ? "active" : "")">
                     <a class="nav-link" asp-controller="Home" asp-action="Cars">Cars</a>
                 </li>
-                <li class="nav-item @(ViewData["ActivePage"] as string == "AdminPanel" ? "active" : "")">
-                    <a class="nav-link" asp-controller="Home" asp-action="AdminPanel">AdminPanel</a>
-                </li>
-                <li class="nav-item dropdown @(ViewData["ActivePage"] as string == "ManageProfile" ? "active" : "")">
+                @if(User.IsInRole("Admin"))
+                    {
+                            <li class="nav-item @(ViewData["ActivePage"] as string == "AdminPanel" ? "active" : "")">
+                                <a class="nav-link" asp-controller="Home" asp-action="AdminPanel">AdminPanel</a>
+                            </li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    { 
+                    <li class="nav-item dropdown @(ViewData["ActivePage"] as string == "ManageProfile" ? "active" : "")">
     <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fa fa-user-circle me-1"></i> Profile
     </a>
@@ -70,12 +75,16 @@
             </a>
         </li>
         <li>
-            <a class="dropdown-item" asp-controller="EditUserProfile" asp-action="ChangePassword">
+            <a class="dropdown-item" asp-controller="EditUserProfile" asp-action="VerifyEmail">
                 <i class="fa fa-key me-2"></i> Change Password
             </a>
         </li>
     </ul>
 </li>
+}
+                <li class="nav-item @(ViewData["ActivePage"] as string == "Repair" ? "active" : "")">
+                    <a class="nav-link" asp-controller="Accident" asp-action="Repair">Repair</a>
+                </li>
 
                 <li class="nav-item @(ViewData["ActivePage"] as string == "Contact" ? "active" : "")">
                     <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
@@ -85,19 +94,27 @@
 
 
 <!-- Auth Buttons -->
-<li class="nav-item ms-auto d-flex align-items-center auth-buttons">
-    <a class="btn btn-outline-light btn-sm auth-btn" asp-controller="Account" asp-action="determineRole">
-        <i class="fa fa-user-plus me-1"></i> Sign Up
-    </a>
+@if(!User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item ms-auto d-flex align-items-center auth-buttons">
+                            <a class="btn btn-outline-light btn-sm auth-btn" asp-controller="Account" asp-action="determineRole">
+                                <i class="fa fa-user-plus me-1"></i> Sign Up
+                            </a>
 
-    <a class="btn btn-outline-light btn-sm auth-btn" asp-controller="Account" asp-action="LoginView">
-        <i class="fa fa-sign-in me-1"></i> Sign In
-    </a>
-
-    <a class="btn btn-outline-light btn-sm auth-btn" asp-controller="Account" asp-action="LogOutView">
-        <i class="fa fa-sign-out me-1"></i> Log Out
-    </a>
-</li>
+                            <a class="btn btn-outline-light btn-sm auth-btn" asp-controller="Account" asp-action="LoginView">
+                                <i class="fa fa-sign-in me-1"></i> Sign In
+                            </a>
+                        </li>
+                    }
+                    
+@if(User.Identity.IsAuthenticated)
+{
+    <li class="nav-item ms-auto d-flex align-items-center auth-buttons">
+        <a class="btn btn-outline-light btn-sm auth-btn" asp-controller="Account" asp-action="LogOutView">
+            <i class="fa fa-sign-out me-1"></i> Log Out
+        </a>
+    </li>
+}
 
 <style>
     .auth-buttons {
@@ -129,27 +146,143 @@
         color: #fff;
         transform: scale(1.05);
     }
+    /* From Uiverse.io by TroyRandall */ 
+.edit-post {
+  position: relative;
+  background: #ffffff;
+  color: #000;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.edit-tooltip {
+  position: absolute;
+  top: 0px;
+  font-size: 14px;
+  background: #ffffff;
+  color: #ffffff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  width: 150px;
+}
+
+.edit-tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #ffffff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.edit-post:hover .edit-tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.edit-icon {
+  font-size: 24px;
+}
+
+.edit-post:hover,
+.edit-post:hover .edit-tooltip,
+.edit-post:hover .edit-tooltip::before {
+  background: linear-gradient(320deg, rgb(3, 255, 255), rgb(0, 255, 255));
+  color: #ffffff;
+}
+    body.dark-mode {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+
+    body.dark-mode .navbar {
+        background-color: #1f1f1f !important;
+    }
+
+    body.dark-mode .dropdown-menu {
+        background-color: #2c2c2c;
+        color: #fff;
+    }
+
+    body.dark-mode .dropdown-item {
+        color: #fff;
+    }
+
+    body.dark-mode .dropdown-item:hover {
+        background-color: #06b6d4;
+        color: #fff;
+    }
 </style>
+<!-- Dark Mode Script -->
+<script>
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("dark-mode", document.body.classList.contains("dark-mode"));
+    }
+
+    // Load saved preference
+    window.onload = function () {
+        if (localStorage.getItem("dark-mode") === "true") {
+            document.body.classList.add("dark-mode");
+        }
+    }
+</script>
 
 
                  <!-- Language Toggle -->
-<li class="nav-item d-flex align-items-center">
-    @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "ar-EG")
-    {
-        <a class="btn btn-sm lang-toggle"
-           href="@Url.Action("SetLanguage", "Language", new { culture = "en-US", returnUrl = Context.Request.Path + Context.Request.QueryString })">
-            <img src="~/lib/famfamfam-flags/dist/png/us.png" width="22" height="14" class="me-1" />
-            English
-        </a>
-    }
-    else
-    {
-        <a class="btn btn-sm lang-toggle"
-           href="@Url.Action("SetLanguage", "Language", new { culture = "ar-EG", returnUrl = Context.Request.Path + Context.Request.QueryString })">
-            <img src="~/lib/famfamfam-flags/dist/png/eg.png" width="22" height="14" class="me-1" />
-            العربية
-        </a>
-    }
+<!-- Settings Button with Dropdown -->
+<li class="nav-item dropdown ms-3">
+    <div class="edit-post dropdown-toggle" id="settingsDropdown" data-bs-toggle="dropdown" aria-expanded="true" style="cursor:pointer;">
+        <span class="edit-tooltip">Settings</span>
+        <span class="edit-icon">⚙️</span>
+    </div>
+
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingsDropdown">
+        <!-- Localization Toggle -->
+        <li>
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "ar-EG")
+            {
+                <a class="dropdown-item d-flex align-items-center" href="@Url.Action("SetLanguage", "Language", new { culture = "en-US", returnUrl = Context.Request.Path + Context.Request.QueryString })">
+                    <img src="~/lib/famfamfam-flags/dist/png/us.png" width="22" height="14" class="me-2" /> English
+                </a>
+            }
+            else
+            {
+                <a class="dropdown-item d-flex align-items-center" href="@Url.Action("SetLanguage", "Language", new { culture = "ar-EG", returnUrl = Context.Request.Path + Context.Request.QueryString })">
+                    <img src="~/lib/famfamfam-flags/dist/png/eg.png" width="22" height="14" class="me-2" /> العربية
+                </a>
+            }
+        </li>
+
+        <li><hr class="dropdown-divider"></li>
+
+        <!-- Dark Mode Toggle -->
+        <li>
+            <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);" onclick="toggleDarkMode()">
+                🌙 Dark Mode
+            </a>
+        </li>
+    </ul>
 </li>
 
 <style>

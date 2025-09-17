@@ -1,0 +1,50 @@
+﻿<link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
+
+@if (ViewBag.Send != null)
+{
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Send</span>
+        <button class="close-btn">&times;</button>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="registration-container">
+    <div class="registration-card">
+        <div class="registration-header">
+            <h2>Send Email</h2>
+            <p>The Verification Email Has been Sent To You, Please Check Your Inbox </p>
+            <div class = "text-center mt-2">
+                <a asp-controller="Account" asp-action="LoginView" class = "text-decoratio-none mt-2">Back To LogIn</a>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="registration-container">
+    <div class="registration-card">
+        <div class="registration-header">
+            <h2>Send Email</h2>
+            <h4>You Have a Problem With The Verification Email !</h4>
+            <div class = "text-center mt-2">
+                <a asp-controller="Account" asp-action="LoginView" class = "text-decoratio-none mt-2">Back To LogIn</a>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+}

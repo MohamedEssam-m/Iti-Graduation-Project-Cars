@@ -94,6 +94,11 @@ namespace Cars.BLL.ModelVM.CarVM
 
         // Safety: Parking sensors
         public bool HasParkingSensors { get; set; }
+        [Required(ErrorMessage = "Quantity is Required")]
+        [Range(0, 100, ErrorMessage = "Quantity must be between 0 and 100 ")]
+        public int quantity { get; set; }
+        [Required(ErrorMessage = "Status is Required")]
+        public string Status { get; set; }
         public UpdateCarVM()
         {
             
