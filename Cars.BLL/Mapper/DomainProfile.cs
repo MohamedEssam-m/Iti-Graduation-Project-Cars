@@ -47,7 +47,8 @@ namespace Cars.BLL.Mapper
             CreateMap<UpdateAccidentVM, Accident>().ReverseMap();
             CreateMap<UpdateOfferVM, Offer>().ReverseMap();
             CreateMap<CreateOfferVM, Offer>().ReverseMap();
-
+            CreateMap<MechanicUser, SignUpVM>().ReverseMap();
+            CreateMap<Offer, Offer>().ReverseMap();
         }
     }
 }

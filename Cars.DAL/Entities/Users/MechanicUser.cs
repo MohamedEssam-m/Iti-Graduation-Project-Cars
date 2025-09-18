@@ -17,7 +17,7 @@ namespace Cars.DAL.Entities.Users
     {
         [Required]
         [StringLength(100)]
-        public MechanicSpecialize Specialization { get; private set; }
+        public string Specialization { get; private set; }
 
         [Range(0, 50)]
         public int ExperienceYears { get; private set; }
@@ -30,7 +30,7 @@ namespace Cars.DAL.Entities.Users
         {
             
         }
-        public MechanicUser(string fullName, string address, MechanicSpecialize specialization, int experienceYears, string workshopAddress)
+        public MechanicUser(string fullName, string address, string specialization, int experienceYears, string workshopAddress)
         {
             Specialization = specialization;
             ExperienceYears = experienceYears;

@@ -1,5 +1,5 @@
-﻿@using Cars.BLL.ModelVM.Accident
-@model UpdateAccidentVM
+﻿@using Cars.BLL.ModelVM.Offers
+@model UpdateOfferVM
 
 
 <link rel="stylesheet" href="~/css/SignUp.css" />
@@ -26,49 +26,43 @@
 <div class="registration-container">
     <div class="registration-card">
         <div class="registration-header">
-            <h2>Edit Your Accident</h2>
+            <h2>Edit Your Offer</h2>
         </div>
 
-        <form asp-action="Edit" asp-controller="Accident" method="post" class="registration-form">
-            <input type="hidden" asp-for="AccidentId"></input>
-            <!-- Description -->
+        <form asp-action="EditOffer" asp-controller="Offer" method="post" class="registration-form">
+            <input type="hidden" asp-for="OfferId"></input>
+            <input type="hidden" asp-for="Status" value="Pending"></input>
+            <!-- Price -->
             <div class="form-group">
-                <label asp-for="Description" class="form-label">Description</label>
-                <input asp-for="Description" class="form-input" placeholder="Enter The Description of The Accident" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Price" class="form-label">Price</label>
+                <input asp-for="Price" class="form-input" placeholder="Enter The Price of The Offer" />
+                <span asp-validation-for="Price" class="text-danger"></span>
             </div>
 
 
-            <!-- Location -->
+            <!-- Details -->
             <div class="form-group">
-                <label asp-for="Location" class="form-label">Location</label>
-                <input asp-for="Location" class="form-input" placeholder="Enter The Location of The Accident" />
-                <span asp-validation-for="Location" class="text-danger"></span>
+                <label asp-for="Details" class="form-label">Details</label>
+                <input asp-for="Details" class="form-input" placeholder="Enter The Details of The Offer" />
+                <span asp-validation-for="Details" class="text-danger"></span>
             </div>
 
 
-            <!-- AccidentDate -->
+            <!-- OfferStartDate -->
             <div class="form-group">
-                <label asp-for="AccidentDate" class="form-label">Accident Date</label>
-                <input asp-for="AccidentDate" class="form-input" placeholder="Enter The Date of The Accident" />
-                <span asp-validation-for="AccidentDate" class="text-danger"></span>
+                <label asp-for="OfferStartDate" class="form-label">Offer Start Date</label>
+                <input asp-for="OfferStartDate" type = "Date" min="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-input" placeholder="Enter The Date of The Accident" />
+                <span asp-validation-for="OfferStartDate" class="text-danger"></span>
             </div>
 
-            <!-- Car Id Dropdown -->
+            <!-- OfferEndDate -->
             <div class="form-group">
-                <label asp-for="carId" class="form-label">Select Car</label>
-                <select asp-for="carId" class="form-input">
-                    <option value=""> Select Your Car </option>
-                    @if(ViewBag.Cars != null && ViewBag.Cars.Count > 0)
-                    {
-                        @foreach (var car in ViewBag.Cars)
-                        {
-                            <option value="@car.CarId">@car.Brand</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="carId" class="text-danger"></span>
+                <label asp-for="OfferEndDate" class="form-label">Offer End Date</label>
+                <input asp-for="OfferEndDate" type = "Date" min="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-input" placeholder="Enter The Date of The Accident" />
+                <span asp-validation-for="OfferEndDate" class="text-danger"></span>
             </div>
+
+            
 
             <!-- Submit Button -->
             <div class="form-group">

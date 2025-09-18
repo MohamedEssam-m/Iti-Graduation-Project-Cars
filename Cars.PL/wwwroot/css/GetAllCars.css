@@ -48,10 +48,14 @@
     margin-bottom: 15px;
 }
 
-.car-model {
-    color: #7f8c8d;
-    font-size: 17px;
+.car-details {
+    margin: 0;
+    font-weight: bold;
+    word-wrap: break-word;
+    overflow-wrap: break-word; 
+    white-space: normal; 
 }
+
 
 .car-price {
     color: #3498db;

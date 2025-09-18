@@ -42,6 +42,8 @@ namespace Cars.DAL.Repo.Implementation
             {
                 return db.Accidents
                          .Include(a => a.User)
+                         .ThenInclude(u => u.Rents)
+                         .ThenInclude(r => r.Car)
                          .Include(a => a.Offers)
                          .ThenInclude(o => o.Mechanic)
                          .FirstOrDefault(a => a.AccidentId == id) ?? new Accident();

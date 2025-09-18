@@ -1,10 +1,11 @@
-﻿using Cars.BLL.ModelVM.Accident;
+﻿using AutoMapper;
+using Cars.BLL.ModelVM.Accident;
 using Cars.BLL.Service.Abstraction;
 using Cars.DAL.Entities.Accidents;
+using Cars.DAL.Entities.Offers;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 
 namespace Cars.PL.Controllers
 {
@@ -42,6 +43,7 @@ namespace Cars.PL.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            //use appUserService instead of useing GetUserAsync to get the navigations of the user
             var user = await userManager.GetUserAsync(User);
             var UserId = user.Id;
             var userWithNavigations = await appUserService.GetById(UserId);
@@ -91,9 +93,22 @@ namespace Cars.PL.Controllers
                 var listOfAccidents = await accidentService.GetAllAccidents();
                 return View("Repair" , listOfAccidents);
             }
-            var user = await userManager.FindByIdAsync(accident.UserId);
+            //use appUserService instead of useing GetUserAsync to get the navigations of the user
+            var user = await userManager.GetUserAsync(User);
+            var UserId = user.Id;
+            var userWithNavigations = await appUserService.GetById(UserId);
+            List<Car> l = new List<Car>();
+            if (userWithNavigations != null && userWithNavigations.Rents != null && userWithNavigations.Rents.Count > 0)
+            {
+                foreach (var rent in userWithNavigations.Rents)
+                {
+                    var car = await carService.GetById(rent.CarId);
+                    l.Add(car);
+                }
+            }
+
+            ViewBag.Cars = l;
             var Accident = mapper.Map<UpdateAccidentVM>(accident);
-            ViewBag.USER = user;
             return View(Accident);
         }
 
@@ -120,16 +135,21 @@ namespace Cars.PL.Controllers
                 ViewBag.Error = "Some Thing Was Wrong";
                 var mainAccident = mapper.Map<UpdateAccidentVM>(accident);
                 var listOfAccidents = await accidentService.GetAllAccidents();
-                return View();
+                return View("Repair");
             }
+            return View(accident);
+            
+        }
+        public async Task<IActionResult> Delete(int accidentId)
+        {
             var IsTrue = await accidentService.DeleteAccident(accidentId);
             if (IsTrue)
             {
                 ViewBag.Success = "The Accident Deleted Successfully";
-                return View();
+                return View("DeleteView");
             }
             ViewBag.Error = "Some Thing Was Wrong";
-            return View();
+            return View("DeleteView");
         }
         public async Task<IActionResult> Offers(int accidentId , int CarId)
         {
@@ -139,6 +159,9 @@ namespace Cars.PL.Controllers
             {
                 offer.CarName = car.Brand;
             }
+            var accident = await accidentService.GetAccidentById(accidentId);
+            var user = await appUserService.GetById(accident.UserId);
+            ViewBag.USERID = user.Id;
             return View(AllOffers);
         }
         //public async Task<IActionResult> Details(int id)

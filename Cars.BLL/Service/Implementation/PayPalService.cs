@@ -1,5 +1,6 @@
 ﻿using Cars.BLL.Helper;
 using Cars.BLL.Service.Abstraction;
+using Cars.BLL.Service.Implementation;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Cars.BLL.Service.Implementation
         }
         public async Task<string> GetAccessTokenAsync()
         {
-            
+
             string accessToken = "";
 
             string url = Paypal.PayPalUrl + "/v1/oauth2/token";
@@ -126,3 +127,4 @@ namespace Cars.BLL.Service.Implementation
 
     }
 }
+

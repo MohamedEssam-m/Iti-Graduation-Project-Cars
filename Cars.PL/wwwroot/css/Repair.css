@@ -1,0 +1,274 @@
+﻿.accidents-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    padding: 30px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.accident-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e8e8e8;
+}
+
+    .accident-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+.accident-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.accident-content {
+    padding: 25px;
+}
+
+.accident-location {
+    color: #2c5aa0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.accident-info {
+    margin-bottom: 20px;
+}
+
+.info-row {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    line-height: 1.5;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #333;
+    min-width: 100px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.info-value {
+    color: #555;
+    flex: 1;
+}
+
+.date-value {
+    color: #5eb3f5;
+    font-weight: 500;
+}
+
+.description-value {
+    color: #666;
+    line-height: 1.4;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #218838 0%, #1ea085 100%);
+        transform: translateY(-2px);
+    }
+
+.btn-secondary {
+    background: linear-gradient(135deg, #5eb3f5 0%, #4a9eff 100%);
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+    .btn-secondary:hover {
+        background: linear-gradient(135deg, #4a9eff 0%, #3d8bfd 100%);
+        transform: translateY(-2px);
+    }
+
+.btn-offers {
+    background: linear-gradient(135deg, #6f42c1 0%, #8e24aa 100%);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+    .btn-offers:hover {
+        background: linear-gradient(135deg, #5a2d91 0%, #7b1fa2 100%);
+        transform: translateY(-2px);
+    }
+
+.add-accident-btn {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 30px auto;
+    display: block;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+    .add-accident-btn:hover {
+        background: linear-gradient(135deg, #218838 0%, #1ea085 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    }
+
+.no-accidents-message {
+    text-align: center;
+    margin: 50px 20px;
+    padding: 40px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    color: #6c757d;
+    font-size: 1.2rem;
+}
+
+/* Toast Alerts Styling */
+.toast-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.success-toast {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.error-toast {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .accidents-container {
+        grid-template-columns: 1fr;
+        padding: 20px 15px;
+        gap: 20px;
+    }
+
+    .accident-content {
+        padding: 20px;
+    }
+
+    .accident-location {
+        font-size: 1.3rem;
+    }
+
+    .info-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .info-label {
+        min-width: auto;
+        margin-right: 0;
+    }
+
+    .button-row {
+        flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .accidents-container {
+        padding: 15px 10px;
+    }
+
+    .accident-content {
+        padding: 15px;
+    }
+
+    .accident-image {
+        height: 150px;
+    }
+}

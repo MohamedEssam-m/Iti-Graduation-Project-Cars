@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Cars.BLL.ModelVM.Offers;
 using Cars.BLL.Service.Abstraction;
+using Cars.DAL.Entities.Accidents;
 using Cars.DAL.Entities.Offers;
 using Cars.DAL.Repo.Abstraction;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +19,17 @@ namespace Cars.BLL.Service.Implementation
         private readonly IAccidentRepo accidentRepo;
         private readonly IEmailService emailService;
         private readonly IMapper mapper;
+        private readonly IAccidentService accidentService;
+        private readonly ICarService carService;
 
-        public OfferService(IMapper mapper,IOfferRepo offerRepo, IAccidentRepo accidentRepo, IEmailService emailService)
+        public OfferService(ICarService carService,IAccidentService accidentService,IMapper mapper,IOfferRepo offerRepo, IAccidentRepo accidentRepo, IEmailService emailService)
         {
             this.offerRepo = offerRepo;
             this.accidentRepo = accidentRepo;
             this.emailService = emailService;
             this.mapper = mapper;
+            this.accidentService = accidentService;
+            this.carService = carService;
         }
 
         public async Task<bool> AddOffer(CreateOfferVM offer)
@@ -33,7 +39,7 @@ namespace Cars.BLL.Service.Implementation
                 throw new ArgumentNullException(); 
             }
             var mainOffer = mapper.Map<Offer>(offer);
-            mainOffer.Status = "Pending"; // Default status
+            mainOffer.Status = "Pending"; 
             await offerRepo.Add(mainOffer);
             return true;
         }
@@ -86,25 +92,16 @@ namespace Cars.BLL.Service.Implementation
 
         public async Task<bool> AcceptOffer(int offerId)
         {
+            
             var offer = await offerRepo.GetById(offerId);
             if (offer != null)
             {
-                offer.Status = "Accepted";
+                offer.Status = "Pending";
                 await offerRepo.Update(offer);
 
-                // Send email to mechanic
-                var mechanicEmail = offer.Mechanic?.Email;
-                if (!string.IsNullOrEmpty(mechanicEmail))
-                {
-                    await emailService.SendEmail(
-                        mechanicEmail,
-                        "Offer Accepted",
-                        $"Your offer for accident #{offer.AccidentId} has been accepted"
-                    );
-                    return true;
-                }
+                return true;
 
-                // redirect to payment
+                
             }
             throw new ArgumentNullException();
         }

@@ -5,10 +5,12 @@
     ViewData["Title"] = "RentingCar";
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="~/css/RentCar.css" />
 <link rel="stylesheet" href="~/css/ViewBag.css" />
 <script src="~/js/ViewBag.js"></script>
+
+
 @if (ViewBag.Success != null)
 {
     <div class="toast-alert success-toast">
@@ -16,7 +18,6 @@
         <button class="close-btn">&times;</button>
     </div>
 }
-
 @if (ViewBag.Error != null)
 {
     <div class="toast-alert error-toast">
@@ -24,12 +25,11 @@
         <button class="close-btn">&times;</button>
     </div>
 }
+
 @inject UserManager<AppUser> userManager
 @{
-    
     var userId = userManager.GetUserId(User);
 }
-
 
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
@@ -48,139 +48,52 @@
     </div>
 </section>
 
-<div class="form-container">
-    <h1 class="form-title">Rent a Car</h1>
-
-    <form asp-action="PaymentSummary" asp-controller="Payment" method="post">
-        <input type="hidden" asp-for="CarId" />
-        <input type="hidden" asp-for="UserId" value="@userId"/>
-        <div class="form-group">
-            <label asp-for="StartDate"></label>
-            <input asp-for="StartDate" class="form-control datepicker" />
-            <span asp-validation-for="StartDate" class="text-danger"></span>
-            
+<div class="rent-container">
+    <div class="rent-card">
+        <div class="card-header">
+            <h1 class="card-title">🚗 Rent a Car</h1>
         </div>
-
-        <div class="form-group">
-            <label asp-for="EndDate"></label>
-            <input asp-for="EndDate" class="form-control datepicker" />
-            <span asp-validation-for="EndDate" class="text-danger"></span>
+        
+        <div class="card-content">
+            <form asp-action="PaymentSummary" asp-controller="Payment" method="post">
+                <input type="hidden" asp-for="CarId" />
+                <input type="hidden" asp-for="UserId" value="@userId"/>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="form-label">📅 Start Date</label>
+                        <input asp-for="StartDate" type="date" min="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control datepicker" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="form-label">📅 End Date</label>
+                        <input asp-for="EndDate" type="date" min="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control datepicker" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group location-input">
+                    <label asp-for="Pick_up_location" class="form-label">📍 Pick-up Location</label>
+                    <input asp-for="Pick_up_location" class="form-control" placeholder="Enter pickup location" />
+                    <span asp-validation-for="Pick_up_location" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group location-input">
+                    <label asp-for="Drop_Off_location" class="form-label">📍 Drop-off Location</label>
+                    <input asp-for="Drop_Off_location" class="form-control" placeholder="Enter drop-off location" />
+                    <span asp-validation-for="Drop_Off_location" class="text-danger"></span>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-update">
+                        💳 Continue to Checkout
+                    </button>
+                    <a href="@Url.Action("Cars", "Home")" class="btn btn-delete">
+                        ❌ @SharedLocalizer["Cancel"]
+                    </a>
+                </div>
+            </form>
         </div>
-
-        <div class="form-group">
-            <label asp-for="Pick_up_location"></label>
-            <input asp-for="Pick_up_location" class="form-control" />
-            <span asp-validation-for="Pick_up_location" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Drop_Off_location"></label>
-            <input asp-for="Drop_Off_location" class="form-control" />
-            <span asp-validation-for="Drop_Off_location" class="text-danger"></span>
-        </div>
-        <div class="form-buttons">
-            <button type="submit" class="btn btn-update">Continue Check Out</button>
-            <a href="@Url.Action("Cars", "Home")" class="btn btn-delete">@SharedLocalizer["Cancel"]</a>
-        </div>
-    </form>
+    </div>
 </div>
-
-
-<style>
-    .form-container {
-        margin: 40px auto;
-        background: #fff;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        max-width: 700px;
-    }
-
-    .form-title {
-        text-align: center;
-        font-size: 2rem;
-        font-weight: bold;
-        margin-bottom: 20px;
-        color: #00bcd4;
-        text-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-group label {
-        font-weight: bold;
-        color: #000;
-        margin-bottom: 5px;
-        display: block;
-    }
-
-    .form-control {
-        width: 100%;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        transition: all 0.3s ease;
-    }
-
-    .form-control:focus {
-        border-color: #00bcd4;
-        box-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
-        outline: none;
-    }
-
-    .text-danger {
-        font-size: 0.85rem;
-        color: red;
-    }
-
-    .form-buttons {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 6px;
-        font-size: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin: 0 5px;
-    }
-
-    .btn-update {
-        background: #00bcd4;
-        color: #fff;
-    }
-
-    .btn-update:hover {
-        background: #000;
-        color: #fff;
-        box-shadow: 0 0 10px #00bcd4;
-    }
-
-    .btn-delete {
-        background: #000;
-        color: #fff;
-        border: 1px solid #00bcd4;
-    }
-
-    .btn-delete:hover {
-        background: #00bcd4;
-        color: #fff;
-        box-shadow: 0 0 10px #00bcd4;
-    }
-</style>
-<script>
-    $(document).ready(function () {
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd',   
-            autoclose: true,
-            todayHighlight: true
-        });
-    });
-</script>
-

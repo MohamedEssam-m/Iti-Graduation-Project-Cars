@@ -1,5 +1,6 @@
 ﻿using Cars.BLL.Helper;
 using Cars.BLL.Helper.Renting;
+using Cars.BLL.ModelVM.CarVM;
 using Cars.BLL.ModelVM.Payment;
 using Cars.BLL.ModelVM.Rent;
 using Cars.BLL.ModelVM.RentVM;
@@ -8,7 +9,9 @@ using Cars.DAL.Entities;
 using Cars.DAL.Entities.Renting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Text.Json.Nodes;
+using AutoMapper;
 
 namespace Cars.PL.Controllers
 {
@@ -19,13 +22,15 @@ namespace Cars.PL.Controllers
         private readonly UserManager<AppUser> userManager;
         private readonly PayPal Paypal;
         private readonly IRentService rentService;
+        private readonly IMapper mapper;
 
-        public PaymentController(IPayPalService paypalService,ICarService carService,UserManager<AppUser> userManager,IConfiguration configuration , IRentService rentService)
+        public PaymentController(IMapper mapper, IPayPalService paypalService,ICarService carService,UserManager<AppUser> userManager,IConfiguration configuration , IRentService rentService)
         {
             this.paypalService = paypalService;
             this.carService = carService;
             this.userManager = userManager;
             this.rentService = rentService;
+            this.mapper = mapper;
 
             Paypal = new PayPal
             {
@@ -215,12 +220,24 @@ namespace Cars.PL.Controllers
                                             IsDone = item.Payment.IsDone,
                                             TotalAmount = item.Payment.Amount
                                         });
+                                        var rent = await rentService.GetRentById(item.RentId);
+                                        var car = await carService.GetById(rent.CarId);
+                                        if (car != null && car.quantity != 0)
+                                        {
+                                            var carVM = mapper.Map<UpdateCarVM>(car);
+                                            carVM.quantity--;
+                                            if (carVM.quantity == 0)
+                                            {
+                                                carVM.Status = "Not Available";
+                                            }
+                                            await carService.Update(carVM);
+                                        }
                                     }
                                 }
                             }
                             //Create a User Page to add new rents and
                             //show his rents and their status
-
+                            
                             return new JsonResult("success");
                         }
                     }

@@ -60,13 +60,13 @@ namespace Cars.BLL.ModelVM.Account
         public string Role { get; set; }
         [Required]
         [StringLength(100)]
-        public string Specialization { get; private set; }
+        public string Specialization { get;  set; }
 
         [Range(0, 50)]
-        public int ExperienceYears { get; private set; }
+        public int ExperienceYears { get;  set; }
 
         [StringLength(200)]
-        public string? WorkshopAddress { get; private set; }
+        public string? WorkshopAddress { get;  set; }
     }
 
 }

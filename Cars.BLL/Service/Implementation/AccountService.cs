@@ -71,10 +71,24 @@ namespace Cars.BLL.Service.Implementation
         {
             try
             {
-                var user = mapper.Map<AppUser>(signUp);
+                if(signUp.Role == "User" || signUp.Role == "Admin")
+                {
+                    var user = mapper.Map<AppUser>(signUp);
 
-                var result = await userManager.CreateAsync(user, signUp.Password);
-                return result;
+                    var result = await userManager.CreateAsync(user, signUp.Password);
+                    return result;
+                }
+                else
+                {
+                    var user = mapper.Map<MechanicUser>(signUp);
+                    user.UserName = signUp.UserName;
+                    user.Address = signUp.Address;
+                    user.FullName = signUp.Fullname;
+
+                    var result = await userManager.CreateAsync(user, signUp.Password);
+                    return result;
+                }
+                
 
             }
             catch (Exception e)

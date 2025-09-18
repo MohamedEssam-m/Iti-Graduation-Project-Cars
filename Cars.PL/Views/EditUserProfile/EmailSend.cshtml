@@ -81,7 +81,8 @@
             <h2>Send Email</h2>
             <p>The Verification Email Has been Sent To You, Please Check Your Inbox </p>
             <div class = "text-center mt-2">
-                <a asp-controller="Account" asp-action="LoginView" class = "text-decoratio-none mt-2">Back To LogIn</a>
+                <a asp-controller="Account" asp-action="LoginView" class="btn-back">Back To LogIn</a>
+
             </div>
         </div>
 
@@ -157,6 +158,27 @@
     background: #00bcd4;
     box-shadow: 0 0 10px #00bcd4;
 }
+.btn-back {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: cyan;
+    border: 2px solid cyan;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-back:hover {
+    background-color: cyan;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 255, 255, 0.3);
+}
+
 </style>
 
 

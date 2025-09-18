@@ -1,12 +1,11 @@
 ﻿@using Cars.DAL.Entities.Offers
+@using Microsoft.AspNetCore.Identity
 @model List<Offer>
 
-@{
-    ViewData["Title"] = "Offers";
-    Layout = "_Layout";
-}
 
-<link rel="stylesheet" href="~/css/GetAllCars.css" />
+@inject UserManager<AppUser> userManager
+<link rel="stylesheet" href="@Url.Content("~/css/Offers.css")" />
+
 
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
@@ -27,47 +26,103 @@
 
 @if (Model == null || Model.Count == 0)
 {
-    <h2 class="alert alert-info text-center mt-5">
-        No Offers available for this Accident
-    </h2>
+    <div class="no-offers-message">
+        <h2>No Offers Available</h2>
+        <p>There are currently no offers available for this accident.</p>
+    </div>
 }
 else
 {
-    <div class="offers-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 20px;">
+    <div class="offers-container">
         @foreach (var offer in Model)
         {
-            <div class="car-card" style="box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 10px; overflow: hidden;">
-                <!-- Offer Content -->
-                <div class="car-content" style="padding: 20px;">
-                    <h2 class="car-brand">Offer Price: @offer.Price.ToString("C")</h2>
-                    
-                    <div class="car-info" style="margin-top: 10px;">
-                        <p><strong>Description:</strong> @offer.Details</p>
-                        <p><strong>Car:</strong> @offer.CarName</p>
-                        <p><strong>Mechanic:</strong> @offer.Mechanic?.UserName</p>
-                        <p><strong>Date:</strong> @offer.OfferDate.ToString("yyyy/MM/dd")</p>
+            @if(offer.Status != "Declined" && offer.Status != "Paid" && User.Identity.IsAuthenticated)
+            {
+                <div class="offer-card">
+                    <div class="offer-content">
+                        <div class="offer-price">
+                            @offer.Price.ToString("C")
+                        </div>
                         
-                    </div>
+                        <div class="offer-info">
+                            <div class="info-item">
+                                <span class="info-label">Description:</span>
+                                <span class="info-value">@offer.Details</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Car:</span>
+                                <span class="info-value">@offer.CarName</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Mechanic:</span>
+                                <span class="info-value mechanic-value">@offer.Mechanic?.UserName</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Offer Date:</span>
+                                <span class="info-value date-value">@offer.OfferDate.ToString("MMM dd, yyyy")</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Repair Start:</span>
+                                <span class="info-value date-value">@offer.OfferStartDate.ToString("MMM dd, yyyy")</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Car Delivery:</span>
+                                <span class="info-value date-value">@offer.OfferEndDate.ToString("MMM dd, yyyy")</span>
+                            </div>
+                        </div>
 
-                    <div class="car-buttons" style="margin-top: 15px; display:flex; gap:10px;">
-                        <!-- Accept Offer -->
-                        <form asp-controller="Offer" asp-action="Accept" method="post">
-                            <button type="submit" name="id" value="@offer.OfferId" class="book-button" 
-                                    style="background-color: green; color: white; padding: 10px 15px; border: none; border-radius: 8px; cursor: pointer;">
-                                Accept
-                            </button>
-                        </form>
+                        @if(User.IsInRole("User") && userManager.GetUserId(User) == ViewBag.USERID && offer.Status == "Pending")
+                        {
+                            <div class="car-buttons">
+                                <!-- Accept Offer -->
+                                <form asp-controller="Offer" asp-action="Accept" method="post">
+                                    <button type="submit" name="id" value="@offer.OfferId" class="accept-button">
+                                        Accept Offer
+                                    </button>
+                                </form>
 
-                        <!-- Decline Offer -->
-                        <form asp-controller="Offer" asp-action="Decline" method="post">
-                            <button type="submit" name="id" value="@offer.OfferId" class="book-button" 
-                                    style="background-color: red; color: white; padding: 10px 15px; border: none; border-radius: 8px; cursor: pointer;">
-                                Decline
-                            </button>
-                        </form>
+                                <!-- Decline Offer -->
+                                <form asp-controller="Offer" asp-action="Decline" method="post">
+                                    <button type="submit" name="id" value="@offer.OfferId" class="decline-button">
+                                        Decline Offer
+                                    </button>
+                                </form>
+                            </div>
+                        }
+                        @if(User.IsInRole("Mechanic") && userManager.GetUserId(User) == offer.MechanicId && offer.Status == "Pending")
+                        {
+                            <div class="car-buttons">
+                                <!-- Edit Offer -->
+                                <form asp-controller="Offer" asp-action="EditOfferView" method="get">
+                                    <button type="submit" name="offerId" value="@offer.OfferId" class="accept-button">
+                                        Edit Offer
+                                    </button>
+                                </form>
+
+                                <!-- Delete Offer -->
+                                <form asp-controller="Offer" asp-action="DeleteOfferView" method="get">
+                                    <button type="submit" name="offerId" value="@offer.OfferId" class="decline-button">
+                                        Delete Offer
+                                    </button>
+                                </form>
+                            </div>
+                        }
+                        
+                        @if(offer.Status == "Paid")
+                        {
+                            <div class="deal-done">
+                                <span>✓</span>
+                                <span>Deal Completed</span>
+                            </div>
+                        }
                     </div>
                 </div>
-            </div>
+            }
         }
     </div>
 }
