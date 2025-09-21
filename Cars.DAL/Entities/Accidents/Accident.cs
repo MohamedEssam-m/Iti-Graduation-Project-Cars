@@ -37,5 +37,6 @@ namespace Cars.DAL.Entities.Accidents
 
         public List<Offer>? Offers { get; set; }
         public RepairPayment? repairPayment { get; set; }
+        //public string? Status { get; set; }
     }
 }

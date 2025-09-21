@@ -3,10 +3,17 @@ using Cars.BLL.ModelVM.Account;
 using Cars.BLL.Service.Abstraction;
 using Cars.BLL.Service.Implementation;
 using Cars.PL.Language;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using System.Security.Claims;
 
 namespace Cars.PL.Controllers
 {
@@ -21,9 +28,11 @@ namespace Cars.PL.Controllers
 
         private readonly UserManager<AppUser> UserManager;
         private readonly IEmailService EmailService;
-        
+        private readonly SignInManager<AppUser> signInManager;
 
-        public AccountController(IAccountService accountService, IMapper mapper , IStringLocalizer<SharedResource> SharedLocalizer , IRoleService roleService , UserManager<AppUser> userManager, IEmailService EmailService)
+
+
+        public AccountController(SignInManager<AppUser> signInManager,IAccountService accountService, IMapper mapper , IStringLocalizer<SharedResource> SharedLocalizer , IRoleService roleService , UserManager<AppUser> userManager, IEmailService EmailService)
         {
             this.accountService = accountService;
             this.mapper = mapper;
@@ -31,6 +40,7 @@ namespace Cars.PL.Controllers
             RoleService = roleService;
             UserManager = userManager;
             this.EmailService = EmailService;
+            this.signInManager = signInManager;
             
         }
         public IActionResult determineRole()
@@ -172,6 +182,117 @@ namespace Cars.PL.Controllers
 
             ViewBag.Error = "Some Thing Was Wrong";
             return View("SendEmailConfirm");
+        }
+       
+        [HttpGet]
+        public IActionResult GoogleSignIn()
+        {
+            
+            var redirectUrl = Url.Action("GoogleResponse", "Account");
+            var properties = signInManager.ConfigureExternalAuthenticationProperties("Google", redirectUrl);
+
+            
+            return Challenge(properties, "Google");
+        }
+
+
+        
+        [HttpGet]
+        public async Task<IActionResult> GoogleResponse()
+        {
+        
+            var info = await signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+        
+                ViewBag.Error = "Google login info not found (external cookie missing or SignInScheme not configured).";
+                return RedirectToAction("Login", "Account");
+            }
+
+        
+            var provider = info.LoginProvider; 
+            var providerKey = info.ProviderKey; 
+            var claimsList = info.Principal.Claims.Select(c => new { c.Type, c.Value }).ToList();
+            
+
+            
+            var signInResult = await signInManager.ExternalLoginSignInAsync(provider, providerKey, isPersistent: false);
+            if (signInResult.Succeeded)
+            {
+                
+                return RedirectToAction("Index", "Home");
+            }
+
+            
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+            if (!string.IsNullOrEmpty(email))
+            {
+                var existingUserByEmail = await UserManager.FindByEmailAsync(email);
+                if (existingUserByEmail != null)
+                {
+            
+                    var addLoginResult = await UserManager.AddLoginAsync(existingUserByEmail, info);
+                    if (addLoginResult.Succeeded)
+                    {
+            
+                        await signInManager.SignInAsync(existingUserByEmail, isPersistent: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+            
+                        var errors = string.Join("; ", addLoginResult.Errors.Select(e => e.Description));
+                        ViewBag.Error = "Failed to link external login to existing account: " + errors;
+                        return RedirectToAction("Login", "Account");
+                    }
+                }
+            }
+
+            
+            var name = info.Principal.FindFirstValue(ClaimTypes.Name) ?? info.Principal.FindFirstValue(ClaimTypes.GivenName) ?? email;
+            var newUser = new AppUser
+            {
+                UserName = email ?? Guid.NewGuid().ToString(),
+                Email = email,
+                FullName = name,
+                EmailConfirmed = true 
+            };
+
+            var createResult = await UserManager.CreateAsync(newUser);
+            if (!createResult.Succeeded)
+            {
+                
+                var createErrors = string.Join("; ", createResult.Errors.Select(e => e.Description));
+                ViewBag.Error = "User creation failed: " + createErrors;
+                
+                return RedirectToAction("Login", "Account");
+            }
+
+            
+            var addLogin = await UserManager.AddLoginAsync(newUser, info);
+            if (!addLogin.Succeeded)
+            {
+                var addLoginErrors = string.Join("; ", addLogin.Errors.Select(e => e.Description));
+                ViewBag.Error = "Failed to add external login after creating user: " + addLoginErrors;
+                return RedirectToAction("Login", "Account");
+            }
+
+            
+            await signInManager.SignInAsync(newUser, isPersistent: false);
+
+            
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
+        [HttpGet("Logout")]
+        public async Task<IActionResult> GoogleLogout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
         }
 
 

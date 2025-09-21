@@ -8,6 +8,7 @@ using Cars.DAL.Repo.Implementation;
 using Cars.DAL.Repo.Implementation.Cars.DAL.Repository;
 using Cars.PL.Language;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using DotNetEnv;
 
 namespace Cars
 {
@@ -59,7 +61,23 @@ namespace Cars
             })
             .AddEntityFrameworkStores<CarsDbContext>()
             .AddDefaultTokenProviders();
+            // get variables from .env file
+            Env.Load("C:\\Users\\mahmoud\\source\\repos\\Iti-Graduation-Project-Cars\\.env");
 
+            // get Google ClientId and ClientSecret from .env
+            var googleClientId = Environment.GetEnvironmentVariable("ClientId");
+            var googleClientSecret = Environment.GetEnvironmentVariable("ClientSecret");
+
+            if (string.IsNullOrWhiteSpace(googleClientId) || string.IsNullOrWhiteSpace(googleClientSecret))
+            {
+                throw new Exception("googleClientId and googleClientSecret are required");
+            }
+
+            // Set configuration values
+            builder.Configuration["Google:ClientId"] = googleClientId;
+            builder.Configuration["Google:ClientSecret"] = googleClientSecret;
+
+            
             // Repositories
             builder.Services.AddScoped<IAppUserRepo, AppUserRepo>();
             builder.Services.AddScoped<ICarRepo, CarRepo>();
@@ -79,6 +97,23 @@ namespace Cars
             builder.Services.AddScoped<IAccidentService, AccidentService>();
             builder.Services.AddScoped<IOfferService, OfferService>();
             builder.Services.Configure<EmailService>(builder.Configuration.GetSection("EmailSettings"));
+            builder.Services.AddAuthentication(options =>
+            {
+                
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+                
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            })
+
+.AddCookie()
+
+.AddGoogle(options =>
+{
+    options.ClientId = builder.Configuration["Google:ClientId"];
+    options.ClientSecret = builder.Configuration["Google:ClientSecret"];
+    options.SignInScheme = IdentityConstants.ExternalScheme;
+});
 
             var app = builder.Build();
 

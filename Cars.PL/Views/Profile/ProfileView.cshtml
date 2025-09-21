@@ -1,0 +1,275 @@
+﻿@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/ProfileView.css" />
+@model AppUser
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs">
+                    <span class="mr-2">
+                        <a href="@Url.Action("Index", "Home")">@SharedLocalizer["Home"] <i class="ion-ios-arrow-forward"></i></a>
+                    </span> 
+                    <span>Roles <i class="ion-ios-arrow-forward"></i></span>
+                </p>
+                <h1 class="mb-3 bread">Car Details</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<br />
+<br />
+<br />
+<div class="container-fluid" style="padding: 20px; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); min-height: 100vh;">
+    
+    <!-- Header Section with Action Buttons -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div style="background: white; padding: 20px; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 style="color: #1e293b; font-weight: 700; margin: 0;">
+                        <i class="fas fa-user-circle" style="color: #06b6d4; margin-right: 10px;"></i>
+                        My Profile
+                    </h2>
+                    <div>
+                        <!-- Edit Profile Button -->
+                        <a href="@Url.Action("EditUserProfileView", "EditUserProfile")" class="btn" 
+                           style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; border: none; padding: 12px 24px; border-radius: 10px; margin-right: 10px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease;"
+                           onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(6, 182, 212, 0.4)';"
+                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </a>
+                        
+                        <!-- Change Password Button -->
+                        <a href="@Url.Action("VerifyEmail", "EditUserProfile")" class="btn"
+                           style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 12px 24px; border-radius: 10px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease;"
+                           onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(245, 158, 11, 0.4)';"
+                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <i class="fas fa-key"></i> Change Password
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Information Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div style="background: white; padding: 25px; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                <h4 style="color: #374151; font-weight: 600; margin-bottom: 20px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
+                    <i class="fas fa-info-circle" style="color: #06b6d4; margin-right: 8px;"></i>
+                    Personal Information
+                </h4>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div style="padding: 15px; background: #f8fafc; border-radius: 10px; border-left: 4px solid #06b6d4;">
+                            <label style="color: #6b7280; font-size: 14px; font-weight: 500;">Full Name</label>
+                            <p style="color: #1e293b; font-size: 16px; font-weight: 600; margin: 0;">@Model.FullName </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div style="padding: 15px; background: #f8fafc; border-radius: 10px; border-left: 4px solid #06b6d4;">
+                            <label style="color: #6b7280; font-size: 14px; font-weight: 500;">User Name</label>
+                            <p style="color: #1e293b; font-size: 16px; font-weight: 600; margin: 0;">@Model.UserName </p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div style="padding: 15px; background: #f8fafc; border-radius: 10px; border-left: 4px solid #06b6d4;">
+                            <label style="color: #6b7280; font-size: 14px; font-weight: 500;">Email</label>
+                            <p style="color: #1e293b; font-size: 16px; font-weight: 600; margin: 0;">@Model.Email</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div style="padding: 15px; background: #f8fafc; border-radius: 10px; border-left: 4px solid #06b6d4;">
+                            <label style="color: #6b7280; font-size: 14px; font-weight: 500;">Phone Number</label>
+                            <p style="color: #1e293b; font-size: 16px; font-weight: 600; margin: 0;">@Model.PhoneNumber</p>
+                        </div>
+                    </div>
+                    
+                    
+
+                    <div class="col-md-6 mb-3">
+                        <div style="padding: 15px; background: #f8fafc; border-radius: 10px; border-left: 4px solid #06b6d4;">
+                            <label style="color: #6b7280; font-size: 14px; font-weight: 500;">Role</label>
+                            <p style="color: #1e293b; font-size: 16px; font-weight: 600; margin: 0;">
+                                <span style="background: @(User.IsInRole("User") ? "#dcfce7" : "#fef3c7"); color: @(User.IsInRole("User") ? "#16a34a" : "#d97706"); padding: 4px 12px; border-radius: 20px; font-size: 14px;">
+                                    @(User.IsInRole("User") ? "👤 User" : "🔧 Mechanic")
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rent Cars Section (For Both Roles) -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div style="background: white; padding: 25px; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                <h4 style="color: #374151; font-weight: 600; margin-bottom: 20px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
+                    <i class="fas fa-car" style="color: #10b981; margin-right: 8px;"></i>
+                    @(User.IsInRole("User") ? "My Rented Cars" : "Cars I'm Working On")
+                </h4>
+                @{bool isTrue = false;}
+                @if (Model.Rents != null && Model.Rents.Any())
+                {
+                    <div class="row">
+                        @foreach (var rent in Model.Rents)
+                        {
+                            @if(rent.Status == "Paid")
+                                {
+                                    isTrue = true;
+                                    <div class="col-md-6 col-lg-4 mb-3">
+                                        <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #bbf7d0; border-radius: 12px; padding: 18px; transition: all 0.3s ease;"
+                                             onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 24px rgba(16, 185, 129, 0.15)';"
+                                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="fas fa-car" style="color: #059669; font-size: 20px; margin-right: 10px;"></i>
+                                                <h6 style="color: #065f46; font-weight: 700; margin: 0;">@rent.Car?.Brand @rent.Car?.Model @rent.Car?.Year</h6>
+                                            </div>
+                                            <p style="color: #6d28d9; margin: 5px 0; font-size: 14px;"><strong>Start Date:</strong> @rent.StartDate.ToString("MMM dd, yyyy")</p>
+                                                <p style="color: #6d28d9; margin: 5px 0; font-size: 14px;"><strong>End Date:</strong> @rent.EndDate.ToString("MMM dd, yyyy")</p>
+                                            <p style="color: #047857; margin: 5px 0; font-size: 14px;"><strong>Pick up location:</strong> @rent.Pick_up_location</p>
+                                            <p style="color: #047857; margin: 5px 0; font-size: 14px;"><strong>Drop Off location:</strong> @rent.Drop_Off_location</p>
+                                            <p style="color: #047857; margin: 5px 0; font-size: 14px;"><strong>Status:</strong> 
+                                                <span style="background: #10b981; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px;">@rent.Status</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+                                
+                            }
+                            @if(!isTrue)
+                            {
+                                <div style="text-align: center; padding: 40px; color: #6b7280;">
+                                    <i class="fas fa-car" style="font-size: 48px; color: #d1d5db; margin-bottom: 15px;"></i>
+                                    <p style="font-size: 18px; margin: 0;">@(User.IsInRole("User") ? "No rented cars found" : "No cars assigned for maintenance")</p>
+                                </div>
+
+                            }
+                        </div>
+                }
+                else
+                {
+                    <div style="text-align: center; padding: 40px; color: #6b7280;">
+                        <i class="fas fa-car" style="font-size: 48px; color: #d1d5db; margin-bottom: 15px;"></i>
+                        <p style="font-size: 18px; margin: 0;">@(User.IsInRole("User") ? "No rented cars found" : "No cars assigned for maintenance")</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (User.IsInRole("User"))
+    {
+        <!-- Accidents Section (User Role Only) -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div style="background: white; padding: 25px; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                    <h4 style="color: #374151; font-weight: 600; margin-bottom: 20px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
+                        <i class="fas fa-exclamation-triangle" style="color: #ef4444; margin-right: 8px;"></i>
+                        My Accidents
+                    </h4>
+                    
+                    @if (ViewBag.ACCIDENTS != null && ViewBag.ACCIDENTS.Count > 0)
+                    {
+                        <div class="row">
+                            @foreach (var accident in ViewBag.ACCIDENTS)
+                            {
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div style="background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); border: 1px solid #fca5a5; border-radius: 12px; padding: 18px; transition: all 0.3s ease;"
+                                         onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 24px rgba(239, 68, 68, 0.15)';"
+                                         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-exclamation-triangle" style="color: #dc2626; font-size: 20px; margin-right: 10px;"></i>
+                                            <h6 style="color: #991b1b; font-weight: 700; margin: 0;">Accident #@accident.AccidentId</h6>
+                                        </div>
+                                        <p style="color: #b91c1c; margin: 5px 0; font-size: 14px;"><strong>Date:</strong> @accident.AccidentDate.ToString("MMM dd, yyyy")</p>
+                                        <p style="color: #b91c1c; margin: 5px 0; font-size: 14px;"><strong>Location:</strong> @accident.Location</p>
+                                        <p style="color: #b91c1c; margin: 5px 0; font-size: 14px;"><strong>Status:</strong> 
+                                            @* <span style="background: #dc2626; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px;">@accident.Status</span> *@
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="text-align: center; padding: 40px; color: #6b7280;">
+                            <i class="fas fa-shield-alt" style="font-size: 48px; color: #10b981; margin-bottom: 15px;"></i>
+                            <p style="font-size: 18px; margin: 0; color: #10b981; font-weight: 600;">Great! No accidents reported</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (User.IsInRole("Mechanic"))
+    {
+        <!-- Offers Section (Mechanic Role Only) -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div style="background: white; padding: 25px; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                    <h4 style="color: #374151; font-weight: 600; margin-bottom: 20px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
+                        <i class="fas fa-handshake" style="color: #8b5cf6; margin-right: 8px;"></i>
+                        My Repair Offers
+                    </h4>
+                    
+                    @if (Model.Offers != null && Model.Offers.Any())
+                    {
+                        <div class="row">
+                            @foreach (var offer in Model.Offers)
+                            {
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div style="background: linear-gradient(135deg, #faf5ff 0%, #e9d5ff 100%); border: 1px solid #c4b5fd; border-radius: 12px; padding: 18px; transition: all 0.3s ease;"
+                                         onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 24px rgba(139, 92, 246, 0.15)';"
+                                         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-tools" style="color: #7c3aed; font-size: 20px; margin-right: 10px;"></i>
+                                            <h6 style="color: #5b21b6; font-weight: 700; margin: 0;">Offer #@offer.OfferId</h6>
+                                        </div>
+                                        <p style="color: #6d28d9; margin: 5px 0; font-size: 14px;"><strong>Car:</strong> @offer.CarName </p>
+                                        <p style="color: #6d28d9; margin: 5px 0; font-size: 14px;"><strong>Price:</strong> $@offer.Price.ToString("F2")</p>
+                                        <p style="color: #6d28d9; margin: 5px 0; font-size: 14px;"><strong>Status:</strong> 
+                                            <span style="background: #8b5cf6; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px;">@offer.Status</span>
+                                        </p>
+                                        <p style="color: #6d28d9; margin: 5px 0; font-size: 14px;"><strong>Offer Date:</strong> @offer.OfferDate.ToString("MMM dd, yyyy")</p>
+                                        <p style="color: #6d28d9; margin: 5px 0; font-size: 14px;"><strong>Start Date:</strong> @offer.OfferStartDate.ToString("MMM dd, yyyy")</p>
+                                        <p style="color: #6d28d9; margin: 5px 0; font-size: 14px;"><strong>End Date:</strong> @offer.OfferEndDate.ToString("MMM dd, yyyy")</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="text-align: center; padding: 40px; color: #6b7280;">
+                            <i class="fas fa-clipboard-list" style="font-size: 48px; color: #d1d5db; margin-bottom: 15px;"></i>
+                            <p style="font-size: 18px; margin: 0;">No offers submitted yet</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Font Awesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    
+</style>

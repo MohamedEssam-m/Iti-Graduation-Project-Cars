@@ -1,0 +1,21 @@
+﻿.container-fluid {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+        .d-flex.justify-content-between > div {
+            display: flex;
+            gap: 10px;
+        }
+
+            .d-flex.justify-content-between > div a {
+                flex: 1;
+                text-align: center;
+            }
+}

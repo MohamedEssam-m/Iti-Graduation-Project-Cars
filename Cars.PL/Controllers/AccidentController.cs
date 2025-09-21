@@ -57,7 +57,7 @@ namespace Cars.PL.Controllers
                 }
             }
             
-            ViewBag.Cars = l;
+            ViewBag.RENTS = userWithNavigations.Rents;
             return View();
         }
 
