@@ -4,6 +4,8 @@
 @{
     Layout = "_Layout";
 }
+@model List<Car> 
+<link rel="stylesheet" href="~/css/GetAllCars.css">
 @* <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="~/css/open-iconic-bootstrap.min.css">
@@ -61,7 +63,7 @@
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-	  						<form action="#" class="request-form ftco-animate bg-primary">
+	  						<form asp-controller="Home" asp-action="Cars" class="request-form ftco-animate bg-primary">
 		          		<h2>Make your trip</h2>
 			    				<div class="form-group">
 			    					<label for="" class="label">Pick-up location</label>
@@ -81,10 +83,7 @@
 			                <input type="text" class="form-control" id="book_off_date" placeholder="Date">
 			              </div>
 		              </div>
-		              <div class="form-group">
-		                <label for="" class="label">Pick-up time</label>
-		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
-		              </div>
+		              
 			            <div class="form-group">
 			              <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
 			            </div>
@@ -119,7 +118,7 @@
 					            </div>      
 					          </div>
 					        </div>
-					        <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
+					        <p><a asp-controller="Home" asp-action="Cars" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
 	  						</div>
 	  					</div>
 	  				</div>
@@ -128,78 +127,100 @@
     </section>
 
 
-    <section class="ftco-section ftco-no-pt bg-light">
-    	<div class="container">
-    		<div class="row justify-content-center">
-          <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-          	<span class="subheading">What we offer</span>
-            <h2 class="mb-2">Feeatured Vehicles</h2>
-          </div>
+    <section class="ftco-section ftco-no-pt bg-light" style="padding: 3rem 0;">
+    <div class="container" style="max-width:1200px;margin:0 auto;">
+        <div class="row justify-content-center" style="margin-bottom:1.5rem;">
+            <div class="col-md-12 heading-section text-center mb-5">
+                <span class="subheading">What we offer</span>
+                <h2 class="mb-2">Featured Vehicles</h2>
+            </div>
         </div>
-    		<div class="row">
-    			<div class="col-md-12">
-    				<div class="carousel-car owl-carousel">
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-1.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-2.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-3.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-4.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
+
+        
+        <div 
+            class="cars-grid" 
+            style="
+                display:flex;
+                flex-wrap:wrap;
+                gap:1rem;
+                align-items:flex-start;
+                justify-content:center;
+                overflow:hidden; 
+                -webkit-overflow-scrolling: auto;
+                touch-action: pan-y; 
+            " 
+            ondragstart="return false;">
+            
+            @foreach(var car in Model)
+            {
+                <div class="car-card" style="
+                        width: calc(33.333% - 1rem); 
+                        min-width: 260px;             
+                        background:#fff;
+                        border-radius:10px;
+                        box-shadow:0 6px 18px rgba(0,0,0,0.08);
+                        overflow:hidden;
+                        display:flex;
+                        flex-direction:column;
+                    ">
+                    
+                    <div class="img" 
+                         style="
+                            height:180px;
+                            background-image: url('@(string.IsNullOrEmpty(car.CarImagePath) ? "/images/car-1.jpg" : car.CarImagePath)');
+                            background-size:cover;
+                            background-position:center;
+                            background-repeat:no-repeat;
+                            display:block;
+                         "
+                         ondragstart="return false;">
+                    </div>
+
+                   
+                    <div class="text" style="padding:1rem; display:flex; flex-direction:column; gap:0.5rem;">
+                        <h2 class="mb-0" style="margin:0; font-size:1.05rem;">
+                            <a href="#" style="color:#111; text-decoration:none;">@car.Brand</a>
+                        </h2>
+
+                        <div style="display:flex; align-items:center; gap:0.5rem; color:#666; font-size:0.9rem;">
+                            <span class="cat">@car.Model @car.Year</span>
+                            <p class="price" style="margin-left:auto; font-weight:700; color:#000;">$@car.PricePerDay <span style="font-weight:400;">/day</span></p>
+                            <p class="car-price" style="margin:0; color:#f1c40f;">@car.AverageRating ⭐</p>
+                        </div>
+
+                        <div class="car-buttons">
+                            @if(User.Identity.IsAuthenticated)
+                            {
+                                <form asp-controller="Rent" asp-action="RentingDetails" method="post">
+                                    <button type="submit" name="CarId" value="@car.CarId" class="book-button">
+                                        <i class="fa fa-user"></i> Book now
+                                    </button>
+                                </form>
+                            
+                            }
+                            @if(!User.Identity.IsAuthenticated)
+                            {
+                                <form asp-controller="Account" asp-action="LoginView" method="post">
+                                    <button type="submit" class="book-button">
+                                        <i class="fa fa-user"></i> LogIn To Book
+                                    </button>
+                                </form>
+                            
+                            }
+
+                            <form asp-controller="Cars" asp-action="CarDetails" method="post">
+                                <button type="submit" name="CarId" value="@car.CarId" class="details-button">
+                                    <i class="fa fa-car"></i> Details
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
 
     <section class="ftco-section ftco-about">
 			<div class="container">
@@ -213,7 +234,7 @@
 
 	            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
 	            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-	            <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
+	            <p><a asp-controller="Home" asp-action="Cars" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
 	          </div>
 					</div>
 				</div>
@@ -275,7 +296,10 @@
 				<div class="row justify-content-end">
 					<div class="col-md-6 heading-section heading-section-white ftco-animate">
             <h2 class="mb-3">Do You Want To Earn With Us? So Don't Be Late.</h2>
-            <a href="#" class="btn btn-primary btn-lg">Become A Driver</a>
+            <form asp-controller="Account" asp-action="SignUpView" >
+                <input type="hidden" name = "role" value = "Mechanic"></input>
+                <button type="submit" class="btn btn-primary btn-lg"> Become A Mechanic</button>
+            </form>
           </div>
 				</div>
 			</div>
@@ -374,7 +398,7 @@
                   <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                 </div>
                 <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                <p><a href="#" class="btn btn-primary">Read more</a></p>
+                
               </div>
             </div>
           </div>
@@ -389,7 +413,7 @@
                   <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                 </div>
                 <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                <p><a href="#" class="btn btn-primary">Read more</a></p>
+                
               </div>
             </div>
           </div>
@@ -404,7 +428,7 @@
                   <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                 </div>
                 <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-                <p><a href="#" class="btn btn-primary">Read more</a></p>
+                
               </div>
             </div>
           </div>

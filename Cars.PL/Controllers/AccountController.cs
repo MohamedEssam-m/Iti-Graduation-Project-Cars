@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Cars.BLL.ModelVM.Account;
+using Cars.BLL.ModelVM.Offers;
 using Cars.BLL.Service.Abstraction;
 using Cars.BLL.Service.Implementation;
 using Cars.PL.Language;
@@ -29,10 +30,11 @@ namespace Cars.PL.Controllers
         private readonly UserManager<AppUser> UserManager;
         private readonly IEmailService EmailService;
         private readonly SignInManager<AppUser> signInManager;
+        private readonly IConfiguration configuration;
 
 
 
-        public AccountController(SignInManager<AppUser> signInManager,IAccountService accountService, IMapper mapper , IStringLocalizer<SharedResource> SharedLocalizer , IRoleService roleService , UserManager<AppUser> userManager, IEmailService EmailService)
+        public AccountController(IConfiguration configuration,SignInManager<AppUser> signInManager,IAccountService accountService, IMapper mapper , IStringLocalizer<SharedResource> SharedLocalizer , IRoleService roleService , UserManager<AppUser> userManager, IEmailService EmailService)
         {
             this.accountService = accountService;
             this.mapper = mapper;
@@ -41,6 +43,7 @@ namespace Cars.PL.Controllers
             UserManager = userManager;
             this.EmailService = EmailService;
             this.signInManager = signInManager;
+            this.configuration = configuration;
             
         }
         public IActionResult determineRole()
@@ -135,19 +138,19 @@ namespace Cars.PL.Controllers
             await accountService.LogOut();
             return RedirectToAction("Index", "Home");
         }
-        public async Task<ActionResult> SendEmailConfirm(string email)
+        public async Task<ActionResult> SendEmailConfirm(string Toemail)
         {
-            var user = await UserManager.FindByEmailAsync(email);
+            var user = await UserManager.FindByEmailAsync(Toemail);
             if (ModelState.IsValid && user != null)
             {
                 var resetToken = await UserManager.GenerateEmailConfirmationTokenAsync(user);
                 //**add new object after "EditUserProfile"**
-                var resetLink = Url.Action("ConfirmEmail", "Account", new { email = email, token = resetToken }, protocol: HttpContext.Request.Scheme);
+                var resetLink = Url.Action("ConfirmEmail", "Account", new { email = Toemail, token = resetToken }, protocol: HttpContext.Request.Scheme);
 
                 var subject = "Vrify Your Email";
                 var body = $"Please, Vrify Your Email By Clicking Here : <a href=\"{resetLink}\">Vrify Email</a>";
 
-                await EmailService.SendEmail(email, subject, body);
+                await EmailService.SendEmail(Toemail, subject, body , configuration["EmailSettings:From"]);
                 ViewBag.Send = "Verification Email Sent";
                 return View();
             }
@@ -293,6 +296,20 @@ namespace Cars.PL.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
+        }
+        public async Task<ActionResult> ContactEmail(string userEmail , string subject , string message)
+        {
+            var user = await UserManager.FindByEmailAsync(userEmail);
+            if (user == null)
+            {
+                ViewBag.Error = "User not found!";
+                return View("CreateView", new CreateOfferVM());
+            }
+
+            await EmailService.SendEmail("zeyadazzap0@gmail.com", subject, message , userEmail);
+
+            ViewBag.Success = "Email Sent Successfully";
+            return View("Contact");
         }
 
 

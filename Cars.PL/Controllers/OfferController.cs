@@ -22,8 +22,9 @@ namespace Cars.PL.Controllers
         private readonly IEmailService emailService;
         private readonly ICarService carService;
         private readonly IPayPalService payPalService;
+        private readonly IConfiguration configuration;
 
-        public OfferController(ICarService carService, IEmailService emailService, UserManager<AppUser> userManager, IMapper mapper, IOfferService offerService, IAccidentService accidentService, IAppUserService appUserService, IPayPalService payPalService)
+        public OfferController(IConfiguration configuration,ICarService carService, IEmailService emailService, UserManager<AppUser> userManager, IMapper mapper, IOfferService offerService, IAccidentService accidentService, IAppUserService appUserService, IPayPalService payPalService)
         {
             this.offerService = offerService;
             this.mapper = mapper;
@@ -33,6 +34,7 @@ namespace Cars.PL.Controllers
             this.emailService = emailService;
             this.carService = carService;
             this.payPalService = payPalService;
+            this.configuration = configuration;
         }
 
 
@@ -107,7 +109,7 @@ namespace Cars.PL.Controllers
         </div>
     ";
 
-            await emailService.SendEmail(userEmail, subject, body);
+            await emailService.SendEmail(userEmail, subject, body , configuration["EmailSettings:From"]);
 
             ViewBag.Success = "Offer Email Sent";
             return View("CreateView", new CreateOfferVM());
@@ -135,13 +137,13 @@ namespace Cars.PL.Controllers
             ViewBag.Error = "Some Thing Was Wrong";
             return View();
         }
-        public async Task<ActionResult> SendAcceptedOfferEmail(string MechanicEmail, string mechanicName, int accidentId)
-        {
+        //public async Task<ActionResult> SendAcceptedOfferEmail(string MechanicEmail, string mechanicName, int accidentId)
+        //{
 
 
-            ViewBag.Success = "Offer Email Sent";
-            return View("CreateView", new CreateOfferVM());
-        }
+        //    ViewBag.Success = "Offer Email Sent";
+        //    return View("CreateView", new CreateOfferVM());
+        //}
 
 
         [HttpPost]

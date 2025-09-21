@@ -23,14 +23,14 @@ namespace Cars.BLL.Service.Implementation
             this.accidentService = accidentService;
             this.appUserService = appUserService;
         }
-        public async Task SendEmail(string ToEmail, string Subject, string Body)
+        public async Task SendEmail(string ToEmail, string Subject, string Body, string FromEmail = "zeyadazzap0@gmail.com")
         {
-            var from = configuration["EmailSettings:From"];
+            //var FromEmail = configuration["EmailSettings:From"];
             var SmtpServer = configuration["EmailSettings:SmtpServer"];
             var Port = int.Parse(configuration["EmailSettings:Port"]);
             var UserName = configuration["EmailSettings:UserName"];
             var Password = configuration["EmailSettings:Password"];
-            var message = new MailMessage(from, ToEmail, Subject, Body);
+            var message = new MailMessage(FromEmail, ToEmail, Subject, Body);
             message.IsBodyHtml = true;
             using var Client = new SmtpClient(SmtpServer, Port)
             {
@@ -44,12 +44,6 @@ namespace Cars.BLL.Service.Implementation
             var AllAccidents = await accidentService.GetAllAccidents();
             var Accident = await accidentService.GetAccidentById(accidentId);
             var user = await appUserService.GetById(Accident.UserId);
-                if (user == null)
-                {
-                    
-                }
-
-                
 
             var subject = "Your Offer Has Been Accepted!";
             var body = $@"

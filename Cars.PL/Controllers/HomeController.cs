@@ -22,10 +22,11 @@ namespace Cars.Controllers
             this.accidentService = accidentService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             ViewData["ActivePage"] = "Home";
-            return View();
+            var RandList = await CarService.GetAllRandom();
+            return View(RandList.Take(3).ToList());
         }
         public IActionResult About()
         {

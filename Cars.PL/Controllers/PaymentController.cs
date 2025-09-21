@@ -224,8 +224,9 @@ namespace Cars.PL.Controllers
                                         var car = await carService.GetById(rent.CarId);
                                         if (car != null && car.quantity != 0)
                                         {
+                                            car.quantity--;
                                             var carVM = mapper.Map<UpdateCarVM>(car);
-                                            carVM.quantity--;
+                                            
                                             if (carVM.quantity == 0)
                                             {
                                                 carVM.Status = "Not Available";

@@ -70,7 +70,7 @@
 
                     <td>
 
-                        <form asp-action="DeleteUser" asp-controller="User" method="post" style="display:inline;">
+                        <form asp-action="DeleteUser" asp-controller="Users" method="post" style="display:inline;">
                             <input type="hidden" name="Username" value="@user.UserName" />
                             <button type="submit" class="btn btn-delete">@SharedLocalizer["Delete"]</button>
                         </form>

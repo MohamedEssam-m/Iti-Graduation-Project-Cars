@@ -192,5 +192,23 @@ namespace Cars.BLL.Service.Implementation
             }
         }
 
+        public async Task<List<Car>> GetAllRandom()
+        {
+            try
+            {
+                Random rand = new Random();
+                var list = repo.GetAll();
+                if (list == null)
+                    throw new Exception("No cars found");
+                int random = rand.Next(50);
+                var RandList = list.OrderBy(i => random).ToList();
+                return RandList;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new List<Car>();
+            }
+        }
     }
 }

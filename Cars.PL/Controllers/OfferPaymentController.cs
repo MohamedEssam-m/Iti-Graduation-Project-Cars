@@ -183,7 +183,7 @@ namespace Cars.PL.Controllers
                                     var AccidentId = offer.AccidentId;
                                     var MechanicName = offer.Mechanic?.UserName;
                                     var MechanicEmail = offer.Mechanic?.Email;
-                                    
+                                    //can not use "Url" in the service , due to this reason I used SendAcceptedOfferEmail to be in the middle
                                     var link = Url.Action("Offers", "Accident", new { accidentId = AccidentId }, protocol: HttpContext.Request.Scheme);
                                     await emailService.SendAcceptedOfferEmail(MechanicEmail, MechanicName, AccidentId, link);
                                     return new JsonResult("success");

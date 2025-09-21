@@ -127,7 +127,7 @@ namespace Cars.PL.Controllers
                 var subject = "Reset Password";
                 var body = $"Please, Reset Your Password By Clicking Here : <a href=\"{resetLink}\">Reset Password</a>";
 
-                await EmailService.SendEmail(email , subject , body);
+                await EmailService.SendEmail(email , subject , body , "zeyadazzap0@gmail.com");
                 return View();
             }
             else
