@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Cars.BLL.ModelVM.CarVM
 {
     public class UpdateCarVM
     {
+        public IFormFile Car_Image { get; set; }
         [Required]
         public int CarId { get; set; }
 

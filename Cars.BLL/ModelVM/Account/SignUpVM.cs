@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 namespace Cars.BLL.ModelVM.Account
 {
     using Cars.DAL.Enums;
+    using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;
 
     public class SignUpVM
     {
         public SignUpVM() { }
+        public IFormFile User_Image { get; set; }
 
         public SignUpVM(string fullname, string userName, string email, string phoneNumber, string password, string confirmPassword, int age)
         {

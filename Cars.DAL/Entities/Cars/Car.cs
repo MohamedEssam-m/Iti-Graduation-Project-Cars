@@ -8,8 +8,7 @@ public class Car
 {
     [Key]
     public int CarId { get; private set; }
-    public string? CarImagePath { get; private set; }
-
+    [Required] public string CarImagePath { get; set; }
     [ForeignKey("User")]
     public string? userId { get;  set; }
     public AppUser? User { get; private set; }

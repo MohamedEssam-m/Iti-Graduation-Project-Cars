@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cars.BLL.Helper;
 using Cars.BLL.ModelVM.AppUserVM;
 using Cars.BLL.ModelVM.CarVM;
 using Cars.BLL.Service.Abstraction;
@@ -29,6 +30,21 @@ namespace Cars.BLL.Service.Implementation
         {
             try
             {
+                var imagePath = Upload.UploadFile("Files", CarVM.Car_Image);
+                var mappedCar = new Car
+                {
+                    CarImagePath = imagePath,
+                    Brand = CarVM.Brand,
+                    Model = CarVM.Model,
+                    Year = CarVM.Year,
+                    BodyType = CarVM.BodyType,
+                    Doors = CarVM.Doors,
+                    FuelType = CarVM.FuelType,
+                    EngineCapacity = CarVM.EngineCapacity,
+                    HorsePower = CarVM.HorsePower,
+                    FuelConsumption = CarVM.FuelConsumption,
+                    Seats = CarVM.Seats
+                };
                 if (CarVM == null)
                     return false;
                 else
@@ -110,16 +126,31 @@ namespace Cars.BLL.Service.Implementation
         }
 
         // Update Car
-        public async Task<bool> Update(UpdateCarVM carVM)
+        public async Task<bool> Update(UpdateCarVM CarVM)
         {
             try
             {
-                if (carVM != null)
+                var imagePath = Upload.UploadFile("Files", CarVM.Car_Image);
+                var mappedCar = new Car
                 {
-                    var car = repo.GetById(carVM.CarId); 
+                    CarImagePath = imagePath,
+                    Brand = CarVM.Brand,
+                    Model = CarVM.Model,
+                    Year = CarVM.Year,
+                    BodyType = CarVM.BodyType,
+                    Doors = CarVM.Doors,
+                    FuelType = CarVM.FuelType,
+                    EngineCapacity = CarVM.EngineCapacity,
+                    HorsePower = CarVM.HorsePower,
+                    FuelConsumption = CarVM.FuelConsumption,
+                    Seats = CarVM.Seats
+                };
+                if (CarVM != null)
+                {
+                    var car = repo.GetById(CarVM.CarId); 
                     if (car != null && car.CarId > 0)
                     {
-                        mapper.Map(carVM, car); 
+                        mapper.Map(CarVM, car); 
                         repo.Update(car);
                         return true;
                     }

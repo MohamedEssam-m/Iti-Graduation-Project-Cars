@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Cars.BLL.ModelVM.CarVM
 {
     public class CreateCarVM
     {
+        public IFormFile Car_Image { get; set; }
         //[Required(ErrorMessage = "Plate Number is required")]
         //[MaxLength(20, ErrorMessage = "Plate Number cannot exceed 20 characters")]
         //public string PlateNumber { get; private set; }

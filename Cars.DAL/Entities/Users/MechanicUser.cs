@@ -15,6 +15,7 @@ namespace Cars.DAL.Entities.Users
 {
     public class MechanicUser : AppUser
     {
+        public string? MechanicImagePath { get; private set; }
         [Required]
         [StringLength(100)]
         public string Specialization { get; private set; }
@@ -30,11 +31,12 @@ namespace Cars.DAL.Entities.Users
         {
             
         }
-        public MechanicUser(string fullName, string address, string specialization, int experienceYears, string workshopAddress)
+        public MechanicUser(string fullName, string address, string specialization, int experienceYears, string workshopAddress, string? MechanicImage)
         {
             Specialization = specialization;
             ExperienceYears = experienceYears;
             WorkshopAddress = workshopAddress;
+            MechanicImagePath = MechanicImage;
         }
     }
 }

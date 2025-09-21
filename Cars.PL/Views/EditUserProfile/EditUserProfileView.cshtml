@@ -75,6 +75,13 @@
                 <input asp-for="Age" class="form-input" type="number" placeholder="@SharedLocalizer["EnterYourAge"]" min="18" max="100" />
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
+            <!-- Profile Picture -->
+            <div class="form-group">
+                <label asp-for="User_Image" class="form-label">@SharedLocalizer["ProfilePicture"]</label>
+                <input asp-for="User_Image" type="file" class="form-input" />
+                <span asp-validation-for="User_Image" class="text-danger"></span>
+            </div>
+
 
             
 

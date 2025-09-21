@@ -53,6 +53,12 @@
                 <input asp-for="AccidentDate" class="form-input" placeholder="Enter The Date of The Accident" />
                 <span asp-validation-for="AccidentDate" class="text-danger"></span>
             </div>
+            <!-- Accident Image -->
+            <div class="form-group">
+                <label asp-for="Accident_Image" class="form-label">Upload Accident Image</label>
+                <input asp-for="Accident_Image" type="file" class="form-input" />
+                <span asp-validation-for="Accident_Image" class="text-danger"></span>
+            </div>
 
             <!-- Car Id Dropdown -->
             <div class="form-group">

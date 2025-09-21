@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cars.BLL.Helper;
 using Cars.BLL.ModelVM.AppUserVM;
 using Cars.BLL.Service.Abstraction;
 using Cars.DAL.Repo.Abstraction;
@@ -29,6 +30,19 @@ namespace Cars.BLL.Service.Implementation
         {
             try
             {
+                //Get User Image_Path
+                var imagePath = Upload.UploadFile("Files", userVM.User_Image);
+                var mappedUser = new AppUser
+                {
+                    //هنا عملنا مابنج للصور لان الاوتو مابير مش بيدعم الفورم فايل وكمان ضيفنا اليوزر ايميج عشان نحط فيه المسار
+                    UserImagePath = imagePath,
+                    FullName = userVM.FullName,
+                    UserName = userVM.Username,
+                    Email = userVM.Email,
+                    PhoneNumber = userVM.PhoneNumber,
+                    Address = userVM.Address,
+                    Age = userVM.Age,
+                };
                 if (userVM == null)
                     throw new ArgumentNullException("userVM");
                 else
@@ -116,6 +130,19 @@ namespace Cars.BLL.Service.Implementation
         {
             try
             {
+                //Get User Image_Path
+                var imagePath = Upload.UploadFile("Files", user.User_Image);
+                var mappedUser = new AppUser
+                {
+                    //هنا عملنا مابنج للصور لان الاوتو مابير مش بيدعم الفورم فايل وكمان ضيفنا اليوزر ايميج عشان نحط فيه المسار
+                    UserImagePath = imagePath,
+                    FullName = user.FullName,
+                    UserName = user.Username,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    Address = user.Address,
+                    Age = user.Age,
+                };
                 if (user != null)
                 {
                     var appUser = mapper.Map<AppUser>(user);

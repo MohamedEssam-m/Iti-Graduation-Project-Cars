@@ -1,4 +1,5 @@
 ﻿using Cars.DAL.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +11,7 @@ namespace Cars.BLL.ModelVM.Account
 {
     public class SignUpMechanicVM
     {
+        public IFormFile Mechanic_Image { get; set; }
         [Required(ErrorMessage = "Full name is required")]
         [StringLength(50, ErrorMessage = "Full name cannot exceed 50 characters")]
         public string Fullname { get; set; }

@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 public class AppUser : IdentityUser
 {
+    public string? UserImagePath { get; set; }
     [Required(ErrorMessage = "Name is required, you must add a name.")]
     [Column(TypeName = "nvarchar(30)")]
     public string FullName { get;  set; }

@@ -34,7 +34,7 @@
             <p>@SharedLocalizer["JoinUsToday"]</p>
         </div>
 
-        <form asp-action="Create" asp-controller="Accident" method="post" class="registration-form">
+        <form enctype="multipart/form-data" asp-action="Create" asp-controller="Accident" method="post" class="registration-form">
             <!-- Description -->
             <div class="form-group">
                 <label asp-for="Description" class="form-label">Description</label>
@@ -56,6 +56,12 @@
                 <label asp-for="AccidentDate" class="form-label">Accident Date</label>
                 <input asp-for="AccidentDate" class="form-input" placeholder="Enter The Date of The Accident" />
                 <span asp-validation-for="AccidentDate" class="text-danger"></span>
+            </div>
+            <!-- Accident Image -->
+            <div class="form-group">
+                <label asp-for="Accident_Image" class="form-label">Upload Accident Image</label>
+                <input asp-for="Accident_Image" type="file" class="form-input" />
+                <span asp-validation-for="Accident_Image" class="text-danger"></span>
             </div>
 
             <!-- Car Id Dropdown -->

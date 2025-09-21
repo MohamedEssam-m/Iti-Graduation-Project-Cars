@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Cars.BLL.ModelVM.MechanicUserVM
 {
     public class CreateMechanicVM
     {
+        public IFormFile Mechanic_Image { get; set; }
         [Required]
         [StringLength(30)]
         public string FullName { get; set; }

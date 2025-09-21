@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Cars.BLL.Helper;
 using Cars.BLL.ModelVM.AppUserVM;
 using Cars.BLL.ModelVM.MechanicUserVM;
 using Cars.BLL.Service.Abstraction;
 using Cars.DAL.Entities.Users;
+using Cars.DAL.Enums;
 using Cars.DAL.Repo.Abstraction;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -33,6 +35,15 @@ namespace Cars.BLL.Service.Implementation
         {
             try
             {
+                var imagePath = Upload.UploadFile("Files", mechanicVM.Mechanic_Image);
+                var mechanicMapped = new MechanicUser(
+                    mechanicVM.FullName,
+                    mechanicVM.Address,
+                    mechanicVM.Specialization,
+                    mechanicVM.ExperienceYears,
+                    mechanicVM.WorkshopAddress,
+                    imagePath
+                );
                 if (mechanicVM == null)
                     throw new ArgumentNullException("mechanicVM");
                 else

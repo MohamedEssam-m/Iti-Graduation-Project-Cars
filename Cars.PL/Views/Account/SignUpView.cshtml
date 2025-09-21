@@ -29,7 +29,7 @@
             <p>@SharedLocalizer["JoinUsToday"]</p>
         </div>
 
-        <form asp-action="SignUp" asp-controller="Account" method="post" class="registration-form">
+        <form enctype="multipart/form-data" asp-action="SignUp" asp-controller="Account" method="post" class="registration-form">
             <input type="hidden" name = "Role" value = "@Model.Role"></input>
             <!-- Full Name -->
             <div class="form-group">
@@ -87,6 +87,12 @@
                 <label asp-for="ConfirmPassword" class="form-label">@SharedLocalizer["ConfirmPassword"]</label>
                 <input asp-for="ConfirmPassword" class="form-input" type="password" placeholder="@SharedLocalizer["ConfirmYourPassword"]" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <!-- Profile Picture -->
+            <div class="form-group">
+                <label asp-for="User_Image" class="form-label">@SharedLocalizer["ProfilePicture"]</label>
+                <input asp-for="User_Image" type="file" class="form-input" />
+                <span asp-validation-for="User_Image" class="text-danger"></span>
             </div>
             @if(Model.Role == "Mechanic")
             {

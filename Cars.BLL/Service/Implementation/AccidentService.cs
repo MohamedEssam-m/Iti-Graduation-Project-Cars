@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cars.BLL.Helper;
 using Cars.BLL.ModelVM.Accident;
 using Cars.BLL.Service.Abstraction;
 using Cars.DAL.Entities.Accidents;
@@ -27,7 +28,17 @@ namespace Cars.BLL.Service.Implementation
 
         public async Task<bool> AddAccident(CreateAccidentVM accident , string UserId)
         {
-            
+            var imagePath = Upload.UploadFile("Files", accident.Accident_Image);
+            var mappedAccident = new Accident
+            {
+                AccidentImagePath = imagePath,
+                Description = accident.Description,
+                ReportDate = accident.ReportDate,
+                AccidentDate = accident.AccidentDate,
+                Location = accident.Location,
+                carId = accident.carId
+            };
+
             if (accident == null)
             {
                 throw new ArgumentNullException(); 
@@ -50,6 +61,16 @@ namespace Cars.BLL.Service.Implementation
 
         public async Task<bool> UpdateAccident(UpdateAccidentVM accident)
         {
+            var imagePath = Upload.UploadFile("Files", accident.Accident_Image);
+            var mappedAccident = new Accident
+            {
+                AccidentImagePath = imagePath,
+                Description = accident.Description,
+                ReportDate = accident.ReportDate,
+                AccidentDate = accident.AccidentDate,
+                Location = accident.Location,
+                carId = accident.carId
+            };
             if (accident == null)
             {
                 throw new ArgumentNullException(); 

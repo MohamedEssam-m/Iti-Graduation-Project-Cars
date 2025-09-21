@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Cars.BLL.ModelVM.AppUserVM
 {
     public class CreateUserVM
     {
+        public IFormFile User_Image { get; set; }
         [Required(ErrorMessage = "Full name is required.")]
         [StringLength(30, ErrorMessage = "Full name cannot exceed 30 characters.")]
         public string FullName { get; set; }
