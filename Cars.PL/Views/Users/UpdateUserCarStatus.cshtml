@@ -83,7 +83,8 @@
                                         <option value="">Select Status</option>
                                         <option value="Pending" selected="@(car.Status == "Pending")">Pending</option>
                                         <option value="Paid" selected="@(car.Status == "Paid")">Paid</option>
-                                        <option value="InProgress" selected="@(car.Status == "InProgress")">InProgress</option>
+                                        @* <option value="InProgress" selected="@(car.Status == "InProgress")">InProgress</option> *@
+                                        <option value="Finished" selected="@(car.Status == "Finished")">Finished</option>
                                     </select>
                                     <button type="submit" class="btn btn-update">Update</button>
                                 </form>
