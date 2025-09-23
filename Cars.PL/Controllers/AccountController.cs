@@ -3,6 +3,7 @@ using Cars.BLL.ModelVM.Account;
 using Cars.BLL.ModelVM.Offers;
 using Cars.BLL.Service.Abstraction;
 using Cars.BLL.Service.Implementation;
+using Cars.DAL.Entities.Users;
 using Cars.PL.Language;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication;
@@ -96,7 +97,7 @@ namespace Cars.PL.Controllers
                     var role = await RoleService.AssignRoleToUser(user, signUp.Role);
                 }
                 ViewBag.success = "SignUp Is Done Successfully , You Can Verify Your Account Now";
-                return RedirectToAction("SendEmailConfirm", "Account" , new {email = signUp.Email});
+                return RedirectToAction("SendEmailConfirm", "Account" , new {Toemail = signUp.Email});
                 //return View("LoginView");
             }
             else
@@ -208,7 +209,7 @@ namespace Cars.PL.Controllers
             if (info == null)
             {
         
-                ViewBag.Error = "Google login info not found (external cookie missing or SignInScheme not configured).";
+                ViewBag.Error = "Google login Failed!";
                 return RedirectToAction("Login", "Account");
             }
 
@@ -251,42 +252,51 @@ namespace Cars.PL.Controllers
                 }
             }
 
+
+            //var name = info.Principal.FindFirstValue(ClaimTypes.Name) ?? info.Principal.FindFirstValue(ClaimTypes.GivenName) ?? email;
+            //var newUser = new AppUser
+            //{
+            //    UserName = email ?? Guid.NewGuid().ToString(),
+            //    Email = email,
+            //    FullName = name,
+            //    EmailConfirmed = true 
+            //};
+            var claims = info.Principal.Claims;
+
             
-            var name = info.Principal.FindFirstValue(ClaimTypes.Name) ?? info.Principal.FindFirstValue(ClaimTypes.GivenName) ?? email;
-            var newUser = new AppUser
+            var googleUserData = new GoogleUserData
             {
-                UserName = email ?? Guid.NewGuid().ToString(),
-                Email = email,
-                FullName = name,
-                EmailConfirmed = true 
+                Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                EmailVerification = bool.TryParse(claims.FirstOrDefault(c => c.Type == "email_verified")?.Value, out var verified) && verified,
+                FullName = info.Principal.FindFirstValue(ClaimTypes.Name),
+                UserName = info.Principal.FindFirstValue(ClaimTypes.GivenName),
+                Picture = claims.FirstOrDefault(c => c.Type == "picture")?.Value,
             };
 
-            var createResult = await UserManager.CreateAsync(newUser);
-            if (!createResult.Succeeded)
-            {
-                
-                var createErrors = string.Join("; ", createResult.Errors.Select(e => e.Description));
-                ViewBag.Error = "User creation failed: " + createErrors;
-                
-                return RedirectToAction("Login", "Account");
-            }
+            var user = mapper.Map<ProfileCompletionVM>(googleUserData);
+            //var createResult = await UserManager.CreateAsync(newUser);
+            //if (!createResult.Succeeded)
+            //{
 
-            
-            var addLogin = await UserManager.AddLoginAsync(newUser, info);
-            if (!addLogin.Succeeded)
-            {
-                var addLoginErrors = string.Join("; ", addLogin.Errors.Select(e => e.Description));
-                ViewBag.Error = "Failed to add external login after creating user: " + addLoginErrors;
-                return RedirectToAction("Login", "Account");
-            }
+            //    var createErrors = string.Join("; ", createResult.Errors.Select(e => e.Description));
+            //    ViewBag.Error = "User creation failed: " + createErrors;
 
-            
-            await signInManager.SignInAsync(newUser, isPersistent: false);
+            //    return RedirectToAction("LoginView", "Account");
+            //}
 
-            
+
+            //var addLogin = await UserManager.AddLoginAsync(newUser, info);
+            //if (!addLogin.Succeeded)
+            //{
+            //    var addLoginErrors = string.Join("; ", addLogin.Errors.Select(e => e.Description));
+            //    ViewBag.Error = "Failed to add external login after creating user: " + addLoginErrors;
+            //    return RedirectToAction("LoginView", "Account");
+            //}
+
+
+            ViewBag.User = user;
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
-            return RedirectToAction("Index", "Home");
+            return View("GoogleDetermineRole", "Account");
         }
 
 
@@ -306,12 +316,66 @@ namespace Cars.PL.Controllers
                 return View("CreateView", new CreateOfferVM());
             }
 
-            await EmailService.SendEmail("zeyadazzap0@gmail.com", subject, message , userEmail);
+            await EmailService.SendEmail(configuration["EmailSettings:From"], subject, message , userEmail);
 
             ViewBag.Success = "Email Sent Successfully";
-            return View("Contact");
+            return View("Contact" , "Home");
         }
+        public IActionResult ProfileCompletion(ProfileCompletionVM user)
+        {
+            return View(user);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveProfileCompletion(ProfileCompletionVM profile)
+        {
+            if(ModelState.IsValid)
+            {
+                if(profile.Role == "User")
+                {
+                    var user = mapper.Map<AppUser>(profile);
+                    user.UserName = profile.UserName; 
+                    var result = await UserManager.CreateAsync(user);
 
+                    if (result.Succeeded)
+                    {
+                        var User = await UserManager.FindByEmailAsync(profile.Email);
+                        if (User != null && User.Email != null)
+                        {
+                            var role = await RoleService.AssignRoleToUser(user, profile.Role);
+                        }
+
+                        await signInManager.SignInAsync(user, isPersistent: false);
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    var user = mapper.Map<MechanicUser>(profile);
+
+                    var result = await UserManager.CreateAsync(user);
+
+                    if (result.Succeeded)
+                    {
+                        var User = await UserManager.FindByEmailAsync(profile.Email);
+                        if (User != null && User.Email != null)
+                        {
+                            var role = await RoleService.AssignRoleToUser(user, profile.Role);
+                        }
+                        await signInManager.SignInAsync(user, isPersistent: false);
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    
+                }
+            }
+            ViewBag.Error = "Some Thing Was Wrong";
+            return View("ProfileCompletion" , profile);
+        }
+        public IActionResult GoogleDetermineRole()
+        {
+            return View();
+        }
 
 
 

@@ -79,6 +79,7 @@ namespace Cars.DAL.Repo.Implementation
                     oldOffer.Details = offer.Details;
                     oldOffer.OfferStartDate = offer.OfferStartDate;
                     oldOffer.OfferEndDate = offer.OfferEndDate;
+                    oldOffer.Fine = offer.Fine;
                     db.Offers.Update(oldOffer);
                     db.SaveChanges();
                     return true;

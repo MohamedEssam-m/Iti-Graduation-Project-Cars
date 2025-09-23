@@ -11,6 +11,7 @@ namespace Cars.BLL.ModelVM.CarVM
     public class UpdateCarVM
     {
         public IFormFile Car_Image { get; set; }
+        public string? ImagePath { get; set; }
         [Required]
         public int CarId { get; set; }
 

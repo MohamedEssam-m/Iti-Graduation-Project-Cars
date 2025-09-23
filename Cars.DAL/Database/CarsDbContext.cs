@@ -120,7 +120,7 @@ namespace Cars.DAL.Database
                 .HasOne(a => a.User)
                 .WithMany(u => u.Accidents) 
                 .HasForeignKey(a => a.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Accident - Car
             modelBuilder.Entity<Accident>()

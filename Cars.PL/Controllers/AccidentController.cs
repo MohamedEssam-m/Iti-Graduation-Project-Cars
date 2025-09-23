@@ -50,15 +50,18 @@ namespace Cars.PL.Controllers
             List<Car> l = new List<Car>();
             if (userWithNavigations != null && userWithNavigations.Rents != null && userWithNavigations.Rents.Count > 0)
             {
-                foreach (var rent in userWithNavigations.Rents)
-                {
-                    var car = await carService.GetById(rent.CarId);
-                    l.Add(car);
-                }
+                //foreach (var rent in userWithNavigations.Rents)
+                //{
+                //    var car = await carService.GetById(rent.CarId);
+                //    l.Add(car);
+                //}
+                ViewBag.RENTS = userWithNavigations.Rents;
+                return View();
             }
-            
-            ViewBag.RENTS = userWithNavigations.Rents;
+            ViewBag.Error = "Some Thing Was Wrong!";
             return View();
+            
+            
         }
 
         [HttpPost]
@@ -100,15 +103,19 @@ namespace Cars.PL.Controllers
             List<Car> l = new List<Car>();
             if (userWithNavigations != null && userWithNavigations.Rents != null && userWithNavigations.Rents.Count > 0)
             {
-                foreach (var rent in userWithNavigations.Rents)
-                {
-                    var car = await carService.GetById(rent.CarId);
-                    l.Add(car);
-                }
+                //foreach (var rent in userWithNavigations.Rents)
+                //{
+                //    var car = await carService.GetById(rent.CarId);
+                //    l.Add(car);
+                //}
+                ViewBag.RENTS = userWithNavigations.Rents;
+                
             }
 
-            ViewBag.Cars = l;
+            
             var Accident = mapper.Map<UpdateAccidentVM>(accident);
+            Accident.ImagePath = accident.AccidentImagePath;
+            
             return View(Accident);
         }
 
@@ -121,11 +128,18 @@ namespace Cars.PL.Controllers
                 if(IsTrue)
                 {
                     ViewBag.Success = "The Accident Updated Successfully";
-                    return View("EditView" , accident);
+                    var Accident = await accidentService.GetAccidentById(accident.AccidentId);
+                    var mapAccident = mapper.Map<UpdateAccidentVM>(Accident);
+                    mapAccident.ImagePath = Accident.AccidentImagePath;
+                    return View("EditView" , mapAccident);
                 }
             }
             ViewBag.Error = "Some Thing Was Wrong";
-            return View("EditView", accident);
+            var Accident1 = await accidentService.GetAccidentById(accident.AccidentId);
+            var mapAccident1 = mapper.Map<UpdateAccidentVM>(Accident1);
+            mapAccident1.ImagePath = Accident1.AccidentImagePath;
+            return View("EditView", mapAccident1);
+            
         }
         public async Task<IActionResult> DeleteView(int accidentId)
         {
@@ -145,14 +159,18 @@ namespace Cars.PL.Controllers
             var IsTrue = await accidentService.DeleteAccident(accidentId);
             if (IsTrue)
             {
+                var accident = await accidentService.GetAccidentById(accidentId);
                 ViewBag.Success = "The Accident Deleted Successfully";
-                return View("DeleteView");
+                return View("DeleteView" , accident);
             }
+            var Accident = await accidentService.GetAccidentById(accidentId);
             ViewBag.Error = "Some Thing Was Wrong";
-            return View("DeleteView");
+            return View("DeleteView", Accident);
         }
         public async Task<IActionResult> Offers(int accidentId , int CarId)
         {
+            var successMessage = TempData["Success"] as string;
+            ViewBag.Success = successMessage;
             var car = await carService.GetById(CarId);
             var AllOffers = await offerService.GetOffersByAccident(accidentId);
             foreach (var offer in AllOffers)

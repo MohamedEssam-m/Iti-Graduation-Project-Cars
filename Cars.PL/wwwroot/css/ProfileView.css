@@ -1,21 +1,485 @@
-﻿.container-fluid {
+﻿
+/* Enhanced Profile View Styles */
+.profile-container {
+    padding: 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .d-flex.justify-content-between {
-        flex-direction: column;
-        gap: 15px;
+/* Profile Image Styles */
+.profile-image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.user-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #06b6d4;
+    box-shadow: 0 8px 32px rgba(6, 182, 212, 0.3);
+    transition: all 0.3s ease;
+}
+
+    .user-image:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 40px rgba(6, 182, 212, 0.4);
     }
 
-        .d-flex.justify-content-between > div {
-            display: flex;
-            gap: 10px;
+.image-overlay {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #06b6d4;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .image-overlay:hover {
+        background: #0891b2;
+        transform: scale(1.1);
+    }
+
+/* Card Styles */
+.profile-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+    .profile-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+/* Header Styles */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.profile-title {
+    color: #1e293b;
+    font-weight: 700;
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+    .profile-title i {
+        color: #06b6d4;
+        margin-right: 10px;
+    }
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Button Styles */
+.btn {
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    color: white;
+}
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(6, 182, 212, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+.btn-secondary {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+    .btn-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+/* Section Title */
+.section-title {
+    color: #374151;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+    .section-title i {
+        margin-right: 8px;
+    }
+
+/* Info Item Styles */
+.info-item {
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 10px;
+    border-left: 4px solid #06b6d4;
+    transition: all 0.3s ease;
+}
+
+    .info-item:hover {
+        background: #f1f5f9;
+        transform: translateX(2px);
+    }
+
+    .info-item label {
+        color: #6b7280;
+        font-size: 14px;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .info-item p {
+        color: #1e293b;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0;
+        word-break: break-word;
+    }
+
+/* Role Badge */
+.role-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+    .role-badge.user-role {
+        background: #dcfce7;
+        color: #16a34a;
+    }
+
+    .role-badge.mechanic-role {
+        background: #fef3c7;
+        color: #d97706;
+    }
+
+/* Car Card Styles */
+.car-card {
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid;
+    height: 100%;
+}
+
+    .car-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .car-card.success-card {
+        background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        border-color: #bbf7d0;
+    }
+
+        .car-card.success-card:hover {
+            box-shadow: 0 12px 24px rgba(16, 185, 129, 0.15);
         }
 
-            .d-flex.justify-content-between > div a {
-                flex: 1;
-                text-align: center;
-            }
+    .car-card.danger-card {
+        background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+        border-color: #fca5a5;
+    }
+
+        .car-card.danger-card:hover {
+            box-shadow: 0 12px 24px rgba(239, 68, 68, 0.15);
+        }
+
+    .car-card.info-card {
+        background: linear-gradient(135deg, #faf5ff 0%, #e9d5ff 100%);
+        border-color: #c4b5fd;
+    }
+
+        .car-card.info-card:hover {
+            box-shadow: 0 12px 24px rgba(139, 92, 246, 0.15);
+        }
+
+.card-header {
+    padding: 15px 18px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
+
+    .card-header i {
+        font-size: 18px;
+    }
+
+.success-card .card-header i {
+    color: #059669;
+}
+
+.danger-card .card-header i {
+    color: #dc2626;
+}
+
+.info-card .card-header i {
+    color: #7c3aed;
+}
+
+.card-header h6 {
+    font-weight: 700;
+    margin: 0;
+    font-size: 16px;
+}
+
+.success-card .card-header h6 {
+    color: #065f46;
+}
+
+.danger-card .card-header h6 {
+    color: #991b1b;
+}
+
+.info-card .card-header h6 {
+    color: #5b21b6;
+}
+
+.card-body {
+    padding: 0 18px 18px;
+}
+
+.info-row {
+    margin-bottom: 8px;
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+    .info-row strong {
+        min-width: 100px;
+    }
+
+.success-card .info-row {
+    color: #047857;
+}
+
+.danger-card .info-row {
+    color: #b91c1c;
+}
+
+.info-card .info-row {
+    color: #6d28d9;
+}
+
+.price {
+    font-weight: 700;
+    color: #059669 !important;
+}
+
+/* Status Badge */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+
+    .status-badge.success {
+        background: #10b981;
+    }
+
+    .status-badge.danger {
+        background: #dc2626;
+    }
+
+    .status-badge.info {
+        background: #8b5cf6;
+    }
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+}
+
+    .empty-state i {
+        font-size: 48px;
+        color: #d1d5db;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .empty-state.success i {
+        color: #10b981;
+    }
+
+    .empty-state.success p {
+        color: #10b981;
+        font-weight: 600;
+    }
+
+    .empty-state p {
+        font-size: 18px;
+        margin: 0;
+    }
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .profile-container {
+        padding: 15px;
+    }
+
+    .profile-title {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .car-card {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .action-buttons {
+        justify-content: center;
+    }
+
+    .btn {
+        flex: 1;
+        justify-content: center;
+        min-width: 0;
+    }
+
+    .user-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-card {
+        padding: 20px;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+    }
+
+    .profile-title {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    .info-row {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+        .info-row strong {
+            min-width: auto;
+        }
+}
+
+@media (max-width: 576px) {
+    .profile-container {
+        padding: 10px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .btn-text {
+        display: inline;
+    }
+
+    .user-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .image-overlay {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+        bottom: 5px;
+        right: 5px;
+    }
+
+    .profile-card {
+        padding: 15px;
+    }
+
+    .empty-state {
+        padding: 30px 15px;
+    }
+
+        .empty-state i {
+            font-size: 36px;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+        }
+}
+
+@media (max-width: 400px) {
+    .profile-title i {
+        display: block;
+        margin: 0 0 5px 0;
+    }
+
+    .section-title i {
+        display: block;
+        margin: 0 0 5px 0;
+    }
+}
+
+

@@ -49,6 +49,9 @@ namespace Cars.BLL.Mapper
             CreateMap<CreateOfferVM, Offer>().ReverseMap();
             CreateMap<MechanicUser, SignUpVM>().ReverseMap();
             CreateMap<Offer, Offer>().ReverseMap();
+            CreateMap<GoogleUserData, ProfileCompletionVM>().ReverseMap();
+            CreateMap<AppUser, ProfileCompletionVM>().ReverseMap();
+            CreateMap<MechanicUser, ProfileCompletionVM>().ReverseMap();
         }
     }
 }

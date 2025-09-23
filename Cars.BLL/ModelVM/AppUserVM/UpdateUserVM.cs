@@ -10,7 +10,8 @@ namespace Cars.BLL.ModelVM.AppUserVM
 {
     public class UpdateUserVM
     {
-        public IFormFile User_Image { get; set; }
+        public IFormFile? User_Image { get; set; }
+        public string? User_Image_Path { get; set; }
         [Required]public string Id { get; set; }
         [Required(ErrorMessage = "Full name is required.")]
         [StringLength(30, ErrorMessage = "Full name cannot exceed 30 characters.")]

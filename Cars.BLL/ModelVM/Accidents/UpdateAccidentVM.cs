@@ -12,6 +12,7 @@ namespace Cars.BLL.ModelVM.Accident
     {
         public int AccidentId { get; set; }
         public IFormFile Accident_Image { get; set; }
+        public string? ImagePath { get; set; }
         [Required(ErrorMessage = "Description is required")]
         [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters")]
         public string Description { get; set; }
@@ -23,5 +24,6 @@ namespace Cars.BLL.ModelVM.Accident
         [Required(ErrorMessage = "Location ID is required")]
         public string Location { get; set; }
         public int carId { get; set; }
+        
     }
 }

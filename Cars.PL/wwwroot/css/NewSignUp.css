@@ -1,0 +1,412 @@
+﻿/* Enhanced Sign-Up Form Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000000;
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.registration-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.registration-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+    .registration-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #00bcd4, #0097a7, #006064);
+    }
+
+.registration-header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-bottom: 1px solid #e9ecef;
+}
+
+    .registration-header h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #212529;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .registration-header p {
+        font-size: 1.1rem;
+        color: #6c757d;
+        font-weight: 400;
+    }
+
+.registration-form {
+    padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    align-items: start;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+}
+
+.form-input, .form-textarea {
+    padding: 15px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fff;
+    color: #212529;
+    outline: none;
+}
+
+    .form-input:focus, .form-textarea:focus {
+        border-color: #00bcd4;
+        box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .form-input:hover, .form-textarea:hover {
+        border-color: #00acc1;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-input[type="file"] {
+    padding: 12px 20px;
+    background: #f8f9fa;
+    border: 2px dashed #00bcd4;
+    cursor: pointer;
+}
+
+    .form-input[type="file"]:hover {
+        background: #e9f7f8;
+        border-color: #0097a7;
+    }
+
+select.form-input {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 40px;
+    appearance: none;
+}
+
+.text-danger {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+/* Button Styling */
+.btn-register {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    box-shadow: 0 8px 20px rgba(0, 188, 212, 0.3);
+}
+
+    .btn-register:hover {
+        background: linear-gradient(135deg, #0097a7 0%, #00695c 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(0, 188, 212, 0.4);
+    }
+
+    .btn-register:active {
+        transform: translateY(-1px);
+    }
+
+/* Divider */
+.divider {
+    grid-column: 1 / -1;
+    text-align: center;
+    position: relative;
+    margin: 20px 0;
+}
+
+    .divider::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: #dee2e6;
+    }
+
+    .divider span {
+        background: white;
+        padding: 0 20px;
+        color: #6c757d;
+        font-weight: 500;
+        position: relative;
+        z-index: 1;
+    }
+
+/* Google Button */
+.btn-google {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: white;
+    border: 2px solid #e9ecef;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #495057;
+}
+
+    .btn-google:hover {
+        background: #f8f9fa;
+        border-color: #00bcd4;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Login Link */
+.login-link {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .login-link p {
+        color: #6c757d;
+        font-size: 0.95rem;
+    }
+
+    .login-link a {
+        color: #00bcd4;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+        .login-link a:hover {
+            color: #0097a7;
+            text-decoration: underline;
+        }
+
+/* Toast Notifications */
+.toast-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 300px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.success-toast {
+    background: linear-gradient(135deg, #00bcd4, #0097a7);
+}
+
+.error-toast {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .close-btn:hover {
+        opacity: 0.8;
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .registration-form {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+        gap: 20px;
+    }
+
+    .registration-header h2 {
+        font-size: 2rem;
+    }
+
+    .form-input, .form-textarea {
+        padding: 12px 16px;
+    }
+
+    .btn-register, .btn-google {
+        padding: 15px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .registration-container {
+        padding: 10px;
+    }
+
+    .registration-card {
+        border-radius: 15px;
+    }
+
+    .registration-header {
+        padding: 30px 15px 20px;
+    }
+
+        .registration-header h2 {
+            font-size: 1.75rem;
+        }
+
+    .toast-alert {
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+    }
+}
+
+/* Special styling for mechanic fields */
+.mechanic-fields {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    border-left: 4px solid #00bcd4;
+    margin-top: 10px;
+}
+
+    .mechanic-fields .form-group {
+        margin: 0;
+    }
+
+/* Animation for form elements */
+.form-group {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+    .form-group:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .form-group:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .form-group:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .form-group:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
+    .form-group:nth-child(5) {
+        animation-delay: 0.5s;
+    }
+
+    .form-group:nth-child(6) {
+        animation-delay: 0.6s;
+    }
+
+    .form-group:nth-child(7) {
+        animation-delay: 0.7s;
+    }
+
+    .form-group:nth-child(8) {
+        animation-delay: 0.8s;
+    }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading state for buttons */
+.btn-register:disabled, .btn-google:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Focus indicators for accessibility */
+.form-input:focus-visible,
+.form-textarea:focus-visible,
+.btn-register:focus-visible,
+.btn-google:focus-visible {
+    outline: 2px solid #00bcd4;
+    outline-offset: 2px;
+}

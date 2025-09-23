@@ -15,10 +15,10 @@ public class AppUser : IdentityUser
     [Column(TypeName = "nvarchar(30)")]
     public string FullName { get;  set; }
 
-    [Required(ErrorMessage = "Address is required, you must add an address.")]
+    //[Required(ErrorMessage = "Address is required, you must add an address.")]
     [Column(TypeName = "nvarchar(50)")]
-    public string Address { get;  set; }
-    [Required]
+    public string? Address { get;  set; }
+    
     [Range(18 , 60)]
     public int Age { get;  set; }
     
@@ -32,12 +32,12 @@ public class AppUser : IdentityUser
     public List<RentPayment>? RentPayments { get; private set; } = new List<RentPayment>();
     public List<RepairPayment>? RepairPayments { get; set; } = new List<RepairPayment>();
 
-    public string? ProfilePicture { get;  set; }
+    
     public bool? IsDeleted { get; private set; }
     public DateTime? DeletedAt { get; private set; }
     public DateTime? CreatedAt { get; private set; } = DateTime.UtcNow;
    
-    public string? Role { get; private set; }
+    public string? Role { get;  set; }
     
 
     //public AppUser(string fullName, string address)
@@ -57,13 +57,7 @@ public class AppUser : IdentityUser
     {
     }
 
-    public bool UpdateProfile(string fullName, string address, string? profilePicture)
-    {
-        FullName = fullName;
-        Address = address;
-        ProfilePicture = profilePicture;
-        return true;
-    }
+    
     public bool SoftDelete()
     {
         IsDeleted = true;

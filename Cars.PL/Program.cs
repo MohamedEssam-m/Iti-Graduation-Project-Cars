@@ -7,6 +7,8 @@ using Cars.DAL.Repo.Abstraction;
 using Cars.DAL.Repo.Implementation;
 using Cars.DAL.Repo.Implementation.Cars.DAL.Repository;
 using Cars.PL.Language;
+using DotNetEnv;
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
@@ -16,7 +18,6 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using DotNetEnv;
 
 namespace Cars
 {
@@ -114,8 +115,18 @@ namespace Cars
     options.ClientSecret = builder.Configuration["Google:ClientSecret"];
     options.SignInScheme = IdentityConstants.ExternalScheme;
 });
-
+            builder.Services.AddHangfire(x => x.UseSqlServerStorage(connectionString));
+            builder.Services.AddHangfireServer();
+            
             var app = builder.Build();
+            using (var scope = app.Services.CreateScope())
+            {
+                var recurringJobManager = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
+
+                recurringJobManager.AddOrUpdate<IOfferService>("check-offer-date",service => service.CheckOfferDate(),"* * * * *");
+
+                recurringJobManager.AddOrUpdate<IRentService>("check-rent-date",service => service.CheckRentDate(),"* * * * *");
+            }
 
             // Middleware pipeline
             if (!app.Environment.IsDevelopment())
@@ -123,7 +134,8 @@ namespace Cars
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
+            //RecurringJob.AddOrUpdate<IOfferService>(service => service.CheckOfferDate(), "0 12 * * *");
+            //RecurringJob.AddOrUpdate<IRentService>(service => service.CheckRentDate(), "0 12 * * *");
             // Localization
             var supportedCultures = new[] {
                 new CultureInfo("ar-EG"),
@@ -136,7 +148,7 @@ namespace Cars
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures
             });
-
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -147,7 +159,7 @@ namespace Cars
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
+            app.UseHangfireDashboard("/BackGroundJob");
             app.Run();
         }
     }

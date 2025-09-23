@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cars.DAL.Entities.Renting;
+using Microsoft.AspNetCore.Http;
 
 namespace Cars.BLL.ModelVM.AppUserVM
 {
     public class UserWithRentCarsVM
     {
+        public string? ImagePath { get; set; }
+        public IFormFile? Image { get; set; }
         [Required(ErrorMessage = "Full Name is required")]
         [MaxLength(20, ErrorMessage = "Full Name cannot exceed 20 characters")]
         public string FullName { get; set; }

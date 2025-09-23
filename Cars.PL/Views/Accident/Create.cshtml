@@ -1,12 +1,13 @@
 ﻿@using Cars.BLL.ModelVM.Accident
+@using Cars.BLL.Service.Abstraction
 @using Microsoft.AspNetCore.Identity
 @model CreateAccidentVM
 
-@* @inject UserManager<AppUser> userManager
-@{
+@inject ICarService carService
+@* @{
         var UserId = userManager.GetUserId(User);
-        var user = await userManager.FindByIdAsync(UserId);
-} *@
+        var user = await userManager.FindByIdAsync(UserId); *@
+} 
 <link rel="stylesheet" href="~/css/SignUp.css" />
 <link rel="stylesheet" href="~/css/ViewBag.css" />
 <script src="~/js/ViewBag.js"></script>
@@ -77,7 +78,11 @@
                             @if(rent.Status == "Paid")
                             {
                                 isTrue = true;
-                                <option value="@rent.CarId">@rent.Car?.Brand</option>
+                                // becaus of the Include in appUserRepo Loads Payment and can not Loads car
+                                var car = await carService.GetById(rent.CarId);
+                                
+
+                                <option value="@rent.CarId">@car.Brand</option>
                             }
                         }
                         @if(!isTrue)

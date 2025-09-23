@@ -25,5 +25,6 @@ namespace Cars.BLL.ModelVM.Offers
         [Required(ErrorMessage = "The Date Of Recieving The Car Is Required")]
         public DateTime OfferEndDate { get; set; }
         public string  Status { get; set; }
+        public decimal? Fine { get; set; }
     }
 }

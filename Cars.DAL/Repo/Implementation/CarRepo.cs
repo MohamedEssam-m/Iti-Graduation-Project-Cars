@@ -1,4 +1,5 @@
-﻿using Cars.DAL.Database;
+﻿using AutoMapper;
+using Cars.DAL.Database;
 using Cars.DAL.Repo.Abstraction;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,9 +14,11 @@ namespace Cars.DAL.Repo.Implementation
     public class CarRepo : ICarRepo
     {
         private readonly CarsDbContext db;
-        public CarRepo(CarsDbContext db)
+        private readonly IMapper mapper;
+        public CarRepo(CarsDbContext db, IMapper mapper)
         {
             this.db = db;
+            this.mapper = mapper;
         }
         public void Add(Car car)
         {
@@ -95,6 +98,8 @@ namespace Cars.DAL.Repo.Implementation
                             existingcar.CarRates.Add(rate);
 
                     }
+                    mapper.Map(car, existingcar);
+                    db.Update(existingcar);
                     db.SaveChanges();
                 }
                 else

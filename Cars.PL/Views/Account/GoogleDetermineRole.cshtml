@@ -1,0 +1,110 @@
+﻿@* @using Cars.BLL.ModelVM.Account *@
+@{
+    ViewData["Title"] = "Sign Up Choice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* @model ProfileCompletionVM *@
+<section class="signup-choice-container">
+    <div class="signup-choice-card">
+        <h2>@SharedLocalizer["SignUpAs"]</h2>
+        <p>@SharedLocalizer["PleaseChooseYourAccountType"]</p>
+
+        <div class="signup-buttons">
+            <form asp-controller="Account" asp-action="ProfileCompletion" method="get">
+                <input type="hidden" name = "FullName" value = "@ViewBag.User.FullName"></input>
+                <input type="hidden" name = "UserName" value = "@ViewBag.User.UserName"></input>
+                <input type="hidden" name = "Email" value = "@ViewBag.User.Email"></input>
+                <input type="hidden" name = "EmailVerification" value = "@ViewBag.User.EmailVerification"></input>
+                @* <input type="hidden" asp-for="FullName"></input>
+                <input type="hidden" asp-for="UserName"></input>
+                <input type="hidden" asp-for="Email"></input>
+                <input type="hidden" asp-for="EmailVerification"></input> *@
+                
+                
+                
+                <button type="submit" name="Role" value="User" class="btn btn-user">
+                    <i class="fa fa-user"></i> @SharedLocalizer["User"]
+                </button>
+                <button type="submit" name="Role" value="Mechanic" class="btn btn-mechanic">
+                    <i class="fa fa-car"></i> @SharedLocalizer["Mechanic"]
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<style>
+.signup-choice-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    padding: 20px;
+}
+
+.signup-choice-card {
+    background: #fff; 
+    border-radius: 12px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    max-width: 450px;
+    width: 100%;
+}
+
+.signup-choice-card h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000; 
+    margin-bottom: 10px;
+}
+
+.signup-choice-card p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.signup-buttons {
+    width: 100%;
+}
+
+.signup-form {
+    display: flex;
+    justify-content: space-between; 
+    gap: 20px;
+}
+
+.signup-form .btn {
+    flex: 1;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+
+.btn-user {
+    background: #00bcd4; 
+    color: #000; 
+
+.btn-user:hover {
+    background: #0097a7;
+    color: #fff;
+}
+
+
+.btn-mechanic {
+    background: #000;
+    color: #fff;
+}
+
+.btn-mechanic:hover {
+    background: #333;
+    color: #00bcd4;
+}
+</style>

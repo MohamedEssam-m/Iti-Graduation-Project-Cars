@@ -17,5 +17,6 @@ namespace Cars.BLL.Service.Abstraction
         Task<Rent?> GetRentById(int id);
         Task<List<Rent>> GetAllRents();
         Task<bool> UpdateRent(UpdateRentVM rent);
+        public Task CheckRentDate();
     }
 }

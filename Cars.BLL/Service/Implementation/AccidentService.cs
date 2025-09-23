@@ -29,21 +29,22 @@ namespace Cars.BLL.Service.Implementation
         public async Task<bool> AddAccident(CreateAccidentVM accident , string UserId)
         {
             var imagePath = Upload.UploadFile("Files", accident.Accident_Image);
-            var mappedAccident = new Accident
-            {
-                AccidentImagePath = imagePath,
-                Description = accident.Description,
-                ReportDate = accident.ReportDate,
-                AccidentDate = accident.AccidentDate,
-                Location = accident.Location,
-                carId = accident.carId
-            };
+            //var mappedAccident = new Accident
+            //{
+            //    AccidentImagePath = imagePath,
+            //    Description = accident.Description,
+            //    ReportDate = accident.ReportDate,
+            //    AccidentDate = accident.AccidentDate,
+            //    Location = accident.Location,
+            //    carId = accident.carId
+            //};
 
             if (accident == null)
             {
                 throw new ArgumentNullException(); 
             }
             var Accident = mapper.Map<Accident>(accident);
+            Accident.AccidentImagePath = imagePath;
             Accident.UserId = UserId;
             await accidentRepo.Add(Accident);
             return true;
@@ -61,21 +62,26 @@ namespace Cars.BLL.Service.Implementation
 
         public async Task<bool> UpdateAccident(UpdateAccidentVM accident)
         {
-            var imagePath = Upload.UploadFile("Files", accident.Accident_Image);
-            var mappedAccident = new Accident
+            string imagePath = accident.ImagePath; 
+            if (accident.Accident_Image != null)
             {
-                AccidentImagePath = imagePath,
-                Description = accident.Description,
-                ReportDate = accident.ReportDate,
-                AccidentDate = accident.AccidentDate,
-                Location = accident.Location,
-                carId = accident.carId
-            };
+                imagePath = Upload.UploadFile("Files", accident.Accident_Image);
+            }
+            //var mappedAccident = new Accident
+            //{
+            //    AccidentImagePath = imagePath,
+            //    Description = accident.Description,
+            //    ReportDate = accident.ReportDate,
+            //    AccidentDate = accident.AccidentDate,
+            //    Location = accident.Location,
+            //    carId = accident.carId
+            //};
             if (accident == null)
             {
                 throw new ArgumentNullException(); 
             }
             var Accident = mapper.Map<Accident>(accident);
+            Accident.AccidentImagePath = imagePath;
             await accidentRepo.Update(Accident);
             return true;
         }
@@ -85,5 +91,6 @@ namespace Cars.BLL.Service.Implementation
             await accidentRepo.Delete(id);
             return true;
         }
+        
     }
 }

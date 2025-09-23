@@ -1,0 +1,125 @@
+﻿@using Cars.BLL.ModelVM.Account
+@model ProfileCompletionVM
+<link rel="stylesheet" href="~/css/ViewBag.css" />
+<script src="~/js/ViewBag.js"></script>
+@if (ViewBag.Success != null)
+{
+    <div class="toast-alert success-toast">
+        <span>@ViewBag.Success</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="toast-alert error-toast">
+        <span>@ViewBag.Error</span>
+        <button class="close-btn">&times;</button>
+    </div>
+}
+
+
+<link rel="stylesheet" href="~/css/NewSignUp.css" />
+
+<br />
+<br />
+<br />
+<br />
+
+<div class="registration-container">
+    <div class="registration-card">
+        <div class="registration-header">
+            <h2>@SharedLocalizer["CreateYourAccount"]</h2>
+            <p>@SharedLocalizer["JoinUsToday"]</p>
+        </div>
+
+        <form enctype="multipart/form-data" asp-action="SaveProfileCompletion" asp-controller="Account" method="post" class="registration-form">
+            @* <input type="hidden" name = "Role" value = "@Model.Role"></input>
+            <input type="hidden" name = "UserId" value = "@ViewBag.USERID"></input> *@
+            <input type="hidden" asp-for="Email"></input>
+            <input type="hidden" asp-for="FullName"></input>
+            
+            <input type="hidden" asp-for="EmailVerification"></input>
+            <input type="hidden" asp-for="Role"></input>
+            @* <input type="hidden" asp-for="Picture"></input> *@
+            
+
+
+            <!-- Username -->
+            <div class="form-group">
+                <label asp-for="UserName" class="form-label">@SharedLocalizer["Username"]</label>
+                <input asp-for="UserName" class="form-input" placeholder="@SharedLocalizer["ChooseAUsername"]" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+
+            
+
+            <!-- Phone Number -->
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="form-label">@SharedLocalizer["PhoneNumber"]</label>
+                <input asp-for="PhoneNumber" class="form-input" placeholder="@SharedLocalizer["EnterYourPhoneNumber"]" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+                <label asp-for="Address" class="form-label">@SharedLocalizer["Address"]</label>
+                <textarea asp-for="Address" class="form-textarea" placeholder="@SharedLocalizer["EnterYourAddress"]" rows="3"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <!-- Age -->
+            <div class="form-group">
+                <label asp-for="Age" class="form-label">@SharedLocalizer["Age"]</label>
+                <input asp-for="Age" class="form-input" type="number" placeholder="@SharedLocalizer["EnterYourAge"]" min="18" max="100" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+
+            
+            @* <!-- Profile Picture -->
+            <div class="form-group">
+                <label asp-for="User_Image" class="form-label">@SharedLocalizer["ProfilePicture"]</label>
+                <input asp-for="User_Image" type="file" class="form-input" />
+                <span asp-validation-for="User_Image" class="text-danger"></span>
+            </div> *@
+            @if(Model.Role == "Mechanic")
+            {
+                <!-- Specialization -->
+                <div class="form-group">
+                    <label asp-for="Specialization" class="form-label">@SharedLocalizer["Specialization"]</label>
+    
+                    <select asp-for="Specialization" class="form-input">
+                        <option value="">@SharedLocalizer["SelectSpecialization"]</option>
+                        <option value="Electricity">@SharedLocalizer["Electricity"]</option>
+                        <option value="Fuel">@SharedLocalizer["Fuel"]</option>
+                    </select>
+
+                    <span asp-validation-for="Specialization" class="text-danger"></span>
+                </div>
+                <!-- ExperienceYears -->
+                <div class="form-group">
+                    <label asp-for="ExperienceYears" class="form-label">@SharedLocalizer["ExperienceYears"]</label>
+                    <input asp-for="ExperienceYears" class="form-input"  placeholder="@SharedLocalizer["EnterYourExperienceYears"]"  />
+                    <span asp-validation-for="ExperienceYears" class="text-danger"></span>
+                </div>
+                <!-- WorkshopAddress -->
+                <div class="form-group">
+                    <label asp-for="WorkshopAddress" class="form-label">@SharedLocalizer["WorkshopAddress"]</label>
+                    <input asp-for="WorkshopAddress" class="form-input"  placeholder="@SharedLocalizer["EnterYourWorkshopAddress"]"  />
+                    <span asp-validation-for="WorkshopAddress" class="text-danger"></span>
+                </div>
+            }
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="btn-register">@SharedLocalizer["CreateAccount"]</button>
+            </div>
+
+           
+        </form>
+    </div>
+</div>
+
+
+

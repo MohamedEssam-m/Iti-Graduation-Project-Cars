@@ -41,6 +41,7 @@ namespace Cars.PL.Controllers
                 {
                     usersWithRoles.Add(new UserWithRentCarsVM
                     {
+                        ImagePath = user.UserImagePath,
                         FullName = user.FullName,
                         UserName = user.UserName,
                         Email = user.Email,

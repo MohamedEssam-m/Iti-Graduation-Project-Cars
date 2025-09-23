@@ -50,6 +50,7 @@ namespace Cars.PL.Controllers
         {
             var car = await carService.GetById(carId);
             var carVM = mapper.Map<UpdateCarVM>(car);
+            carVM.ImagePath = car.CarImagePath;
             return View(carVM);
         }
         public async Task<IActionResult> UpdateCar(UpdateCarVM carVM)

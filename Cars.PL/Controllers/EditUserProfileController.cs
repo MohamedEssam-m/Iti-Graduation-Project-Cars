@@ -11,18 +11,21 @@ namespace Cars.PL.Controllers
     public class EditUserProfileController : Controller
     {
         private readonly IAppUserService UserService;
-        private readonly IMapper Mapper;
+        private readonly IMapper mapper;
         private readonly IAccountService accountService;
         private readonly UserManager<AppUser> userManager;
         private readonly IEmailService EmailService;
+        private readonly IConfiguration configuration;
 
-        public EditUserProfileController(IAppUserService userService , IMapper mapper , IAccountService accountService,UserManager<AppUser> userManager, IEmailService EmailService)
+
+        public EditUserProfileController(IConfiguration configuration,IAppUserService userService , IMapper mapper , IAccountService accountService,UserManager<AppUser> userManager, IEmailService EmailService)
         {
             UserService = userService;
-            Mapper = mapper;
+            this.mapper = mapper;
             this.accountService = accountService;
             this.userManager = userManager;
             this.EmailService = EmailService;
+            this.configuration = configuration; 
         }
         public IActionResult ChangePassword(string email , string token)
         {
@@ -46,7 +49,7 @@ namespace Cars.PL.Controllers
                 var user = await userManager.FindByEmailAsync(forgetPassword.Email);
                 if (user == null)
                 {
-                    var model = Mapper.Map<VerifyEmail>(forgetPassword);
+                    var model = mapper.Map<VerifyEmail>(forgetPassword);
                     ViewBag.Error = "Invalid Email!";
                     return View("VerifyEmail", model);
 
@@ -88,9 +91,13 @@ namespace Cars.PL.Controllers
             ViewBag.Error = "Some Thing Was Wrong";
             return View("ChangePassword", forgetPassword);
         }
-        public IActionResult EditUserProfileView()
+        public async Task<IActionResult> EditUserProfileView()
         {
-            return View();
+            string UserId =  userManager.GetUserId(User);
+            var user = await UserService.GetById(UserId);
+            var updateUserVM = mapper.Map<UpdateUserVM>(user);
+            //updateUserVM.User_Image_Path = user.UserImagePath;
+            return View(updateUserVM);
         }
         public async Task<IActionResult> SaveEditProfile(UpdateUserVM user)
         {
@@ -127,7 +134,7 @@ namespace Cars.PL.Controllers
                 var subject = "Reset Password";
                 var body = $"Please, Reset Your Password By Clicking Here : <a href=\"{resetLink}\">Reset Password</a>";
 
-                await EmailService.SendEmail(email , subject , body , "zeyadazzap0@gmail.com");
+                await EmailService.SendEmail(email , subject , body , configuration["EmailSettings:From"]);
                 return View();
             }
             else

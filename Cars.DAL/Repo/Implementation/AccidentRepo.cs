@@ -61,7 +61,10 @@ namespace Cars.DAL.Repo.Implementation
             {
                 return db.Accidents
                          .Include(a => a.User)
+                         .ThenInclude(u => u.Rents)
+                         .ThenInclude(r => r.Car)
                          .Include(a => a.Offers)
+                         .ThenInclude(o => o.Mechanic)
                          .ToList();
             }
             catch (Exception ex)
@@ -81,6 +84,7 @@ namespace Cars.DAL.Repo.Implementation
                     oldAccident.Description = accident.Description;
                     oldAccident.Location = accident.Location;
                     oldAccident.ReportDate = accident.ReportDate;
+                    oldAccident.AccidentImagePath = accident.AccidentImagePath;
                     db.Accidents.Update(oldAccident);
                     db.SaveChanges();
                     return true;

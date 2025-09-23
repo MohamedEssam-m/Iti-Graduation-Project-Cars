@@ -17,5 +17,6 @@ namespace Cars.BLL.Service.Abstraction
         Task<bool> DeleteOffer(int offerId);
         Task<bool> AcceptOffer(int offerId);
         Task<bool> DeclineOffer(int offerId);
+        public Task CheckOfferDate();
     }
 }

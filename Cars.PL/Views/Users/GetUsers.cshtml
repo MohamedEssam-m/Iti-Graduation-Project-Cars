@@ -27,6 +27,7 @@
     <table class="data-table">
         <thead>
             <tr>
+                <th>User Profile Photo</th>
                 <th>@SharedLocalizer["FullName"]</th>
                 <th>@SharedLocalizer["Username"]</th>
                 <th>@SharedLocalizer["Email"]</th>
@@ -43,6 +44,7 @@
             @foreach (var user in Model)
             {
                 <tr>
+                    @* <td>@user.<td> *@
                     <td>@user.FullName</td>
                     <td>@user.UserName</td>
                     <td>@user.Email</td>

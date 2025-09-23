@@ -153,11 +153,13 @@ namespace Cars.PL.Controllers
             if (accepted)
             {
                 var offer = await offerService.GetOfferById(id);
-                ViewBag.Success = "Offerd Declined Successfully";
-                return View("Offers", "Accident");
+                TempData["Success"] = "Offer Declined Successfully";
+                return RedirectToAction("Offers", "Accident");
+
             }
-            ViewBag.Error = "Some Thing Was Wrong";
-            return View("Offers", "Accident");
+            TempData["Error"] = "Some Thing Was Wrong";
+            return RedirectToAction("Offers", "Accident");
+
         }
         //public async Task<IActionResult> PaymentOfferSummary(OfferPaymentSummaryVM offerVM)
         //{

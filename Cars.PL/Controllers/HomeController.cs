@@ -1,10 +1,11 @@
-using System.Diagnostics;
-using System.Threading.Tasks;
 using Cars.BLL.Service.Abstraction;
 using Cars.DAL.Entities.Accidents;
 using Cars.Models;
+using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Cars.Controllers
 {
@@ -14,18 +15,21 @@ namespace Cars.Controllers
 
         private readonly ICarService CarService;
         private readonly IAccidentService accidentService;
+        private readonly IOfferService offerService;
 
-        public HomeController(ILogger<HomeController> logger , ICarService carService, IAccidentService accidentService)
+        public HomeController(ILogger<HomeController> logger , IOfferService offerService,ICarService carService, IAccidentService accidentService)
         {
             _logger = logger;
             CarService = carService;
             this.accidentService = accidentService;
+            this.offerService = offerService;
         }
 
         public async Task<IActionResult> Index()
         {
             ViewData["ActivePage"] = "Home";
             var RandList = await CarService.GetAllRandom();
+            //RecurringJob.AddOrUpdate(() => offerService.CheckOfferDate(), "0 12 * * *");
             return View(RandList.Take(3).ToList());
         }
         public IActionResult About()

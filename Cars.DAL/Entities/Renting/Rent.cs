@@ -14,8 +14,8 @@ namespace Cars.DAL.Entities.Renting
         [Key]
         public int RentId { get; set; }
 
-        [Required(ErrorMessage = "User is required")]
-        public string UserId { get; set; }
+        
+        public string? UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public AppUser? User { get; set; }
@@ -47,7 +47,7 @@ namespace Cars.DAL.Entities.Renting
         public string Status { get; set; } = "Pending";
 
         public RentPayment? Payment { get; set; }
-
+        public decimal? Fine { get; set; }
         //[Required]
         //[Column(TypeName = "decimal(18,2)")]
         //public decimal TotalAmount { get; set; }

@@ -20,14 +20,14 @@ body {
 
 /* -------------------- Main Container -------------------- */
 .registration-container {
-    flex: 1; /* يخلي المحتوى يمتد وياخد المساحة بين navbar و footer */
+    flex: 1; 
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 100px 20px 40px;
 
 
-    /* خلتها 60px فوق علشان يبعد عن الـ navbar */
+    
 }
 
 
@@ -70,7 +70,7 @@ body {
     padding: 25px 20px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px; /* مسافة بين الحقول */
+    gap: 20px;
 }
 
 /* Form groups */
@@ -176,28 +176,33 @@ textarea.touched:invalid + .validation-error {
 
 /* -------------------- Google Button -------------------- */
 .btn-google {
-    width: auto; /* ياخد العرض على قد المحتوى */
-    padding: 8px 8px; /* padding أكبر شوية عشان الشكل */
-    background: #fff;
-    border: 2px solid #00ffff;
-    color: #000;
-    font-weight: 600;
-    border-radius: 8px;
+    grid-column: 1 / -1;
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 12px;
+    background: white;
+    border: 2px solid #e9ecef;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin: 0 auto; /* يخليه في النص */
+    color: #495057;
 }
 
-
     .btn-google:hover {
-        background: #00ffff;
-        color: #000;
-        box-shadow: 0 4px 12px rgba(0, 255, 255, 0.4);
+        background: #f8f9fa;
+        border-color: #00bcd4;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
+
+.google-icon {
+    width: 10px;
+    height: 20px;
+}
 
 /* -------------------- Login Link -------------------- */
 .login-link {

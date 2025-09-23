@@ -60,14 +60,18 @@
             <!-- OfferStartDate -->
             <div class="form-group">
                 <label asp-for="OfferStartDate" class="form-label">Start Date Of Repairing *</label>
-                <input asp-for="OfferStartDate" class="form-input" type="Date" min="@DateTime.Today.ToString("yyyy-MM-dd")" placeholder="Enter The Start Date Of Repairing" />
+                <input asp-for="OfferStartDate" type="datetime-local"
+                               min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"
+                               class="form-input" />
                 <span asp-validation-for="OfferStartDate" class="text-danger"></span>
             </div>
 
             <!-- OfferStartDate -->
             <div class="form-group">
                 <label asp-for="OfferEndDate" class="form-label">The Date Of Receiving Car *</label>
-                <input asp-for="OfferEndDate" class="form-input" type="Date" min="@DateTime.Today.ToString("yyyy-MM-dd")" placeholder="Enter The Date Of Receiving Car" />
+                <input asp-for="OfferEndDate" type="datetime-local"
+                               min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"
+                               class="form-input" />
                 <span asp-validation-for="OfferEndDate" class="text-danger"></span>
             </div>
 

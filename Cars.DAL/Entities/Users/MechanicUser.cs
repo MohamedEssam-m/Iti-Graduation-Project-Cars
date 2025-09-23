@@ -16,15 +16,15 @@ namespace Cars.DAL.Entities.Users
     public class MechanicUser : AppUser
     {
         public string? MechanicImagePath { get; private set; }
-        [Required]
+        
         [StringLength(100)]
-        public string Specialization { get; private set; }
+        public string? Specialization { get; private set; }
 
         [Range(0, 50)]
-        public int ExperienceYears { get; private set; }
+        public int? ExperienceYears { get; private set; }
 
         [StringLength(200)]
-        public string WorkshopAddress { get; private set; }
+        public string? WorkshopAddress { get; private set; }
         
 
         public MechanicUser()

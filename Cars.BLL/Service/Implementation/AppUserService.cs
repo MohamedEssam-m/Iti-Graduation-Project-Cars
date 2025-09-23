@@ -32,25 +32,24 @@ namespace Cars.BLL.Service.Implementation
             {
                 //Get User Image_Path
                 var imagePath = Upload.UploadFile("Files", userVM.User_Image);
-                var mappedUser = new AppUser
-                {
-                    //هنا عملنا مابنج للصور لان الاوتو مابير مش بيدعم الفورم فايل وكمان ضيفنا اليوزر ايميج عشان نحط فيه المسار
-                    UserImagePath = imagePath,
-                    FullName = userVM.FullName,
-                    UserName = userVM.Username,
-                    Email = userVM.Email,
-                    PhoneNumber = userVM.PhoneNumber,
-                    Address = userVM.Address,
-                    Age = userVM.Age,
-                };
+                //var mappedUser = new AppUser
+                //{
+                    
+                //    UserImagePath = imagePath,
+                //    FullName = userVM.FullName,
+                //    UserName = userVM.Username,
+                //    Email = userVM.Email,
+                //    PhoneNumber = userVM.PhoneNumber,
+                //    Address = userVM.Address,
+                //    Age = userVM.Age,
+                //};
                 if (userVM == null)
                     throw new ArgumentNullException("userVM");
                 else
                 {
                     var user = mapper.Map<AppUser>(userVM);
+                    user.UserImagePath = imagePath;
                     repo.Add(user);
-                    
-                    
                     return true;
                 }
             }
@@ -132,20 +131,21 @@ namespace Cars.BLL.Service.Implementation
             {
                 //Get User Image_Path
                 var imagePath = Upload.UploadFile("Files", user.User_Image);
-                var mappedUser = new AppUser
-                {
-                    //هنا عملنا مابنج للصور لان الاوتو مابير مش بيدعم الفورم فايل وكمان ضيفنا اليوزر ايميج عشان نحط فيه المسار
-                    UserImagePath = imagePath,
-                    FullName = user.FullName,
-                    UserName = user.Username,
-                    Email = user.Email,
-                    PhoneNumber = user.PhoneNumber,
-                    Address = user.Address,
-                    Age = user.Age,
-                };
+                //var mappedUser = new AppUser
+                //{
+                //    //هنا عملنا مابنج للصور لان الاوتو مابير مش بيدعم الفورم فايل وكمان ضيفنا اليوزر ايميج عشان نحط فيه المسار
+                //    UserImagePath = imagePath,
+                //    FullName = user.FullName,
+                //    UserName = user.Username,
+                //    Email = user.Email,
+                //    PhoneNumber = user.PhoneNumber,
+                //    Address = user.Address,
+                //    Age = user.Age,
+                //};
                 if (user != null)
                 {
                     var appUser = mapper.Map<AppUser>(user);
+                    appUser.UserImagePath = imagePath;
                     repo.Update(appUser);
                     return true;
                 }

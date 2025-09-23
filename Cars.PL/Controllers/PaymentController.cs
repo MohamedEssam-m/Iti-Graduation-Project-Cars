@@ -23,15 +23,16 @@ namespace Cars.PL.Controllers
         private readonly PayPal Paypal;
         private readonly IRentService rentService;
         private readonly IMapper mapper;
+        private readonly IAppUserService appUserService;
 
-        public PaymentController(IMapper mapper, IPayPalService paypalService,ICarService carService,UserManager<AppUser> userManager,IConfiguration configuration , IRentService rentService)
+        public PaymentController(IAppUserService appUserService,IMapper mapper, IPayPalService paypalService,ICarService carService,UserManager<AppUser> userManager,IConfiguration configuration , IRentService rentService)
         {
             this.paypalService = paypalService;
             this.carService = carService;
             this.userManager = userManager;
             this.rentService = rentService;
             this.mapper = mapper;
-
+            this.appUserService = appUserService;
             Paypal = new PayPal
             {
                 PayPalClientId = configuration["PayPal:ClientId"],
@@ -62,7 +63,7 @@ namespace Cars.PL.Controllers
                     return View("RentingDetails", model);
                 }
 
-                var duration = (model.EndDate - model.StartDate).Days;
+                var duration = (model.EndDate - model.StartDate).Minutes;
                 if (duration <= 0)
                 {
                     ViewBag.Error = "Invalid Duration!";
@@ -200,12 +201,12 @@ namespace Cars.PL.Controllers
                         if (status.ToUpper() == "COMPLETED")
                         {
                             var userId = userManager.GetUserId(User);
-                            var user = await userManager.FindByIdAsync(userId);
+                            var user = await appUserService.GetById(userId);
                             if (user != null && user.Rents != null)
                             {
                                 foreach (var item in user.Rents)
                                 {
-                                    if (item.Payment != null && !item.Payment.IsDone)
+                                    if (item.Payment != null && !item.Payment.IsDone && item.Status == "Pending")
                                     {
                                         item.Payment.IsDone = true;
                                         item.Status = "Paid";
@@ -216,21 +217,22 @@ namespace Cars.PL.Controllers
                                             EndDate = item.EndDate,
                                             Pick_up_location = item.Pick_up_location,
                                             Drop_Off_location = item.Drop_Off_location,
-                                            Status = item.Status,
-                                            IsDone = item.Payment.IsDone,
+                                            Status = "Paid",
+                                            IsDone = true,
                                             TotalAmount = item.Payment.Amount
                                         });
                                         var rent = await rentService.GetRentById(item.RentId);
                                         var car = await carService.GetById(rent.CarId);
                                         if (car != null && car.quantity != 0)
                                         {
-                                            car.quantity--;
+                                            car.quantity = car.quantity - 1;
                                             var carVM = mapper.Map<UpdateCarVM>(car);
                                             
                                             if (carVM.quantity == 0)
                                             {
                                                 carVM.Status = "Not Available";
                                             }
+                                            carVM.ImagePath = car.CarImagePath;
                                             await carService.Update(carVM);
                                         }
                                     }

@@ -95,15 +95,15 @@
 <div class="car-column">
     <div class="car-card">
         <!-- Car Image -->
-        <div class="car-image" style="background-image: url('@car.CarImagePath');">
+        <div class="car-image" style="background-image: url('/Files/@car.CarImagePath');">
         </div>
 
         <!-- Car Content -->
         <div class="car-content">
-            <h2 class="car-brand">@car.Brand</h2>
+            <h2 class="car-brand">@car.Brand @car.Year</h2>
             
             <div class="car-info" style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
-    <h4 class="car-model" style="margin:0;">@car.Brand @car.Model</h4>
+    <h4 class="car-model" style="margin:0;">@car.Brand @car.Model </h4>
     <p class="car-price" style="margin:0; font-weight:bold;">$@car.PricePerDay /day</p>
     <p class="car-price" style="margin:0; color:#f1c40f;">@car.AverageRating ⭐</p>
     <p class="car-price" style="margin:0; grid-column:span 3;">Quantity : @car.quantity</p>

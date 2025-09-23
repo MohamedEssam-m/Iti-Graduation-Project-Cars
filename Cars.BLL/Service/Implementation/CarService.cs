@@ -3,6 +3,7 @@ using Cars.BLL.Helper;
 using Cars.BLL.ModelVM.AppUserVM;
 using Cars.BLL.ModelVM.CarVM;
 using Cars.BLL.Service.Abstraction;
+using Cars.DAL.Entities.Accidents;
 using Cars.DAL.Entities.Cars;
 using Cars.DAL.Repo.Abstraction;
 using Microsoft.AspNetCore.Identity;
@@ -31,25 +32,26 @@ namespace Cars.BLL.Service.Implementation
             try
             {
                 var imagePath = Upload.UploadFile("Files", CarVM.Car_Image);
-                var mappedCar = new Car
-                {
-                    CarImagePath = imagePath,
-                    Brand = CarVM.Brand,
-                    Model = CarVM.Model,
-                    Year = CarVM.Year,
-                    BodyType = CarVM.BodyType,
-                    Doors = CarVM.Doors,
-                    FuelType = CarVM.FuelType,
-                    EngineCapacity = CarVM.EngineCapacity,
-                    HorsePower = CarVM.HorsePower,
-                    FuelConsumption = CarVM.FuelConsumption,
-                    Seats = CarVM.Seats
-                };
+                //var mappedCar = new Car
+                //{
+                //    CarImagePath = imagePath,
+                //    Brand = CarVM.Brand,
+                //    Model = CarVM.Model,
+                //    Year = CarVM.Year,
+                //    BodyType = CarVM.BodyType,
+                //    Doors = CarVM.Doors,
+                //    FuelType = CarVM.FuelType,
+                //    EngineCapacity = CarVM.EngineCapacity,
+                //    HorsePower = CarVM.HorsePower,
+                //    FuelConsumption = CarVM.FuelConsumption,
+                //    Seats = CarVM.Seats
+                //};
                 if (CarVM == null)
                     return false;
                 else
                 {
                     var car = mapper.Map<Car>(CarVM);
+                    car.CarImagePath = imagePath;
                     repo.Add(car);
                     return true;
                 }
@@ -130,27 +132,33 @@ namespace Cars.BLL.Service.Implementation
         {
             try
             {
-                var imagePath = Upload.UploadFile("Files", CarVM.Car_Image);
-                var mappedCar = new Car
+                string imagePath = CarVM.ImagePath;
+                if (CarVM.Car_Image != null)
                 {
-                    CarImagePath = imagePath,
-                    Brand = CarVM.Brand,
-                    Model = CarVM.Model,
-                    Year = CarVM.Year,
-                    BodyType = CarVM.BodyType,
-                    Doors = CarVM.Doors,
-                    FuelType = CarVM.FuelType,
-                    EngineCapacity = CarVM.EngineCapacity,
-                    HorsePower = CarVM.HorsePower,
-                    FuelConsumption = CarVM.FuelConsumption,
-                    Seats = CarVM.Seats
-                };
+                    imagePath = Upload.UploadFile("Files", CarVM.Car_Image);
+                }
+                //var mappedCar = new Car
+                //{
+                //    CarImagePath = imagePath,
+                //    Brand = CarVM.Brand,
+                //    Model = CarVM.Model,
+                //    Year = CarVM.Year,
+                //    BodyType = CarVM.BodyType,
+                //    Doors = CarVM.Doors,
+                //    FuelType = CarVM.FuelType,
+                //    EngineCapacity = CarVM.EngineCapacity,
+                //    HorsePower = CarVM.HorsePower,
+                //    FuelConsumption = CarVM.FuelConsumption,
+                //    Seats = CarVM.Seats
+                //};
                 if (CarVM != null)
                 {
                     var car = repo.GetById(CarVM.CarId); 
                     if (car != null && car.CarId > 0)
                     {
                         mapper.Map(CarVM, car); 
+                        car.CarImagePath = imagePath;
+                        car.quantity = CarVM.quantity;
                         repo.Update(car);
                         return true;
                     }

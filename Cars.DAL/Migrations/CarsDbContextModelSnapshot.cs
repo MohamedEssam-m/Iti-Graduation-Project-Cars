@@ -31,7 +31,6 @@ namespace Cars.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Age")
@@ -89,9 +88,6 @@ namespace Cars.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
@@ -100,6 +96,9 @@ namespace Cars.DAL.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
+
+                    b.Property<string>("UserImagePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
@@ -148,6 +147,7 @@ namespace Cars.DAL.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("CarImagePath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Doors")
@@ -340,6 +340,9 @@ namespace Cars.DAL.Migrations
                     b.Property<DateTime>("ReportDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -411,6 +414,9 @@ namespace Cars.DAL.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
+                    b.Property<decimal?>("Fine")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("MechanicId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -460,6 +466,9 @@ namespace Cars.DAL.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal?>("Fine")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Pick_up_location")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -474,7 +483,6 @@ namespace Cars.DAL.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("RentId");
@@ -623,16 +631,17 @@ namespace Cars.DAL.Migrations
                 {
                     b.HasBaseType("AppUser");
 
-                    b.Property<int>("ExperienceYears")
+                    b.Property<int?>("ExperienceYears")
                         .HasColumnType("int");
 
+                    b.Property<string>("MechanicImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Specialization")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("WorkshopAddress")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -693,6 +702,7 @@ namespace Cars.DAL.Migrations
                     b.HasOne("AppUser", "User")
                         .WithMany("Accidents")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Car", "Car")
@@ -743,8 +753,7 @@ namespace Cars.DAL.Migrations
 
                     b.HasOne("AppUser", "User")
                         .WithMany("Rents")
-                        .HasForeignKey("UserId")
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Car");
 

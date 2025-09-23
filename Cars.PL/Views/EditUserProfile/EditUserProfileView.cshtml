@@ -29,7 +29,8 @@
             <h2>@SharedLocalizer["EditYourAccount"]</h2>
         </div>
 
-        <form asp-action="SaveEditProfile" asp-controller="EditUserProfile" method="post" class="registration-form">
+        <form asp-action="SaveEditProfile" asp-controller="EditUserProfile" enctype="multipart/form-data" method="post" class="registration-form">
+            <input type="hidden" asp-for="Id"></input>
             <!-- Email -->
             <div class="form-group">
                 <label asp-for="Email" class="form-label">@SharedLocalizer["Email"]</label>

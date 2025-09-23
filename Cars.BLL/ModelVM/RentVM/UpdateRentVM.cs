@@ -16,5 +16,6 @@ namespace Cars.BLL.ModelVM.RentVM
         public string Status { get; set; }
         public bool IsDone { get; set; }
         public decimal TotalAmount { get; set; }
+        public decimal? Fine {  get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace Cars.DAL.Entities.Accidents
 
         [DataType(DataType.DateTime)]
         public DateTime ReportDate { get; set; } = DateTime.Now;
-        //add migration
+        
         [Required(ErrorMessage = "Accident Date Is Required")]
         public DateTime AccidentDate { get; set; }
         [Required(ErrorMessage = "Location ID is required")]
@@ -37,6 +37,7 @@ namespace Cars.DAL.Entities.Accidents
 
         public List<Offer>? Offers { get; set; }
         public RepairPayment? repairPayment { get; set; }
-        //public string? Status { get; set; }
+        public string? Status { get; set; } = "Pending";
+        
     }
 }

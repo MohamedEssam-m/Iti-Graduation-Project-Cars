@@ -48,7 +48,12 @@ namespace Cars.PL.Controllers
                 ViewBag.Error = "Offer not found!";
                 return RedirectToAction("Repair", "Accident");
             }
-
+            var duration = (offer.OfferEndDate - offer.OfferStartDate).Minutes;
+            if (duration <= 0)
+            {
+                ViewBag.Error = "Invalid Duration!";
+                return View(new OfferPaymentSummaryVM());
+            }
             var accident = await accidentService.GetAccidentById(offer.AccidentId);
             var userId = userManager.GetUserId(User);
             var user = await userManager.FindByIdAsync(userId);
@@ -173,8 +178,10 @@ namespace Cars.PL.Controllers
                         if (status.ToUpper() == "COMPLETED")
                         {
                             var offer = await offerService.GetOfferById(int.Parse(offerId));
-                            if (offer != null)
+                            var accident = await accidentService.GetAccidentById(offer.AccidentId);
+                            if (offer != null && accident != null)
                             {
+                                accident.Status = "InProgress";
                                 offer.Status = "Paid";
                                 var offerVM = mapper.Map<UpdateOfferVM>(offer);
                                 bool updateResult = await offerService.UpdateOffer(offerVM);

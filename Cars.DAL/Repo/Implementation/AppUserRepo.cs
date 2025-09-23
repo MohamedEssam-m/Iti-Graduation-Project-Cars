@@ -43,7 +43,7 @@ namespace Cars.DAL.Repo.Implementation
             {
                 if(id != null)
                 {
-                    var result =  db.Users.Include(user => user.Rents).ThenInclude(r => r.Car).FirstOrDefault(u => u.Id == id);
+                    var result =  db.Users.Include(user => user.Rents).ThenInclude(r => r.Payment).FirstOrDefault(u => u.Id == id);
                     if(result != null)
                     { 
                         return result; 
@@ -93,6 +93,7 @@ namespace Cars.DAL.Repo.Implementation
                     existingUser.PhoneNumber = user.PhoneNumber;
                     existingUser.Address = user.Address;
                     existingUser.Age = user.Age;
+                    existingUser.UserImagePath = user.UserImagePath;
                     db.AppUsers.Update(existingUser);
                     db.SaveChanges(); 
                 }
@@ -112,13 +113,14 @@ namespace Cars.DAL.Repo.Implementation
         {
             try
             {
-                var user = db.Users.FirstOrDefault(u => u.Id == id);
+                var user = db.Users.Include(u => u.Rents).ThenInclude(r => r.Car).FirstOrDefault(u => u.Id == id);
                 if (user != null)
                 {
                     db.Users.Remove(user);
                     db.SaveChanges();
                 }
-                throw new ArgumentNullException();
+                else
+                    throw new ArgumentNullException();
             }
             catch (Exception ex)
             {
