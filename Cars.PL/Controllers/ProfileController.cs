@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using Cars.BLL.Service.Abstraction;
-using Cars.BLL.Service.Implementation;
-using Cars.DAL.Entities.Accidents;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-
-namespace Cars.PL.Controllers
+﻿namespace Cars.PL.Controllers
 {
     public class ProfileController : Controller
     {

@@ -1,13 +1,4 @@
-﻿using Cars.DAL.Entities.Accidents;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.DAL.Entities.Offers
+﻿namespace Cars.DAL.Entities.Offers
 {
     public class Offer
     {

@@ -1,13 +1,4 @@
-﻿using Cars.BLL.ModelVM.AppUserVM;
-using Cars.BLL.ModelVM.MechanicUserVM;
-using Cars.DAL.Entities.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.Service.Abstraction
+﻿namespace Cars.BLL.Service.Abstraction
 {
     public interface IMechanicService
     {

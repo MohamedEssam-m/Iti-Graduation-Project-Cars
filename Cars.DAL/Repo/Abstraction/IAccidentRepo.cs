@@ -1,11 +1,4 @@
-﻿using Cars.DAL.Entities.Accidents;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.DAL.Repo.Abstraction
+﻿namespace Cars.DAL.Repo.Abstraction
 {
     public interface IAccidentRepo
     {

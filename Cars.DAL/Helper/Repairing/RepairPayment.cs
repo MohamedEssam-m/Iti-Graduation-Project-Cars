@@ -1,14 +1,4 @@
-﻿using Cars.DAL.Entities.Accidents;
-using Cars.DAL.Entities.Users;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.Helper.Repairing
+﻿namespace Cars.BLL.Helper.Repairing
 {
     public class RepairPayment
     {

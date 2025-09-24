@@ -116,14 +116,23 @@
                         </form>
                     </div>
                     <div class="dash-card">
-                        <h3>Update Status Of Users Rented Cars</h3>
+                        <h3>Update Rent Status </h3>
                         <p class="muted">List users</p>
                         <form asp-controller="Users" asp-action="UpdateUserCarStatus" method="get">
                             <button type="submit" class="action-btn">Go</button>
                         </form>
                     </div>
+                    
+                    <div class="dash-card">
+                        <h3>Assign Offer Status</h3>
+                        <p class="muted">Set offer status for user</p>
+                        <form asp-controller="Users" asp-action="AssignOfferStatusView" method="get">
+                            <button type="submit" class="action-btn">Go</button>
+                        </form>
+                    </div>
                 </div>
             </section>
+
 
             <!-- === Admin Dashboard === -->
             <section id="dashboard-admins" class="dash-section hidden">

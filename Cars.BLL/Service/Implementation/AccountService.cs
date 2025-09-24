@@ -1,16 +1,4 @@
-﻿using AutoMapper;
-using Azure.Core;
-using Cars.BLL.ModelVM.Account;
-using Cars.BLL.Service.Abstraction;
-using Cars.DAL.Entities.Users;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.Service.Implementation
+﻿namespace Cars.BLL.Service.Implementation
 {
     public class AccountService : IAccountService
     {
@@ -39,7 +27,7 @@ namespace Cars.BLL.Service.Implementation
             }
         }
 
-        public async Task<SignInResult> SignIn(SignInVM signIn)
+        public async Task<Microsoft.AspNetCore.Identity.SignInResult> SignIn(SignInVM signIn)
         {
             try
             {
@@ -49,7 +37,7 @@ namespace Cars.BLL.Service.Implementation
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new SignInResult();
+                return new Microsoft.AspNetCore.Identity.SignInResult();
             }
         }
         //public async Task<SignInResult> SignInMechanic(SignInVM signIn)
@@ -98,26 +86,26 @@ namespace Cars.BLL.Service.Implementation
             }
         }
 
-        public async Task<IdentityResult> SignUpMechanic(SignUpMechanicVM signUp)
-        {
-            try
-            {
-                var user = new MechanicUser()
-                {
-                    UserName = signUp.Email,
-                    Email = signUp.Email
-                };
+        //public async Task<IdentityResult> SignUpMechanic(SignUpMechanicVM signUp)
+        //{
+        //    try
+        //    {
+        //        var user = new MechanicUser()
+        //        {
+        //            UserName = signUp.Email,
+        //            Email = signUp.Email
+        //        };
 
-                var result = await userManager.CreateAsync(user, signUp.Password);
-                return result;
+        //        var result = await userManager.CreateAsync(user, signUp.Password);
+        //        return result;
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return new IdentityResult();
-            }
-        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e.Message);
+        //        return new IdentityResult();
+        //    }
+        //}
         public async Task<(bool , AppUser)> ForgetPassword(ForgetPasswordVM forgetPassword)
         {
             var user = await userManager.FindByEmailAsync(forgetPassword.Email);

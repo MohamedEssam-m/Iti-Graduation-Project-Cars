@@ -1,14 +1,4 @@
-﻿using Cars.BLL.ModelVM.Payment;
-using Cars.BLL.ModelVM.Rent;
-using Cars.BLL.ModelVM.RentVM;
-using Cars.DAL.Entities.Renting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.Service.Abstraction
+﻿namespace Cars.BLL.Service.Abstraction
 {
     public interface IRentService
     {

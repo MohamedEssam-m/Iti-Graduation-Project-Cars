@@ -1,15 +1,4 @@
-﻿using AutoMapper;
-using Cars.BLL.ModelVM.AppUserVM;
-using Cars.BLL.ModelVM.Role;
-using Cars.BLL.Service.Abstraction;
-using Cars.BLL.Service.Implementation;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Data;
-
-namespace Cars.PL.Controllers
+﻿namespace Cars.PL.Controllers
 {
     //[Authorize("Admin")]
     public class RoleController : Controller

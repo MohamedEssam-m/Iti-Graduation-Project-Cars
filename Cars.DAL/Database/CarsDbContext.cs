@@ -1,19 +1,4 @@
-﻿using Cars.BLL.Helper.Renting;
-using Cars.BLL.Helper.Repairing;
-using Cars.DAL.Entities.Accidents;
-using Cars.DAL.Entities.Offers;
-using Cars.DAL.Entities.Renting;
-using Cars.DAL.Entities.Users;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.DAL.Database
+﻿namespace Cars.DAL.Database
 {
     public class CarsDbContext :IdentityDbContext<AppUser, IdentityRole, string>
     {

@@ -1,16 +1,4 @@
-﻿using Cars.BLL.Service.Abstraction;
-using Cars.DAL.Entities.Accidents;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.Service.Implementation
+﻿namespace Cars.BLL.Service.Implementation
 {
     public class EmailService : IEmailService
     {

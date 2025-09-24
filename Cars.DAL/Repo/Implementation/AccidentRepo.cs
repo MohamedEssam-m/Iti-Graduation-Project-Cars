@@ -1,14 +1,4 @@
-﻿using Cars.DAL.Database;
-using Cars.DAL.Entities.Accidents;
-using Cars.DAL.Repo.Abstraction;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.DAL.Repo.Implementation
+﻿namespace Cars.DAL.Repo.Implementation
 {
     public class AccidentRepo : IAccidentRepo
     {

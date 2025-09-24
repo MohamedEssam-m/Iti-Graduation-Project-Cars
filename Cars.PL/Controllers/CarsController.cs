@@ -1,11 +1,4 @@
-﻿using AutoMapper;
-using Cars.BLL.ModelVM.CarVM;
-using Cars.BLL.Service.Abstraction;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-
-namespace Cars.PL.Controllers
+﻿namespace Cars.PL.Controllers
 {
     public class CarsController : Controller
     {

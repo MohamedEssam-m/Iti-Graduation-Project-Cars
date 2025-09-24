@@ -1,16 +1,4 @@
-﻿using AutoMapper;
-using Cars.BLL.Helper;
-using Cars.BLL.ModelVM.AppUserVM;
-using Cars.BLL.Service.Abstraction;
-using Cars.DAL.Repo.Abstraction;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.Service.Implementation
+﻿namespace Cars.BLL.Service.Implementation
 {
     public class AppUserService : IAppUserService
     {

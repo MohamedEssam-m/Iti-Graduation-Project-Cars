@@ -1,23 +1,4 @@
-﻿using AutoMapper;
-using Cars.BLL.ModelVM.Account;
-using Cars.BLL.ModelVM.Offers;
-using Cars.BLL.Service.Abstraction;
-using Cars.BLL.Service.Implementation;
-using Cars.DAL.Entities.Users;
-using Cars.PL.Language;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
-using System.Security.Claims;
-
-namespace Cars.PL.Controllers
+﻿namespace Cars.PL.Controllers
 {
     public class AccountController : Controller
     {

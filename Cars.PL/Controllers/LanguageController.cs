@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Cars.PL.Controllers
+﻿namespace Cars.PL.Controllers
 {
     public class LanguageController : Controller
     {

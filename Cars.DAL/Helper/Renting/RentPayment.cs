@@ -1,14 +1,4 @@
-﻿using Cars.DAL.Entities.Renting;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.Helper.Renting
+﻿namespace Cars.BLL.Helper.Renting
 {
     public class RentPayment
     {

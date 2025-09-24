@@ -1,14 +1,4 @@
-﻿
-using Cars.BLL.Helper.Renting;
-using Cars.BLL.Helper.Repairing;
-using Cars.DAL.Entities.Accidents;
-using Cars.DAL.Entities.Offers;
-using Cars.DAL.Entities.Renting;
-using Cars.DAL.Entities.Users;
-using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-public class AppUser : IdentityUser
+﻿public class AppUser : IdentityUser
 {
     public string? UserImagePath { get; set; }
     [Required(ErrorMessage = "Name is required, you must add a name.")]

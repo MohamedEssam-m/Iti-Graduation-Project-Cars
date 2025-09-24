@@ -1,19 +1,4 @@
-﻿using Cars.BLL.Helper;
-using Cars.BLL.Helper.Renting;
-using Cars.BLL.ModelVM.CarVM;
-using Cars.BLL.ModelVM.Payment;
-using Cars.BLL.ModelVM.Rent;
-using Cars.BLL.ModelVM.RentVM;
-using Cars.BLL.Service.Abstraction;
-using Cars.DAL.Entities;
-using Cars.DAL.Entities.Renting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Text.Json.Nodes;
-using AutoMapper;
-
-namespace Cars.PL.Controllers
+﻿namespace Cars.PL.Controllers
 {
     public class PaymentController : Controller
     {

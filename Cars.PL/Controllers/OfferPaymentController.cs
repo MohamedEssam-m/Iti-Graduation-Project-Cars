@@ -1,16 +1,4 @@
-﻿using AutoMapper;
-using Cars.BLL.Helper;
-using Cars.BLL.ModelVM.Offers;
-using Cars.BLL.ModelVM.Payment;
-using Cars.BLL.Service.Abstraction;
-using Cars.BLL.Service.Implementation;
-using Cars.DAL.Entities;
-using Cars.DAL.Entities.Accidents;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Text.Json.Nodes;
-
-namespace Cars.PL.Controllers
+﻿namespace Cars.PL.Controllers
 {
     public class OfferPaymentController : Controller
     {

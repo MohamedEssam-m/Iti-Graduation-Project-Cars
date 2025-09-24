@@ -1,11 +1,4 @@
-﻿using Cars.BLL.Helper;
-using Cars.BLL.ModelVM.Payment;
-using Cars.BLL.ModelVM.Rent;
-using Cars.BLL.Service.Abstraction;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Cars.PL.Controllers
+﻿namespace Cars.PL.Controllers
 {
     public class RentController : Controller
     {

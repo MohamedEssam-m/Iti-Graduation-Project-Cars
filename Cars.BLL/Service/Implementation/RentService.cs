@@ -1,18 +1,4 @@
-﻿using AutoMapper;
-using Cars.BLL.Helper.Renting;
-using Cars.BLL.ModelVM.Offers;
-using Cars.BLL.ModelVM.Payment;
-using Cars.BLL.ModelVM.Rent;
-using Cars.BLL.ModelVM.RentVM;
-using Cars.BLL.Service.Abstraction;
-using Cars.DAL.Entities.Renting;
-using Cars.DAL.Repo;
-using Cars.DAL.Repo.Abstraction;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-
-namespace Cars.BLL.Service.Implementation
+﻿namespace Cars.BLL.Service.Implementation
 {
     public class RentService : IRentService
     {

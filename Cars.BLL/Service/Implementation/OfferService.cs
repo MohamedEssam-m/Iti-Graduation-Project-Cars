@@ -1,18 +1,4 @@
-﻿using AutoMapper;
-using Cars.BLL.ModelVM.Offers;
-using Cars.BLL.Service.Abstraction;
-using Cars.DAL.Entities.Accidents;
-using Cars.DAL.Entities.Offers;
-using Cars.DAL.Repo.Abstraction;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.Service.Implementation
+﻿namespace Cars.BLL.Service.Implementation
 {
     public class OfferService : IOfferService
     {

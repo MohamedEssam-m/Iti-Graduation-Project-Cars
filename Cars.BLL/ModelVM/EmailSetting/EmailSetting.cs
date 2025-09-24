@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.ModelVM.EmailSetting
+﻿namespace Cars.BLL.ModelVM.EmailSetting
 {
     public class EmailSetting
     {

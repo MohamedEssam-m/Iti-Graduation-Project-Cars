@@ -1,14 +1,4 @@
-﻿using AutoMapper;
-using Cars.BLL.ModelVM.Role;
-using Cars.BLL.Service.Abstraction;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.Service.Implementation
+﻿namespace Cars.BLL.Service.Implementation
 {
     public class RoleService : IRoleService
     {

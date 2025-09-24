@@ -1,12 +1,4 @@
-﻿using Cars.BLL.ModelVM.Offers;
-using Cars.DAL.Entities.Offers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.Service.Abstraction
+﻿namespace Cars.BLL.Service.Abstraction
 {
     public interface IOfferService
     {

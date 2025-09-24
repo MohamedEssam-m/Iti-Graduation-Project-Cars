@@ -1,16 +1,4 @@
-﻿using Cars.BLL.Helper;
-using Cars.BLL.Service.Abstraction;
-using Cars.BLL.Service.Implementation;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.Service.Implementation
+﻿namespace Cars.BLL.Service.Implementation
 {
 
     public class PayPalService : IPayPalService

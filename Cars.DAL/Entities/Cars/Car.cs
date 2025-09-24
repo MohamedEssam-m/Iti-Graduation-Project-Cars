@@ -1,10 +1,4 @@
-﻿using Cars.DAL.Entities.Accidents;
-using Cars.DAL.Entities.Cars;
-using Cars.DAL.Entities.Renting;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-public class Car
+﻿public class Car
 {
     [Key]
     public int CarId { get; private set; }

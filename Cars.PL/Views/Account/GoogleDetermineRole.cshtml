@@ -1,9 +1,7 @@
-﻿@* @using Cars.BLL.ModelVM.Account *@
-@{
+﻿@{
     ViewData["Title"] = "Sign Up Choice";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@* @model ProfileCompletionVM *@
 <section class="signup-choice-container">
     <div class="signup-choice-card">
         <h2>@SharedLocalizer["SignUpAs"]</h2>
@@ -15,11 +13,6 @@
                 <input type="hidden" name = "UserName" value = "@ViewBag.User.UserName"></input>
                 <input type="hidden" name = "Email" value = "@ViewBag.User.Email"></input>
                 <input type="hidden" name = "EmailVerification" value = "@ViewBag.User.EmailVerification"></input>
-                @* <input type="hidden" asp-for="FullName"></input>
-                <input type="hidden" asp-for="UserName"></input>
-                <input type="hidden" asp-for="Email"></input>
-                <input type="hidden" asp-for="EmailVerification"></input> *@
-                
                 
                 
                 <button type="submit" name="Role" value="User" class="btn btn-user">

@@ -1,5 +1,4 @@
-﻿@using Cars.BLL.ModelVM.CarVM
-@model CreateCarVM
+﻿@model CreateCarVM
 
 @{
     ViewData["Title"] = "Create Car";
@@ -151,7 +150,7 @@
         <!-- Status -->
         <div class="form-group">
             <label asp-for="Status"></label>
-            <input asp-for="Status" type="number" class="form-control" />
+            <input asp-for="Status" type="text" class="form-control" />
             <span asp-validation-for="Status" class="text-danger"></span>
         </div>
         <!-- Car Image -->

@@ -1,17 +1,4 @@
-﻿using Cars.BLL.Helper.Renting;
-using Cars.BLL.Helper.Repairing;
-using Cars.DAL.Entities.Offers;
-using Cars.DAL.Enums;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.DAL.Entities.Users
+﻿namespace Cars.DAL.Entities.Users
 {
     public class MechanicUser : AppUser
     {

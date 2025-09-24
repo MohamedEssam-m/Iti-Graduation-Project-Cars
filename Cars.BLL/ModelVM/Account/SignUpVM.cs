@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.ModelVM.Account
+﻿namespace Cars.BLL.ModelVM.Account
 {
-    using Cars.DAL.Enums;
-    using Microsoft.AspNetCore.Http;
-    using System.ComponentModel.DataAnnotations;
-
     public class SignUpVM
     {
         public SignUpVM() { }

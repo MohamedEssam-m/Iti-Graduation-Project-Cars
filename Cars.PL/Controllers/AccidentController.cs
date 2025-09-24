@@ -1,13 +1,4 @@
-﻿using AutoMapper;
-using Cars.BLL.ModelVM.Accident;
-using Cars.BLL.Service.Abstraction;
-using Cars.DAL.Entities.Accidents;
-using Cars.DAL.Entities.Offers;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-
-namespace Cars.PL.Controllers
+﻿namespace Cars.PL.Controllers
 {
     public class AccidentController : Controller
     {
@@ -134,7 +125,13 @@ namespace Cars.PL.Controllers
                     return View("EditView" , mapAccident);
                 }
             }
+            var user = await userManager.GetUserAsync(User);
+            var UserId = user.Id;
+            var userWithNavigations = await appUserService.GetById(UserId);
+
+            ViewBag.RENTS = userWithNavigations.Rents;
             ViewBag.Error = "Some Thing Was Wrong";
+
             var Accident1 = await accidentService.GetAccidentById(accident.AccidentId);
             var mapAccident1 = mapper.Map<UpdateAccidentVM>(Accident1);
             mapAccident1.ImagePath = Accident1.AccidentImagePath;

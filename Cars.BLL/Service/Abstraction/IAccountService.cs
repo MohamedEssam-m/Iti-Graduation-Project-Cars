@@ -1,18 +1,10 @@
-﻿using Cars.BLL.ModelVM.Account;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.Service.Abstraction
+﻿namespace Cars.BLL.Service.Abstraction
 {
     public interface IAccountService
     {
         Task<IdentityResult> SignUp(SignUpVM signUp);
-        Task<IdentityResult> SignUpMechanic(SignUpMechanicVM signUp);
-        Task<SignInResult> SignIn(SignInVM signIn);
+        //Task<IdentityResult> SignUpMechanic(SignUpMechanicVM signUp);
+        Task<Microsoft.AspNetCore.Identity.SignInResult> SignIn(SignInVM signIn);
         //Task<SignInResult> SignInMechanic(SignInVM signIn);
         Task LogOut();
 

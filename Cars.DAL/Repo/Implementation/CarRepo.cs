@@ -1,15 +1,4 @@
-﻿using AutoMapper;
-using Cars.DAL.Database;
-using Cars.DAL.Repo.Abstraction;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.DAL.Repo.Implementation
+﻿namespace Cars.DAL.Repo.Implementation
 {
     public class CarRepo : ICarRepo
     {

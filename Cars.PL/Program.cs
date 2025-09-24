@@ -1,24 +1,3 @@
-using Cars.BLL.Mapper;
-using Cars.BLL.Service.Abstraction;
-using Cars.BLL.Service.Implementation;
-using Cars.DAL.Database;
-using Cars.DAL.Entities.Users;
-using Cars.DAL.Repo.Abstraction;
-using Cars.DAL.Repo.Implementation;
-using Cars.DAL.Repo.Implementation.Cars.DAL.Repository;
-using Cars.PL.Language;
-using DotNetEnv;
-using Hangfire;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.EntityFrameworkCore;
-using System.Globalization;
-
 namespace Cars
 {
     public class Program

@@ -1,12 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cars.BLL.ModelVM.AppUserVM
+﻿namespace Cars.BLL.ModelVM.AppUserVM
 {
     public class UpdateUserVM
     {

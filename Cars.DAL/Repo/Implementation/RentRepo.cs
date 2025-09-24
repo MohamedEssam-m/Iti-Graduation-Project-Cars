@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cars.DAL.Database;
-using Cars.DAL.Entities.Renting;
-using Cars.DAL.Repo.Abstraction;
-using Microsoft.EntityFrameworkCore;
-namespace Cars.DAL.Repo.Implementation
+﻿namespace Cars.DAL.Repo.Implementation
 {
     
     

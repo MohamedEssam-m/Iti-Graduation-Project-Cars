@@ -1,11 +1,3 @@
-using Cars.BLL.Service.Abstraction;
-using Cars.DAL.Entities.Accidents;
-using Cars.Models;
-using Hangfire;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace Cars.Controllers
 {

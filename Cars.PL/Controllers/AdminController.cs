@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using Cars.BLL.ModelVM.Account;
-using Cars.BLL.ModelVM.AppUserVM;
-using Cars.BLL.Service.Abstraction;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-
-namespace Cars.PL.Controllers
+﻿namespace Cars.PL.Controllers
 {
     public class AdminController : Controller
     {

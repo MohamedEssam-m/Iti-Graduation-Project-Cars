@@ -1,14 +1,4 @@
-﻿using AutoMapper;
-using Cars.BLL.ModelVM.AppUserVM;
-using Cars.BLL.ModelVM.RentVM;
-using Cars.BLL.Service.Abstraction;
-using Cars.BLL.Service.Implementation;
-using Cars.DAL.Entities.Renting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Data;
-
-namespace Cars.PL.Controllers
+﻿namespace Cars.PL.Controllers
 {
     public class UsersController : Controller
     {
@@ -19,15 +9,19 @@ namespace Cars.PL.Controllers
 
         private readonly RoleManager<IdentityRole> RoleManager;
         private readonly IRentService rentService;
+        private readonly IAccidentService accidentService;
+        private readonly IOfferService offerService;
 
 
-        public UsersController(IRentService RentService,IAppUserService userService, IMapper mapper, UserManager<AppUser> userManager ,RoleManager <IdentityRole> roleManager)
+        public UsersController(IRentService RentService, IOfferService offerService, IAccidentService accidentService, IAppUserService userService, IMapper mapper, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.userService = userService;
             this.mapper = mapper;
             UserManager = userManager;
             RoleManager = roleManager;
             this.rentService = RentService;
+            this.accidentService = accidentService;
+            this.offerService = offerService;
         }
         private async Task<List<UserWithRentCarsVM>> GetAllUsersWithRoles()
         {
@@ -85,7 +79,7 @@ namespace Cars.PL.Controllers
         {
             var usersWithRoles = await GetAllUsersWithRoles();
 
-        
+
             return View(usersWithRoles);
         }
         [HttpPost]
@@ -131,7 +125,7 @@ namespace Cars.PL.Controllers
                 var rentVM = mapper.Map<UpdateRentVM>(rent);
                 await rentService.UpdateRent(rentVM);
                 var allUsers = await GetAllUsersWithRoles();
-                ViewBag.Success = "Car status updated successfully!";
+                ViewBag.Success = "Rent status updated successfully!";
                 return View("UpdateUserCarStatus", allUsers);
             }
             else
@@ -140,6 +134,100 @@ namespace Cars.PL.Controllers
                 ViewBag.Error = "Rent Operation not found!";
                 return View("UpdateUserCarStatus", allUsers);
             }
+        }
+        public async Task<IActionResult> AssignOfferStatusView()
+        {
+            var AllAccidents = await accidentService.GetAllAccidents();
+            List<List<Offer>> Offerslist = new List<List<Offer>>();
+            foreach (var accident in AllAccidents)
+            {
+                if (accident.Offers != null && accident.Offers.Any())
+                {
+                    var offers = await offerService.GetOffersByAccident(accident.AccidentId);
+                    Offerslist.Add(offers);
+                    //foreach (var offer in accident.Offers)
+                    //{
+
+                    //}
+                }
+            }
+            return View(Offerslist);
+        }
+        public async Task<IActionResult> AssignOfferStatus(int OfferId, string NewStatus)
+        {
+
+            //var user = await AppUserService.GetById(Id);
+            //if(ModelState.IsValid)
+            //{
+            //    if (user != null && !string.IsNullOrEmpty(RoleName))
+            //    {
+            //        await roleService.AssignRoleToUser(user, RoleName);
+            //        ViewBag.Success = $"The Role {RoleName} Addes Successfilly";
+            //        return View("AssignRoleToUserView" , users);
+            //    }
+            //}
+            //ViewBag.Error = "Some Thing Was Wrong";
+            //return View("AssignRoleToUserView", users);
+
+
+            //var rent = await rentService.GetRentById(RentId);
+            //if (rent != null)
+            //{
+            //    rent.Status = NewStatus;
+            //    var rentVM = mapper.Map<UpdateRentVM>(rent);
+            //    await rentService.UpdateRent(rentVM);
+            //    var allUsers = await GetAllUsersWithRoles();
+            //    ViewBag.Success = "Car status updated successfully!";
+            //    return View("UpdateUserCarStatus", allUsers);
+            //}
+            //else
+            //{
+            //    var allUsers = await GetAllUsersWithRoles();
+            //    ViewBag.Error = "Rent Operation not found!";
+            //    return View("UpdateUserCarStatus", allUsers);
+            //}
+            var offer = await offerService.GetOfferById(OfferId);
+            if (offer != null)
+            {
+                offer.Status = NewStatus;
+                var offerVM = mapper.Map<UpdateOfferVM>(offer);
+                await offerService.UpdateOffer(offerVM);
+                ViewBag.Success = "Offer status updated successfully!";
+                var _AllAccidents = await accidentService.GetAllAccidents();
+                List<List<Offer>> _Offerslist = new List<List<Offer>>();
+                foreach (var accident in _AllAccidents)
+                {
+                    if (accident.Offers != null && accident.Offers.Any())
+                    {
+                        var offers = await offerService.GetOffersByAccident(accident.AccidentId);
+                        _Offerslist.Add(offers);
+                        //foreach (var offer in accident.Offers)
+                        //{
+
+                        //}
+                    }
+                }
+                return View("AssignOfferStatusView", _Offerslist);
+            }
+            var allUsers = await GetAllUsersWithRoles();
+            ViewBag.Error = "Offer not found!";
+            var AllAccidents = await accidentService.GetAllAccidents();
+            List<List<Offer>> Offerslist = new List<List<Offer>>();
+            foreach (var accident in AllAccidents)
+            {
+                if (accident.Offers != null && accident.Offers.Any())
+                {
+                    var offers = await offerService.GetOffersByAccident(accident.AccidentId);
+                    Offerslist.Add(offers);
+                    //foreach (var offer in accident.Offers)
+                    //{
+
+                    //}
+
+                    
+                }
+            }
+            return View("AssignOfferStatusView", Offerslist);
         }
     }
 }
