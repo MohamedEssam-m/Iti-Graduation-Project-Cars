@@ -304,7 +304,8 @@
         }
         public IActionResult ProfileCompletion(ProfileCompletionVM user)
         {
-            return View(user);
+            ViewBag.user = user;
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> SaveProfileCompletion(ProfileCompletionVM profile)

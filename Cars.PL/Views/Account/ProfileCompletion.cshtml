@@ -82,7 +82,7 @@
                 <input asp-for="User_Image" type="file" class="form-input" />
                 <span asp-validation-for="User_Image" class="text-danger"></span>
             </div> *@
-            @if(Model.Role == "Mechanic")
+            @if(ViewBag.user.Role == "Mechanic")
             {
                 <!-- Specialization -->
                 <div class="form-group">

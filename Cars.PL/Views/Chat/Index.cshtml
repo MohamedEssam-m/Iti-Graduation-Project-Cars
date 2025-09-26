@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Chat with Phi";
+}
+<link rel="stylesheet" href="~/css/Chat.css" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="chat-wrapper">
+    <div class="chat-header">
+        <div class="chat-title">
+            🤖 Chat with <span class="model-name">AI</span>
+        </div>
+        <div class="status">
+            <span class="status-dot"></span> Online
+        </div>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+        @if (ViewBag.LastPrompt != null)
+        {
+            <div class="message user">
+                <div class="bubble">@ViewBag.LastPrompt</div>
+            </div>
+        }
+
+        @if (ViewBag.Response != null)
+        {
+            <div class="message bot">
+                <div class="bubble">@ViewBag.Response</div>
+            </div>
+        }
+    </div>
+
+    <form method="post" class="chat-input-area">
+        <input type="text" id="prompt" name="prompt" 
+               placeholder="Type your message..." 
+               maxlength="500" autocomplete="off" required />
+        <button type="submit" class="send-btn">➤</button>
+    </form>
+</div>

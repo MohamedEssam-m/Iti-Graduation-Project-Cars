@@ -47,8 +47,8 @@ namespace Cars
             // get Google ClientId and ClientSecret from .env
             var googleClientId = Environment.GetEnvironmentVariable("ClientId");
             var googleClientSecret = Environment.GetEnvironmentVariable("ClientSecret");
-
-            if (string.IsNullOrWhiteSpace(googleClientId) || string.IsNullOrWhiteSpace(googleClientSecret))
+            var openAiKey = Environment.GetEnvironmentVariable("ApiKey");
+            if (string.IsNullOrWhiteSpace(googleClientId) || string.IsNullOrWhiteSpace(googleClientSecret) || string.IsNullOrWhiteSpace(openAiKey))
             {
                 throw new Exception("googleClientId and googleClientSecret are required");
             }
@@ -56,8 +56,11 @@ namespace Cars
             // Set configuration values
             builder.Configuration["Google:ClientId"] = googleClientId;
             builder.Configuration["Google:ClientSecret"] = googleClientSecret;
-
+            //open ai
             
+            builder.Configuration["OpenAI:ApiKey"] = openAiKey;
+
+            builder.Services.AddControllersWithViews();
             // Repositories
             builder.Services.AddScoped<IAppUserRepo, AppUserRepo>();
             builder.Services.AddScoped<ICarRepo, CarRepo>();
@@ -76,6 +79,16 @@ namespace Cars
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAccidentService, AccidentService>();
             builder.Services.AddScoped<IOfferService, OfferService>();
+
+            builder.Services.AddHttpClient<IOllamaService, OllamaService>(client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:11434"); 
+                client.Timeout = TimeSpan.FromMinutes(5);
+            });
+            
+
+            
+
             builder.Services.Configure<EmailService>(builder.Configuration.GetSection("EmailSettings"));
             builder.Services.AddAuthentication(options =>
             {

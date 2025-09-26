@@ -51,7 +51,10 @@ global using System.Net;
 global using System.Net.Mail;
 global using System.Text.Json.Nodes;
 global using Cars.BLL.Helper.Renting;
- 
+global using Cars.BLL.ModelVM.OpenAi;
+global using System.Net.Http.Headers;
+global using Xabe.FFmpeg;
+global using System.Text.Json;
 
 
 

@@ -116,9 +116,13 @@
                                     {
                                         <i class="fas fa-user">User</i> 
                                     }
-                                    else
+                                    else if (User.IsInRole("Mechanic"))
                                     {
                                         <i class="fas fa-tools">Mechanic</i> 
+                                    }
+                                    else if (User.IsInRole("Admin"))
+                                    {
+                                        <i class="fas fa-tools"> , Admin</i> 
                                     }
                                 </span>
                             </p>
@@ -135,7 +139,7 @@
             <div class="profile-card">
                 <h4 class="section-title">
                     <i class="fas fa-car"></i>
-                    @(User.IsInRole("User") ? "My Rented Cars" : "Cars I'm Working On")
+                    @(User.IsInRole("User") || User.IsInRole("Mechanic")  ? "My Rented Cars" : "My Rented Cars")
                 </h4>
                 
                 @{
@@ -189,7 +193,7 @@
                 {
                     <div class="empty-state">
                         <i class="fas fa-car"></i>
-                        <p>@(User.IsInRole("User") ? "No rented cars found" : "No cars assigned for maintenance")</p>
+                        <p>@(User.IsInRole("User") || User.IsInRole("Mechanic") ? "No rented cars found" : "My Rented Cars")</p>
                     </div>
                 }
             </div>

@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="~/css/flaticon.css">
     <link rel="stylesheet" href="~/css/icomoon.css">
     <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/AI.css">
   </head>
   <body>
     
@@ -522,15 +523,38 @@
 
         <li><hr class="dropdown-divider"></li>
 
-        <!-- Dark Mode Toggle -->
-        <li>
-            <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);" onclick="toggleDarkMode()">
-                🌙 Dark Mode
-            </a>
-        </li>
+        
     </ul>
 </li>
+<!-- Add this link anywhere in your layout or view -->
+<div class="ai-assistant-link-container">
+    <a href="@Url.Action("Index", "Chat")" class="ai-assistant-link">
+        <div class="link-background"></div>
+        <div class="link-content">
+            <div class="ai-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring-2"></div>
+            </div>
+            <div class="link-text">
+                <span class="main-text">AI Assistant</span>
+                <span class="sub-text">Chat with AI</span>
+            </div>
+            <div class="arrow-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+        <div class="hover-overlay"></div>
+    </a>
+</div>
 
+<style>
+
+</style>
 <style>
     .lang-toggle {
         background: white;
