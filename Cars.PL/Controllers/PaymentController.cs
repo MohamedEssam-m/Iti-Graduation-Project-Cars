@@ -54,7 +54,6 @@
                     ViewBag.Error = "Invalid Duration!";
                     return View("RentingDetails", model);
                 }
-
                 var summary = new PaymentSummaryVM
                 {
                     UserId = userId,

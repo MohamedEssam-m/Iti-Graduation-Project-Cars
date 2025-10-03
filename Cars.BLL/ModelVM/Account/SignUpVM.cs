@@ -4,7 +4,7 @@
     {
         public SignUpVM() { }
         public IFormFile User_Image { get; set; }
-
+        public string User_Image_Path { get; set; } = string.Empty;
         public SignUpVM(string fullname, string userName, string email, string phoneNumber, string password, string confirmPassword, int age)
         {
             this.Fullname = fullname;

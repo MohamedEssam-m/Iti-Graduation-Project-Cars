@@ -50,8 +50,8 @@ else
     <div class="offers-container">
         @foreach (var offer in Model)
         {
-            @if(offer.Status != "Declined" && offer.Status != "Paid" && User.Identity.IsAuthenticated)
-            {
+            @* @if(offer.Status != "Declined" && offer.Status != "Paid" && User.Identity.IsAuthenticated)
+            { *@
                 <div class="offer-card">
                     <div class="offer-content">
                         <div class="offer-price">
@@ -87,6 +87,10 @@ else
                             <div class="info-item">
                                 <span class="info-label">Car Delivery:</span>
                                 <span class="info-value date-value">@offer.OfferEndDate.ToString("MMM dd, yyyy")</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Offer Status:</span>
+                                <span class="info-value date-value">@offer.Status</span>
                             </div>
                         </div>
 
@@ -134,9 +138,18 @@ else
                                 <span>Deal Completed</span>
                             </div>
                         }
+                        @if(offer.Status == "Declined")
+                        {
+                            <div class="deal-declined" 
+                                 style="font-weight: bold; color: #dc3545; font-size: 18px; display: flex; align-items: center; gap: 8px;">
+                                <span>❌</span>
+                                <span>Deal Declined</span>
+                            </div>
+
+                        }
                     </div>
                 </div>
-            }
+            @* } *@
         }
     </div>
 }

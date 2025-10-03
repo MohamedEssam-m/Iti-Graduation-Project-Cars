@@ -79,6 +79,8 @@ namespace Cars
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAccidentService, AccidentService>();
             builder.Services.AddScoped<IOfferService, OfferService>();
+            builder.Services.AddHttpClient<IGeminiService, GeminiService>();
+
 
             builder.Services.AddHttpClient<IOllamaService, OllamaService>(client =>
             {

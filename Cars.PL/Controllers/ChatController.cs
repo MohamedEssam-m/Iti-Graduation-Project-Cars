@@ -27,7 +27,7 @@
             ViewBag.LastPrompt = prompt;
 
             
-            var response = await _ollamaService.AskModelAsync(prompt, useStream: true);
+            var response = await _ollamaService.AskModelAsync(prompt,true);
 
             ViewBag.Response = response;
             return View();

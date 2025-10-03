@@ -8,7 +8,7 @@
         [Required(ErrorMessage = "Car name is required.")]
         [Display(Name = "Car Name")]
         public string CarName { get; set; }
-
+        public IFormFile Image { get; set; }
         [Display(Name = "Car Image")]
         public string CarImage { get; set; }
 

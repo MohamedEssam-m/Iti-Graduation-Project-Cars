@@ -1,6 +1,6 @@
 ﻿namespace Cars.PL.Controllers
 {
-    //[Authorize("Admin")]
+    
     public class RoleController : Controller
     {
         private readonly IRoleService roleService;

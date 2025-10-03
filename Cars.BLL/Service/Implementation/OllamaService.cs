@@ -17,7 +17,7 @@ namespace Cars.BLL.Service.Implementation
         {
             var requestBody = new
             {
-                model = "phi",
+                model = "phi-fast1",
                 prompt = prompt,
                 stream = useStream 
             };

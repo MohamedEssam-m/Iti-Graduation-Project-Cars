@@ -394,7 +394,7 @@
     <value>نوع البنزين</value>
   </data>
   <data name="MaxPerDay" xml:space="preserve">
-    <value />
+    <value>المسافة</value>
   </data>
   <data name="Automatic" xml:space="preserve">
     <value>أوتوماتيك</value>
@@ -416,5 +416,506 @@
   </data>
   <data name="Hybrid" xml:space="preserve">
     <value>هجين</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>الخدمات</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>الملف الشخصي</value>
+  </data>
+  <data name="EditPersonalInfo" xml:space="preserve">
+    <value>تعديل بياناتي</value>
+  </data>
+  <data name="Cars" xml:space="preserve">
+    <value>السيارات</value>
+  </data>
+  <data name="Repair" xml:space="preserve">
+    <value>إصلاح السيارات</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>تواصل معنا</value>
+  </data>
+  <data name="Fuel" xml:space="preserve">
+    <value>بنزين</value>
+  </data>
+  <data name="SelectSpecialization" xml:space="preserve">
+    <value>اختر تخصصك</value>
+  </data>
+  <data name="Choose" xml:space="preserve">
+    <value>اختر</value>
+  </data>
+  <data name="SelectYourSpecialization" xml:space="preserve">
+    <value>اختر نوع السيارات التي تتخصص في صيانتها</value>
+  </data>
+  <data name="Fast&amp;amp;EasyWayToRentACar" xml:space="preserve">
+    <value>طريقة سريعة وسهلة لاستئجار سيارة</value>
+  </data>
+  <data name="RentYourCar" xml:space="preserve">
+    <value>استأجر سيارتك بسهولة أو اهتم بصيانة سيارتك مع خدماتنا المتميزة, كل شيء تحت سقف واحد</value>
+  </data>
+  <data name="EasySteps" xml:space="preserve">
+    <value>استأجر سيارتك بخطوات بسيطة وسريعة</value>
+  </data>
+  <data name="BetterWay" xml:space="preserve">
+    <value>استأجر سيارتك المثالية بسهولة و راحة</value>
+  </data>
+  <data name="ChooseYourPickupLocation" xml:space="preserve">
+    <value>حدد مكان استلام سيارتك بسهولة</value>
+  </data>
+  <data name="SelecttheBestDeal" xml:space="preserve">
+    <value>احصل على أفضل صفقة تناسبك</value>
+  </data>
+  <data name="ReserveYourRentalCar" xml:space="preserve">
+    <value>لوحة الإدارة</value>
+  </data>
+  <data name="ReserveYourPerfectCar" xml:space="preserve">
+    <value>احجز سيارتك المثالية الآن</value>
+  </data>
+  <data name="Makeyourtrip" xml:space="preserve">
+    <value>بدأ رحلتك الآن</value>
+  </data>
+  <data name="Drop-offLocation" xml:space="preserve">
+    <value>مكان التسليم</value>
+  </data>
+  <data name="Pick-upLocation" xml:space="preserve">
+    <value>مكان الاستلام</value>
+  </data>
+  <data name="CityAirportStation" xml:space="preserve">
+    <value>المدينة، المطار، المحطة، إلخ</value>
+  </data>
+  <data name="Pick-upDate" xml:space="preserve">
+    <value>تاريخ الاستلام</value>
+  </data>
+  <data name="Drop-offDate" xml:space="preserve">
+    <value>تاريخ التسليم</value>
+  </data>
+  <data name="Drop-ofDate" xml:space="preserve">
+    <value>تاريخ التسليم</value>
+  </data>
+  <data name="Pick-upTime" xml:space="preserve">
+    <value>وقت الاستلام</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>الوقت</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="RentACarNow" xml:space="preserve">
+    <value>استأجر سيارتك الآن</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="AdminPanel" xml:space="preserve">
+    <value>لوحة الإدارة</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>الوضع الليلي</value>
+  </data>
+  <data name="UserManagement" xml:space="preserve">
+    <value>إدارة المستخدم</value>
+  </data>
+  <data name="Chooseanoperationbelow" xml:space="preserve">
+    <value>اختر العملية أدناه</value>
+  </data>
+  <data name="LoggedinasAdmin" xml:space="preserve">
+    <value>تم تسجيل الدخول كمسؤول</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>اضافة مستخدم</value>
+  </data>
+  <data name="CreateNewUser" xml:space="preserve">
+    <value>انشاء مستخدم جديد</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>اذهب</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>ازالة مستخدم</value>
+  </data>
+  <data name="RemoveUser" xml:space="preserve">
+    <value>قم بازالة المستخدم</value>
+  </data>
+  <data name="ViewAllUsers" xml:space="preserve">
+    <value>عرض جميع المستخدمين</value>
+  </data>
+  <data name="ListOfUsers" xml:space="preserve">
+    <value>قائمة المستخدمين</value>
+  </data>
+  <data name="UpdateStatusOfUsersRentedCars" xml:space="preserve">
+    <value>تحديث حالة السيارات المستأجرة للمستخدمين</value>
+  </data>
+  <data name="AdminManagement" xml:space="preserve">
+    <value>إدارة المسؤولين</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>الأدوار</value>
+  </data>
+  <data name="AddAdmin" xml:space="preserve">
+    <value>إضافة مسؤول</value>
+  </data>
+  <data name="ViewAllAdmins" xml:space="preserve">
+    <value>عرض كل المسؤولين</value>
+  </data>
+  <data name="AddRole" xml:space="preserve">
+    <value>إضافة دور</value>
+  </data>
+  <data name="ViewAllRoles" xml:space="preserve">
+    <value>عرض جميع الأدوار</value>
+  </data>
+  <data name="AssignRoleToUserView" xml:space="preserve">
+    <value>تخصيص دور لمستخدم</value>
+  </data>
+  <data name="AddCar" xml:space="preserve">
+    <value>إضافة سيارة</value>
+  </data>
+  <data name="ViewEditDeleteCars" xml:space="preserve">
+    <value>عرض, تعديل, حذف السيارات</value>
+  </data>
+  <data name="OurLatestServices" xml:space="preserve">
+    <value>أحدث خدماتنا</value>
+  </data>
+  <data name="OurServices" xml:space="preserve">
+    <value>خدماتنا</value>
+  </data>
+  <data name="CarRepairing" xml:space="preserve">
+    <value>إصلاح السيارات</value>
+  </data>
+  <data name="CarRepairingDesc" xml:space="preserve">
+    <value>خدمات تصليح سيارات سريعة وموثوقة</value>
+  </data>
+  <data name="CarRenting" xml:space="preserve">
+    <value>تأجير السيارات</value>
+  </data>
+  <data name="CarRentingDesc" xml:space="preserve">
+    <value>خطوات سهلة لتأجير سيارتك المثالية</value>
+  </data>
+  <data name="JoinUsForRentAndRepair" xml:space="preserve">
+    <value>سجّل للحصول على خدمات تأجير السيارات والوصول إلى خدمات الإصلاح بسرعة وسهولة</value>
+  </data>
+  <data name="LoginToJoin" xml:space="preserve">
+    <value>تسجيل الدخول للانضمام</value>
+  </data>
+  <data name="ExploreServices" xml:space="preserve">
+    <value>اكتشف خدماتنا</value>
+  </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value>من نحن</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>الموضوع</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>الرسالة</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>أرسل الرسالة</value>
+  </data>
+  <data name="WelcomeToCarBook" xml:space="preserve">
+    <value>مرحبًا بك في كاربوك</value>
+  </data>
+  <data name="AboutUsDescription" xml:space="preserve">
+    <value>كاربوك هو منصتك الذكية لحجز وتأجير السيارات بسهولة وسرعة، مع خيارات متنوعة وأسعار تنافسية تلبي جميع احتياجاتك</value>
+  </data>
+  <data name="SearchVehicle" xml:space="preserve">
+    <value>ابحث عن سيارة</value>
+  </data>
+  <data name="BookNow" xml:space="preserve">
+    <value>احجز الآن</value>
+  </data>
+  <data name="Ratings" xml:space="preserve">
+    <value>تقييمات السيارة</value>
+  </data>
+  <data name="YearsExperience" xml:space="preserve">
+    <value>سنوات الخبرة</value>
+  </data>
+  <data name="TotalCars" xml:space="preserve">
+    <value>عدد السيارات المتاحة</value>
+  </data>
+  <data name="HappyCustomers" xml:space="preserve">
+    <value>العملاء</value>
+  </data>
+  <data name="TotalBranches" xml:space="preserve">
+    <value>عدد الفروع</value>
+  </data>
+  <data name="CarDetails" xml:space="preserve">
+    <value>معلومات السيارة</value>
+  </data>
+  <data name="RepairCar" xml:space="preserve">
+    <value>اصلح سيارتك</value>
+  </data>
+  <data name="RentCar" xml:space="preserve">
+    <value>استأجر سيارة</value>
+  </data>
+  <data name="LookingFor" xml:space="preserve">
+    <value>هل تبحث عن سيارة أو خدمات إصلاح موثوقة؟ نحن هنا لنلبي احتياجاتك </value>
+  </data>
+  <data name="WhatWeOffer" xml:space="preserve">
+    <value>اكتشف خدماتنا</value>
+  </data>
+  <data name="RoadsideAssistance" xml:space="preserve">
+    <value>المساعدة على الطريق</value>
+  </data>
+  <data name="CarRentingDescr" xml:space="preserve">
+    <value>خيارات تأجير سيارات مرنة وبأسعار معقولة لاحتياجاتك اليومية أو الأسبوعية أو الشهرية</value>
+  </data>
+  <data name="CarRepairingDescr" xml:space="preserve">
+    <value>خدمات صيانة وإصلاح احترافية للحفاظ على سيارتك تعمل بسلاسة</value>
+  </data>
+  <data name="RoadsideAssistanceDescr" xml:space="preserve">
+    <value>دعم طارئ على مدار الساعة للتعطل،  والإصلاحات السريعة على الطريق</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>التقييم</value>
+  </data>
+  <data name="RateCar" xml:space="preserve">
+    <value>تقييم السيارة</value>
+  </data>
+  <data name="ViewRatings" xml:space="preserve">
+    <value>اعرض التقييمات</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>رجوع</value>
+  </data>
+  <data name="RateThisCar" xml:space="preserve">
+    <value>قيم السيارة</value>
+  </data>
+  <data name="HowWouldYouRateThisCar" xml:space="preserve">
+    <value>شارك تقييمك لهذه السيارة</value>
+  </data>
+  <data name="ShareYourExperience" xml:space="preserve">
+    <value>شارك تجربتك (اختياري(</value>
+  </data>
+  <data name="TellUsAboutYourExperience" xml:space="preserve">
+    <value>أخبرنا عن تجربتك مع هذه السيارة....</value>
+  </data>
+  <data name="SubmitRating" xml:space="preserve">
+    <value>ارسال التقييم</value>
+  </data>
+  <data name="AreYouSureDoYouWantToDelete" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد الحذف</value>
+  </data>
+  <data name="Car" xml:space="preserve">
+    <value>سيارة</value>
+  </data>
+  <data name="NoCarsAvailable" xml:space="preserve">
+    <value>عذرًا، لا توجد سيارات حالياً</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="UpdateCar" xml:space="preserve">
+    <value>تحديث بيانات السيارة</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>التقييم</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>التعليق</value>
+  </data>
+  <data name="NoRatingsAvailableForThisCarYet" xml:space="preserve">
+    <value>لا توجد تقييمات لهذه السيارة حتى الآن</value>
+  </data>
+  <data name="SendEmail" xml:space="preserve">
+    <value>أرسل الرسالة على البريد الألكتروني</value>
+  </data>
+  <data name="VerificationEmail" xml:space="preserve">
+    <value>تم إرسال رسالة التحقق إلى بريدك الإلكتروني، يرجى التحقق من صندوق الوارد</value>
+  </data>
+  <data name="BackToLogin" xml:space="preserve">
+    <value>الرجوع لتسجيل الدخول</value>
+  </data>
+  <data name="CreateAnOffer" xml:space="preserve">
+    <value>قدّم عرضاً</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>السعر</value>
+  </data>
+  <data name="EnterOfferPrice" xml:space="preserve">
+    <value>أدخل سعر العرض</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>التفاصيل</value>
+  </data>
+  <data name="StartDateOfRepairing" xml:space="preserve">
+    <value>تاريخ البدء</value>
+  </data>
+  <data name="AreYouSureYouWantToDeleteThisOffer" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد حذف هذا العرض؟</value>
+  </data>
+  <data name="ThisActionCannotBeUndone" xml:space="preserve">
+    <value>لا يمكن التراجع عن هذا الإجراء</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="OfferStartDate" xml:space="preserve">
+    <value>تاريخ بدء العرض</value>
+  </data>
+  <data name="OfferEndDate" xml:space="preserve">
+    <value>تاريخ انتهاء العرض</value>
+  </data>
+  <data name="EditYourOffer" xml:space="preserve">
+    <value>تعديل عرضك</value>
+  </data>
+  <data name="EnterThePriceOfTheOffer" xml:space="preserve">
+    <value>أدخل سعر العرض</value>
+  </data>
+  <data name="EnterTheDetailsOfTheOffer" xml:space="preserve">
+    <value>أدخل تفاصيل العرض</value>
+  </data>
+  <data name="UserEmail" xml:space="preserve">
+    <value>البريد الإلكتروني الخاص بالمستخدم</value>
+  </data>
+  <data name="MechanicName" xml:space="preserve">
+    <value>اسم الميكانيكي</value>
+  </data>
+  <data name="MechanicEmail" xml:space="preserve">
+    <value>البريد الإلكتروني الخاص بالميكانيكي</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>تاريخ البدء</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>تاريخ الانتهاء</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>المدة</value>
+  </data>
+  <data name="PickUpLocation" xml:space="preserve">
+    <value>موقع الاستلام</value>
+  </data>
+  <data name="DropOffLocation" xml:space="preserve">
+    <value>موقع التسليم</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>المجموع</value>
+  </data>
+  <data name="AssignRoleToUser" xml:space="preserve">
+    <value>تعيين دور للمستخدم</value>
+  </data>
+  <data name="UsersDataRecords" xml:space="preserve">
+    <value>سجلات بيانات المستخدمين</value>
+  </data>
+  <data name="CreatedAt" xml:space="preserve">
+    <value>تاريخ الإنشاء</value>
+  </data>
+  <data name="CurrentRoles" xml:space="preserve">
+    <value>لأدوار الحالية</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>الإجراءات</value>
+  </data>
+  <data name="AssignRole" xml:space="preserve">
+    <value>تعيين دور</value>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>الرقم التعريفي</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="CompleteYourOrder" xml:space="preserve">
+    <value>قم بتأكيد طلبك</value>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>المبلغ المدفوع</value>
+  </data>
+  <data name="Repairing" xml:space="preserve">
+    <value>إصلاح السيارات</value>
+  </data>
+  <data name="AddAnAccident" xml:space="preserve">
+    <value>إضافة حادثة </value>
+  </data>
+  <data name="NoAccidentsAvailable" xml:space="preserve">
+    <value>لا توجد حوادث متاحة</value>
+  </data>
+  <data name="ThereAreCurrentlyNoAccidents" xml:space="preserve">
+    <value>لا توجد حوادث متاحة في الوقت الحالي</value>
+  </data>
+  <data name="HP" xml:space="preserve">
+    <value>قوة حصان</value>
+  </data>
+  <data name="EGP" xml:space="preserve">
+    <value>جنيه مصري</value>
+  </data>
+  <data name="Km/L" xml:space="preserve">
+    <value>كم/لتر</value>
+  </data>
+  <data name="Safety" xml:space="preserve">
+    <value>وسائل الأمان</value>
+  </data>
+  <data name="Features" xml:space="preserve">
+    <value>المميزات</value>
+  </data>
+  <data name="AverageRate" xml:space="preserve">
+    <value>التقييمات</value>
+  </data>
+  <data name="AreYouSureYouWantToDeleteThisAccident" xml:space="preserve">
+    <value>هل أنت متأكد من أنك تريد حذف هذا الحادث؟</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>من نحن</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="LoginToSendOffer" xml:space="preserve">
+    <value>سجّل الدخول لإرسال عرض</value>
+  </data>
+  <data name="ViewOffers" xml:space="preserve">
+    <value>العروض المتاحة</value>
+  </data>
+  <data name="SendOffer" xml:space="preserve">
+    <value>ارسال عرض</value>
+  </data>
+  <data name="EnterTheDescriptionOfTheAccident" xml:space="preserve">
+    <value>برجاء إدخال وصف الحادث</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>موقع الحادث</value>
+  </data>
+  <data name="EnterTheLocationOfTheAccident" xml:space="preserve">
+    <value>برجاء إدخال موقع الحادث</value>
+  </data>
+  <data name="AccidentDate" xml:space="preserve">
+    <value>تاريخ الحادث</value>
+  </data>
+  <data name="EnterTheDateOfTheAccident" xml:space="preserve">
+    <value>رجاء ادخال تاريخ الحادث</value>
+  </data>
+  <data name="SelectCar" xml:space="preserve">
+    <value>اختر السيارة</value>
+  </data>
+  <data name="EditYourAccident" xml:space="preserve">
+    <value>تعديل بيانات الحادث</value>
+  </data>
+  <data name="SelectYourCar" xml:space="preserve">
+    <value>اختر السيارة</value>
+  </data>
+  <data name="Offers" xml:space="preserve">
+    <value>العروض المقدمة</value>
+  </data>
+  <data name="NoOffersAvailable" xml:space="preserve">
+    <value>لا توجد عروض متاحة</value>
+  </data>
+  <data name="ThereAreCurrentlyNoOffers" xml:space="preserve">
+    <value>لا توجد حالياً أي عروض متاحة لهذا الحادث</value>
+  </data>
+  <data name="EditOffer" xml:space="preserve">
+    <value>تعديل العرض المقدم</value>
+  </data>
+  <data name="DeleteOffer" xml:space="preserve">
+    <value>حذف العرض</value>
+  </data>
+  <data name="DealCompleted" xml:space="preserve">
+    <value>تم إتمام الصفقة</value>
   </data>
 </root>

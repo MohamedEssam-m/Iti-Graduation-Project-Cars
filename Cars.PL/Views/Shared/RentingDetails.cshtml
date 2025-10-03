@@ -76,17 +76,28 @@
                 </div>
 
                 
-                <div class="form-group location-input">
-                    <label asp-for="Pick_up_location" class="form-label">📍 Pick-up Location</label>
-                    <input asp-for="Pick_up_location" class="form-control" placeholder="Enter pickup location" />
-                    <span asp-validation-for="Pick_up_location" class="text-danger"></span>
-                </div>
-                
-                <div class="form-group location-input">
-                    <label asp-for="Drop_Off_location" class="form-label">📍 Drop-off Location</label>
-                    <input asp-for="Drop_Off_location" class="form-control" placeholder="Enter drop-off location" />
-                    <span asp-validation-for="Drop_Off_location" class="text-danger"></span>
-                </div>
+               <div class="form-group location-input">
+                <label asp-for="Pick_up_location" class="form-label">📍 Pick-up Location</label>
+                <select asp-for="Pick_up_location" class="form-control">
+                    <option value=""> Select Pickup </option>
+                    <option value="Cairo">Cairo</option>
+                    <option value="Giza">Giza</option>
+                    <option value="Alexandria">Alexandria</option>
+                </select>
+                <span asp-validation-for="Pick_up_location" class="text-danger"></span>
+            </div>
+
+            <div class="form-group location-input">
+                <label asp-for="Drop_Off_location" class="form-label">📍 Drop-off Location</label>
+                <select asp-for="Drop_Off_location" class="form-control">
+                    <option value=""> Select Drop-off </option>
+                    <option value="Cairo">Cairo</option>
+                    <option value="Giza">Giza</option>
+                    <option value="Alexandria">Alexandria</option>
+                </select>
+                <span asp-validation-for="Drop_Off_location" class="text-danger"></span>
+            </div>
+
                 
                 <div class="form-buttons">
                     <button type="submit" class="btn btn-update">

@@ -415,6 +415,507 @@
     <value>Diesel</value>
   </data>
   <data name="Hybrid" xml:space="preserve">
-    <value />
+    <value>Hybrid</value>
+  </data>
+  <data name="Services" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="EditPersonalInfo" xml:space="preserve">
+    <value>Edit Personal Info</value>
+  </data>
+  <data name="Cars" xml:space="preserve">
+    <value>Cars</value>
+  </data>
+  <data name="Repair" xml:space="preserve">
+    <value>Repair</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Fuel" xml:space="preserve">
+    <value>Fuel</value>
+  </data>
+  <data name="SelectSpecialization" xml:space="preserve">
+    <value>Select Specialization</value>
+  </data>
+  <data name="Choose" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="SelectYourSpecialization" xml:space="preserve">
+    <value>Select Your Specialization</value>
+  </data>
+  <data name="Fast&amp;amp;EasyWayToRentACar" xml:space="preserve">
+    <value>Fast &amp; Easy Way To Rent A Car</value>
+  </data>
+  <data name="RentYourCar" xml:space="preserve">
+    <value>Rent your car easily or take care of your vehicle with our premium services, everything under one roof!</value>
+  </data>
+  <data name="EasySteps" xml:space="preserve">
+    <value>Easy steps for renting a car</value>
+  </data>
+  <data name="BetterWay" xml:space="preserve">
+    <value>Better Way to Rent Your Perfect Cars</value>
+  </data>
+  <data name="ChooseYourPickupLocation" xml:space="preserve">
+    <value>Choose Your Pickup Location </value>
+  </data>
+  <data name="SelecttheBestDeal" xml:space="preserve">
+    <value>Select the Best Deal</value>
+  </data>
+  <data name="ReserveYourRentalCar" xml:space="preserve">
+    <value>Reserve Your Rental Car</value>
+  </data>
+  <data name="ReserveYourPerfectCar" xml:space="preserve">
+    <value>Reserve Your Perfect Car</value>
+  </data>
+  <data name="Makeyourtrip" xml:space="preserve">
+    <value>Make your trip</value>
+  </data>
+  <data name="Drop-offLocation" xml:space="preserve">
+    <value>Drop-off location</value>
+  </data>
+  <data name="Pick-upLocation" xml:space="preserve">
+    <value>Pick-up location</value>
+  </data>
+  <data name="CityAirportStation" xml:space="preserve">
+    <value>City, Airport, Station, etc</value>
+  </data>
+  <data name="Pick-upDate" xml:space="preserve">
+    <value>Pick-up date</value>
+  </data>
+  <data name="Drop-offDate" xml:space="preserve">
+    <value>Drop-off date</value>
+  </data>
+  <data name="Drop-ofDate" xml:space="preserve">
+    <value>Drop-off date</value>
+  </data>
+  <data name="Pick-upTime" xml:space="preserve">
+    <value>Pick-up time</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="RentACarNow" xml:space="preserve">
+    <value>Rent A Car Now</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AdminPanel" xml:space="preserve">
+    <value>AdminPanel</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>Dark Mode</value>
+  </data>
+  <data name="UserManagement" xml:space="preserve">
+    <value>User Management</value>
+  </data>
+  <data name="Chooseanoperationbelow" xml:space="preserve">
+    <value>Choose an operation below</value>
+  </data>
+  <data name="LoggedinasAdmin" xml:space="preserve">
+    <value>Logged in as Admin</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Add User</value>
+  </data>
+  <data name="CreateNewUser" xml:space="preserve">
+    <value>Create new user</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Go</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Delete User</value>
+  </data>
+  <data name="RemoveUser" xml:space="preserve">
+    <value>Remove User</value>
+  </data>
+  <data name="ViewAllUsers" xml:space="preserve">
+    <value>View All Users</value>
+  </data>
+  <data name="ListOfUsers" xml:space="preserve">
+    <value>List of users</value>
+  </data>
+  <data name="UpdateStatusOfUsersRentedCars" xml:space="preserve">
+    <value>Update Status Of Users Rented Cars</value>
+  </data>
+  <data name="AdminManagement" xml:space="preserve">
+    <value>Admin Management</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="AddAdmin" xml:space="preserve">
+    <value>Add Admin</value>
+  </data>
+  <data name="ViewAllAdmins" xml:space="preserve">
+    <value>View All Admins</value>
+  </data>
+  <data name="AddRole" xml:space="preserve">
+    <value>Add Role</value>
+  </data>
+  <data name="ViewAllRoles" xml:space="preserve">
+    <value>View All Roles</value>
+  </data>
+  <data name="AssignRoleToUserView" xml:space="preserve">
+    <value>Assign Role To User</value>
+  </data>
+  <data name="AddCar" xml:space="preserve">
+    <value>Add Car</value>
+  </data>
+  <data name="ViewEditDeleteCars" xml:space="preserve">
+    <value>View, Edit, Delete Cars</value>
+  </data>
+  <data name="OurLatestServices" xml:space="preserve">
+    <value>Our Latest Services</value>
+  </data>
+  <data name="OurServices" xml:space="preserve">
+    <value>Our Services</value>
+  </data>
+  <data name="CarRepairing" xml:space="preserve">
+    <value>Car Repairing</value>
+  </data>
+  <data name="CarRepairingDesc" xml:space="preserve">
+    <value>Fast and reliable car repair services.</value>
+  </data>
+  <data name="CarRenting" xml:space="preserve">
+    <value>Car Renting</value>
+  </data>
+  <data name="CarRentingDesc" xml:space="preserve">
+    <value>Easy steps to rent your perfect car.</value>
+  </data>
+  <data name="JoinUsForRentAndRepair" xml:space="preserve">
+    <value>Sign up to rent cars and access our repair services quickly and easily.</value>
+  </data>
+  <data name="LoginToJoin" xml:space="preserve">
+    <value>Login to Join</value>
+  </data>
+  <data name="ExploreServices" xml:space="preserve">
+    <value>Explore Our Services</value>
+  </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Send Message</value>
+  </data>
+  <data name="WelcomeToCarBook" xml:space="preserve">
+    <value>Welcome To Carbook</value>
+  </data>
+  <data name="AboutUsDescription" xml:space="preserve">
+    <value>Carbook is your smart platform for booking and renting cars with ease, offering diverse options and competitive prices to suit all your needs</value>
+  </data>
+  <data name="SearchVehicle" xml:space="preserve">
+    <value>Search Vehicle</value>
+  </data>
+  <data name="BookNow" xml:space="preserve">
+    <value>Book now</value>
+  </data>
+  <data name="Ratings" xml:space="preserve">
+    <value>Ratings</value>
+  </data>
+  <data name="YearsExperience" xml:space="preserve">
+    <value>Years Experience</value>
+  </data>
+  <data name="TotalCars" xml:space="preserve">
+    <value>Total Cars</value>
+  </data>
+  <data name="HappyCustomers" xml:space="preserve">
+    <value>Happy Customers</value>
+  </data>
+  <data name="TotalBranches" xml:space="preserve">
+    <value>Total Branches</value>
+  </data>
+  <data name="CarDetails" xml:space="preserve">
+    <value>Car Details</value>
+  </data>
+  <data name="RepairCar" xml:space="preserve">
+    <value>Repair Car</value>
+  </data>
+  <data name="RentCar" xml:space="preserve">
+    <value>Rent Car</value>
+  </data>
+  <data name="LookingFor" xml:space="preserve">
+    <value>Looking for a car or reliable repair services? We’ve got you covered!</value>
+  </data>
+  <data name="WhatWeOffer" xml:space="preserve">
+    <value>Explore Our Services</value>
+  </data>
+  <data name="RoadsideAssistance" xml:space="preserve">
+    <value>Roadside Assistance</value>
+  </data>
+  <data name="CarRentingDescr" xml:space="preserve">
+    <value>Flexible and affordable car rental options for daily, weekly, or monthly needs. </value>
+  </data>
+  <data name="CarRepairingDescr" xml:space="preserve">
+    <value>Professional repair and maintenance services to keep your vehicle running smoothly.</value>
+  </data>
+  <data name="RoadsideAssistanceDescr" xml:space="preserve">
+    <value>24/7 emergency support for breakdowns, towing, and quick fixes on the road.</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>Rate</value>
+  </data>
+  <data name="RateCar" xml:space="preserve">
+    <value>Rate Car</value>
+  </data>
+  <data name="ViewRatings" xml:space="preserve">
+    <value>View Ratings</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="RateThisCar" xml:space="preserve">
+    <value>Rate This Car</value>
+  </data>
+  <data name="HowWouldYouRateThisCar" xml:space="preserve">
+    <value>How would you rate this car?</value>
+  </data>
+  <data name="ShareYourExperience" xml:space="preserve">
+    <value>Share your experience (Optional)</value>
+  </data>
+  <data name="TellUsAboutYourExperience" xml:space="preserve">
+    <value>Tell us about your experience with this car...</value>
+  </data>
+  <data name="SubmitRating" xml:space="preserve">
+    <value>Submit Rating</value>
+  </data>
+  <data name="AreYouSureDoYouWantToDelete" xml:space="preserve">
+    <value>Are You Sure Do You Want To Delete</value>
+  </data>
+  <data name="Car" xml:space="preserve">
+    <value>Car</value>
+  </data>
+  <data name="NoCarsAvailable" xml:space="preserve">
+    <value> No cars available.</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="UpdateCar" xml:space="preserve">
+    <value>Update Car</value>
+  </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="NoRatingsAvailableForThisCarYet" xml:space="preserve">
+    <value>No Ratings Available For This Car Yet</value>
+  </data>
+  <data name="SendEmail" xml:space="preserve">
+    <value>Send Email</value>
+  </data>
+  <data name="VerificationEmail" xml:space="preserve">
+    <value>The Verification Email Has been Sent To You, Please Check Your Inbox</value>
+  </data>
+  <data name="BackToLogin" xml:space="preserve">
+    <value>Back To Login</value>
+  </data>
+  <data name="CreateAnOffer" xml:space="preserve">
+    <value>Create An Offer</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="EnterOfferPrice" xml:space="preserve">
+    <value>Enter Offer Price</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="StartDateOfRepairing" xml:space="preserve">
+    <value>Start Date Of Repairing</value>
+  </data>
+  <data name="AreYouSureYouWantToDeleteThisOffer" xml:space="preserve">
+    <value>Are you sure you want to delete this Offer?</value>
+  </data>
+  <data name="ThisActionCannotBeUndone" xml:space="preserve">
+    <value>This action cannot be undone</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="OfferStartDate" xml:space="preserve">
+    <value>Offer Start Date</value>
+  </data>
+  <data name="OfferEndDate" xml:space="preserve">
+    <value>Offer End Date</value>
+  </data>
+  <data name="EditYourOffer" xml:space="preserve">
+    <value>Edit Your Offer</value>
+  </data>
+  <data name="EnterThePriceOfTheOffer" xml:space="preserve">
+    <value>Enter The Price of The Offer</value>
+  </data>
+  <data name="EnterTheDetailsOfTheOffer" xml:space="preserve">
+    <value>Enter The Details of The Offer</value>
+  </data>
+  <data name="UserEmail" xml:space="preserve">
+    <value>User Email</value>
+  </data>
+  <data name="MechanicName" xml:space="preserve">
+    <value>Mechanic Name</value>
+  </data>
+  <data name="MechanicEmail" xml:space="preserve">
+    <value>Mechanic Email</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="PickUpLocation" xml:space="preserve">
+    <value>Pick up location</value>
+  </data>
+  <data name="DropOffLocation" xml:space="preserve">
+    <value>Drop Off Location</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="AssignRoleToUser" xml:space="preserve">
+    <value>Assign Role To User</value>
+  </data>
+  <data name="UsersDataRecords" xml:space="preserve">
+    <value>Users Data Records</value>
+  </data>
+  <data name="CreatedAt" xml:space="preserve">
+    <value>Created At</value>
+  </data>
+  <data name="CurrentRoles" xml:space="preserve">
+    <value>CurrentRoles</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="AssignRole" xml:space="preserve">
+    <value>Assign Role</value>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="CompleteYourOrder" xml:space="preserve">
+    <value>Complete Your Order</value>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>Total Amount</value>
+  </data>
+  <data name="Repairing" xml:space="preserve">
+    <value>Repairing</value>
+  </data>
+  <data name="AddAnAccident" xml:space="preserve">
+    <value>AddAnAccident</value>
+  </data>
+  <data name="NoAccidentsAvailable" xml:space="preserve">
+    <value>No Accidents Available</value>
+  </data>
+  <data name="ThereAreCurrentlyNoAccidents" xml:space="preserve">
+    <value>There are currently no accidents available right now.</value>
+  </data>
+  <data name="HP" xml:space="preserve">
+    <value>HP</value>
+  </data>
+  <data name="EGP" xml:space="preserve">
+    <value>EGP</value>
+  </data>
+  <data name="Km/L" xml:space="preserve">
+    <value>Km/L</value>
+  </data>
+  <data name="Safety" xml:space="preserve">
+    <value>Safety</value>
+  </data>
+  <data name="Features" xml:space="preserve">
+    <value>Features</value>
+  </data>
+  <data name="AverageRate" xml:space="preserve">
+    <value>Average Rate</value>
+  </data>
+  <data name="AreYouSureYouWantToDeleteThisAccident" xml:space="preserve">
+    <value>Are you sure you want to delete this accident?</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="LoginToSendOffer" xml:space="preserve">
+    <value>Login To Send Offer</value>
+  </data>
+  <data name="ViewOffers" xml:space="preserve">
+    <value>View Offers</value>
+  </data>
+  <data name="SendOffer" xml:space="preserve">
+    <value>Send Offer</value>
+  </data>
+  <data name="EnterTheDescriptionOfTheAccident" xml:space="preserve">
+    <value>Enter the description of the accident</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="EnterTheLocationOfTheAccident" xml:space="preserve">
+    <value>Enter the location of the accident</value>
+  </data>
+  <data name="AccidentDate" xml:space="preserve">
+    <value>Accident Date</value>
+  </data>
+  <data name="EnterTheDateOfTheAccident" xml:space="preserve">
+    <value>Enter the date of the accident</value>
+  </data>
+  <data name="SelectCar" xml:space="preserve">
+    <value>Select Car</value>
+  </data>
+  <data name="EditYourAccident" xml:space="preserve">
+    <value>Edit Your Accident</value>
+  </data>
+  <data name="SelectYourCar" xml:space="preserve">
+    <value>Select Your Car</value>
+  </data>
+  <data name="Offers" xml:space="preserve">
+    <value>Offers</value>
+  </data>
+  <data name="NoOffersAvailable" xml:space="preserve">
+    <value>No Offers Available</value>
+  </data>
+  <data name="ThereAreCurrentlyNoOffers" xml:space="preserve">
+    <value>There are currently no offers available for this accident.</value>
+  </data>
+  <data name="EditOffer" xml:space="preserve">
+    <value>Edit Offer</value>
+  </data>
+  <data name="DeleteOffer" xml:space="preserve">
+    <value>Delete Offer</value>
+  </data>
+  <data name="DealCompleted" xml:space="preserve">
+    <value>Deal Completed</value>
   </data>
 </root>

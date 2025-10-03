@@ -1,0 +1,12 @@
+﻿@model List<string>
+
+<h2>Available Gemini Models</h2>
+<ul>
+@foreach (var model in Model)
+{
+    foreach(var part in model.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+    {
+        <li>@part</li>
+    }    
+}
+</ul>

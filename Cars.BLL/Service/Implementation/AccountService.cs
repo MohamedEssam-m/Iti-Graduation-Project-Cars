@@ -61,7 +61,9 @@
             {
                 if(signUp.Role == "User" || signUp.Role == "Admin")
                 {
+                    var imagePath = Upload.UploadFile("Files", signUp.User_Image);
                     var user = mapper.Map<AppUser>(signUp);
+                    user.UserImagePath = imagePath;
 
                     var result = await userManager.CreateAsync(user, signUp.Password);
                     return result;

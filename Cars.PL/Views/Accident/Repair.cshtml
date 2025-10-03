@@ -5,6 +5,7 @@
     Layout = "_Layout";
 }
 @inject UserManager<AppUser> userManager
+@inject IAppUserService userService
 @model List<Accident>
 <link rel="stylesheet" href="~/css/Repair.css" />
 <link rel="stylesheet" href="~/css/ViewBag.css" />
@@ -66,6 +67,7 @@ else
     <div class="accidents-container">
         @foreach (var accident in Model)
         {
+            var user = await userService.GetById(accident.UserId);
             <div class="accident-card">
                 <!-- Accident Image -->
                <div class="accident-image" style="background-image: url('/Files/@accident.AccidentImagePath');"></div>
@@ -74,7 +76,14 @@ else
                 <!-- Accident Content -->
                 <div class="accident-content">
                     <h2 class="accident-location">@accident.Location</h2>
-                    
+                    <div class="info-row">
+                            <span class="info-label">User:</span>
+                            <span class="info-value description-value">@user.FullName</span>
+                        </div>
+                    <div class="info-row">
+                            <span class="info-label">Car:</span>
+                            <span class="info-value description-value">@accident.Car?.Brand - @accident.Car?.Model - @accident.Car?.Year</span>
+                        </div>
                     <div class="accident-info">
                         <div class="info-row">
                             <span class="info-label">Date:</span>
@@ -85,10 +94,14 @@ else
                             <span class="info-label">Description:</span>
                             <span class="info-value description-value">@accident.Description</span>
                         </div>
+                        <div class="info-row">
+                            <span class="info-label">Status:</span>
+                            <span class="info-value description-value">@accident.Status</span>
+                        </div>
                     </div>
 
                     <div class="action-buttons">
-                        @if (User.IsInRole("Mechanic") && User.Identity.IsAuthenticated)
+                        @if (User.IsInRole("Mechanic") && User.Identity.IsAuthenticated && accident.Status == "Pending")
                         {
                             <div class="button-row">
                                 <form asp-controller="Offer" asp-action="CreateView" method="get">

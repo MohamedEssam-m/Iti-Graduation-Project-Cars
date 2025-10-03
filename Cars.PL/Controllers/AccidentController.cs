@@ -56,7 +56,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateAccidentVM accident)
+        public async Task<IActionResult> SaveCreate(CreateAccidentVM accident)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +74,8 @@
             var user1 = await userManager.GetUserAsync(User);
             var UserId = user1.Id;
             var userWithNavigations = await appUserService.GetById(UserId);
-            return View("Create", userWithNavigations);
+            ViewBag.RENTS = userWithNavigations.Rents;
+            return View("Create", accident);
         }
         [HttpGet]
         public async Task<IActionResult> EditView(int accidentId)
@@ -156,9 +157,9 @@
             var IsTrue = await accidentService.DeleteAccident(accidentId);
             if (IsTrue)
             {
-                var accident = await accidentService.GetAccidentById(accidentId);
+                var AllAcidents = await accidentService.GetAllAccidents();
                 ViewBag.Success = "The Accident Deleted Successfully";
-                return View("DeleteView" , accident);
+                return View("Repair" , AllAcidents);
             }
             var Accident = await accidentService.GetAccidentById(accidentId);
             ViewBag.Error = "Some Thing Was Wrong";

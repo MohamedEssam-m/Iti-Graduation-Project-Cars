@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Carbook - Free Bootstrap 4 Template by Colorlib</title>
+    <title>MotoCar 🏎️</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -44,30 +44,36 @@
         @if(User.Identity.IsAuthenticated)
             {
                 <p id="usernameBtn" 
-       onclick="showPopup()" 
-       style="
-           color: #06b6d4;
-           font-weight: 600;
-           font-size: 16px;
-           cursor: pointer;
-           text-decoration: none;
-           padding: 12px 20px;
-           background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%);
-           border: 2px solid transparent;
-           border-radius: 25px;
-           display: inline-block;
-           margin: 10px 15px; 
-           box-shadow: 0 4px 12px rgba(6, 182, 212, 0.15); 
-           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-           position: relative;
-           overflow: hidden;
-       "
-       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(6, 182, 212, 0.25)'; this.style.borderColor='#06b6d4';"
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(6, 182, 212, 0.15)'; this.style.borderColor='transparent';"
-       onmousedown="this.style.transform='translateY(0) scale(0.98)';"
-       onmouseup="this.style.transform='translateY(-2px) scale(1)';">
-        Hello @user.UserName
-    </p>
+   onclick="showPopup()" 
+   style="
+       color: #06b6d4;
+       font-weight: 600;
+       font-size: 16px;
+       cursor: pointer;
+       text-decoration: none;
+       padding: 12px 20px;
+       background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%);
+       border: 2px solid transparent;
+       border-radius: 25px;
+       display: inline-block;
+       margin: 10px 15px; 
+       box-shadow: 0 4px 12px rgba(6, 182, 212, 0.15); 
+       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+       position: relative;
+
+       min-width: 125px;       
+       max-width: 200px;       
+       white-space: nowrap;    
+       overflow: hidden;       
+       text-overflow: ellipsis;
+   "
+   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(6, 182, 212, 0.25)'; this.style.borderColor='#06b6d4';"
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(6, 182, 212, 0.15)'; this.style.borderColor='transparent';"
+   onmousedown="this.style.transform='translateY(0) scale(0.98)';"
+   onmouseup="this.style.transform='translateY(-2px) scale(1)';">
+    Hello @user.UserName
+</p>
+
 
     <!-- Popup Overlay -->
     <div id="popupOverlay" 
@@ -528,23 +534,27 @@
 </li>
 <!-- Add this link anywhere in your layout or view -->
 <div class="ai-assistant-link-container">
-    <a href="@Url.Action("Index", "Chat")" class="ai-assistant-link">
+    <a href="@Url.Action("Index", "Gemini")" 
+       class="ai-assistant-link" 
+       style="padding:6px 12px; min-width:120px; border-radius:8px; font-size:12px;">
         <div class="link-background"></div>
-        <div class="link-content">
-            <div class="ai-icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <div class="link-content" style="gap:8px;">
+            <div class="ai-icon" style="width:22px; height:22px;">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:12px; height:12px;">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" 
+                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <div class="pulse-ring"></div>
-                <div class="pulse-ring-2"></div>
+                <div class="pulse-ring" style="width:22px; height:22px; border-radius:6px;"></div>
+                <div class="pulse-ring-2" style="width:22px; height:22px; border-radius:6px;"></div>
             </div>
             <div class="link-text">
-                <span class="main-text">AI Assistant</span>
-                <span class="sub-text">Chat with AI</span>
+                <span class="main-text" style="font-size:12px;">AI Assistant</span>
+                <span class="sub-text" style="font-size:10px;">Chat with AI</span>
             </div>
-            <div class="arrow-icon">
+            <div class="arrow-icon" style="width:12px; height:12px;">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5 12h14M12 5l7 7-7 7" 
+                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
         </div>
@@ -552,9 +562,8 @@
     </a>
 </div>
 
-<style>
 
-</style>
+
 <style>
     .lang-toggle {
         background: white;

@@ -1,4 +1,6 @@
-﻿namespace Cars.PL.Controllers
+﻿using Cars.DAL.Entities.Accidents;
+
+namespace Cars.PL.Controllers
 {
     public class OfferController : Controller
     {
@@ -211,8 +213,7 @@
             if (offer == null || offer.OfferId == 0)
             {
                 ViewBag.Error = "Some Thing Was Wrong";
-                var updateOfferVM = mapper.Map<UpdateOfferVM>(offer);
-                return View("Repair" , updateOfferVM);
+                return View("Repair" , offer);
             }
             return View(offer);
             //ViewBag.Error = "Something went wrong!"
@@ -228,17 +229,13 @@
             var isDeleted = await offerService.DeleteOffer(offerId);
             if (isDeleted)
             {
+                var _offer = await offerService.GetOfferById(offerId);
                 ViewBag.Success = "The Offer Deleted Successfully";
-                return View("DeleteOfferView"); 
+                return View("DeleteOfferView", _offer); 
             }
-            var offer = await offerService.GetOfferById(offerId);
-            var updateOfferVM = mapper.Map<UpdateOfferVM>(offer);
-            ViewBag.Error = "Something went wrong!";
-            return View("Repair", updateOfferVM);
-            
-            
-
-
+            var offer = await offerService.GetOfferById(offerId); 
+            ViewBag.Error = "Some Thing Was Wrong";
+            return View("DeleteOfferView", offer);
         }
     }
 }
