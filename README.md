@@ -62,16 +62,4 @@ The platform ensures a seamless experience for booking, payments, and communicat
 - Google Gemini API
 - SMTP Email Service
 
----
 
-## 🚀 Getting Started
-
-### Prerequisites
-- .NET SDK installed
-- SQL Server installed
-- Visual Studio 2022 or later
-
-### Setup Instructions
-1. Clone the repository:
-   ```bash
-   git clone <repo-link>
