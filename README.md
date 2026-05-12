@@ -45,6 +45,7 @@ The platform ensures a seamless experience for booking, payments, and communicat
 ---
 
 ## 🏗️ Architecture & Design
+- N-Tier Architecture
 - ASP.NET Core MVC architecture
 - Clean separation of concerns
 - Scalable and maintainable structure
